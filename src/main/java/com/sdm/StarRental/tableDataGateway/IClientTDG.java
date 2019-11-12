@@ -1,7 +1,7 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
 import java.util.ArrayList;
-import model.Client;
+import com.sdm.StarRental.model.Client;
 
 
 public interface IClientTDG {

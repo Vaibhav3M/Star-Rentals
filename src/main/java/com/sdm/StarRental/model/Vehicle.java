@@ -1,4 +1,4 @@
-package model;
+package com.sdm.StarRental.model;
 
 /**
  * The type Vehicle.
@@ -31,7 +31,7 @@ public class Vehicle {
      *
      * @param type                the vehicle type
      * @param year                the manufacturing year
-     * @param model               the model
+     * @param model               the com.sdm.StarRental.model
      * @param color               the color
      * @param vehicleLicencePlate the vehicle licence plate number
      * @param status              the status of the vehicle
@@ -84,18 +84,18 @@ public class Vehicle {
     }
 
     /**
-     * Gets model.
+     * Gets com.sdm.StarRental.model.
      *
-     * @return the model
+     * @return the com.sdm.StarRental.model
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * Sets model.
+     * Sets com.sdm.StarRental.model.
      *
-     * @param model the model
+     * @param model the com.sdm.StarRental.model
      */
     public void setModel(String model) {
         this.model = model;

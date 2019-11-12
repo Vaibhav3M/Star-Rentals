@@ -1,10 +1,15 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
-import model.Transaction;
+import com.sdm.StarRental.model.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class TransactionTDG implements ITransactionTDG {
+
+    @Autowired
+    private Connection connection;
 
     @Override
     public boolean createTransaction(int id, String vehicleLicencePlate, String clientLicenseNumber, String status, String timeStamp, String bookingFrom, String bookingTill, String transactionBy) throws Exception {

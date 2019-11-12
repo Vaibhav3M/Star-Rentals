@@ -1,8 +1,8 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
 import java.util.ArrayList;
 
-import model.Transaction;
+import com.sdm.StarRental.model.Transaction;
 
 public interface ITransactionTDG {
 
