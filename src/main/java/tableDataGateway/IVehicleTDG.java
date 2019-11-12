@@ -1,4 +1,4 @@
 package tableDataGateway;
 
-public class IVehicleTDG {
+public interface IVehicleTDG {
 }
