@@ -1,4 +1,4 @@
-package model;
+package com.sdm.StarRental.model;
 
 /**
  * The type Client.

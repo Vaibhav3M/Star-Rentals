@@ -1,10 +1,15 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
-import model.Client;
+import com.sdm.StarRental.model.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 public class ClientTDG implements IClientTDG {
+
+    @Autowired
+    private Connection connection;
 
     @Override
     public boolean createClient(String firstName, String lastName, String phoneNumber,String licenseNumber, String licenseExpiryDate) throws Exception{

@@ -1,9 +1,14 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
-import model.User;
+import com.sdm.StarRental.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Connection;
 
 public class UserTDG implements IUserTDG {
 
+    @Autowired
+    private Connection connection;
 
     @Override
     public User getUser(String userType, String username, String password) throws Exception {

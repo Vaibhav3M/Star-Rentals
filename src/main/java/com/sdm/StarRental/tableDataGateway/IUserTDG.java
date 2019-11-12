@@ -1,6 +1,6 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
-import model.User;
+import com.sdm.StarRental.model.User;
 
 public interface IUserTDG {
 

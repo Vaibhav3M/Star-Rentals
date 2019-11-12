@@ -1,6 +1,8 @@
-package tableDataGateway;
+package com.sdm.StarRental.tableDataGateway;
 
-import model.Vehicle;
+import com.sdm.StarRental.model.Vehicle;
+
+import com.sdm.StarRental.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;

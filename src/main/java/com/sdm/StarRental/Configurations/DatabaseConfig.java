@@ -1,4 +1,4 @@
-package Configurations;
+package com.sdm.StarRental.Configurations;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

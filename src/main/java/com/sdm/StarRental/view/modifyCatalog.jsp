@@ -239,7 +239,7 @@
                             <tr>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
@@ -250,7 +250,7 @@
                                 </th>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
@@ -261,18 +261,18 @@
                                 </th>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
                                         <input type="hidden" name="year" value='${SearchParams.get("year")}'>
-                                        <input type="hidden" name="sortBy" value="model">
+                                        <input type="hidden" name="sortBy" value="com.sdm.StarRental.model">
                                         <button class="btn btn-default" type="submit">Model</button>
                                     </form>
                                 </th>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
@@ -283,7 +283,7 @@
                                 </th>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
@@ -294,7 +294,7 @@
                                 </th>
                                 <th class="th-sm">
                                     <form action="searchmodifyCatalog" method=post>
-                                        <input type="hidden" name="model" value='${SearchParams.get("model")}'>
+                                        <input type="hidden" name="model" value='${SearchParams.get("com.sdm.StarRental.model")}'>
                                         <input type="hidden" name="make" value='${SearchParams.get("make")}'>
                                         <input type="hidden" name="color" value='${SearchParams.get("color")}'>
                                         <input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
@@ -337,7 +337,7 @@
                                         <input type="hidden" name="color" value=''>
                                         <input type="hidden" name="condition" value=''>
                                         <input type="hidden" name="year" value=''>
-                                        <input type="hidden" name="sortBy" value="model">
+                                        <input type="hidden" name="sortBy" value="com.sdm.StarRental.model">
                                         <button class="btn btn-default" type="submit">Model</button>
                                     </form>
                                 </th>
