@@ -10,6 +10,8 @@ public class User {
     private String userName;
 
     private String password;
+    
+   
 
     /**
      * Instantiates a new User.
@@ -29,6 +31,7 @@ public class User {
         this.userType = userType;
         this.userName = userName;
         this.password = password;
+        
     }
 
     /**
@@ -84,4 +87,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+   
 }
