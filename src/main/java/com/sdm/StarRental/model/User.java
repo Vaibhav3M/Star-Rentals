@@ -11,7 +11,7 @@ public class User {
 
     private String password;
     
-    private String name;
+   
 
     /**
      * Instantiates a new User.
@@ -27,11 +27,11 @@ public class User {
      * @param userName the user name
      * @param password the password
      */
-    public User(String userType, String userName, String password, String name) {
+    public User(String userType, String userName, String password) {
         this.userType = userType;
         this.userName = userName;
         this.password = password;
-        this.name = name;
+        
     }
 
     /**
@@ -88,11 +88,5 @@ public class User {
         this.password = password;
     }
     
-    public String getName(){
-    	return name;
-    }
-    
-    public void setName(String name) {
-    	this.name = name;
-    }
+   
 }
