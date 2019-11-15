@@ -6,8 +6,5 @@ public interface IUserTDG {
 
     public User getUser(String username, String password)throws Exception;
     public boolean authUser(String username,String password) throws Exception;
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/heads/dev
 }
