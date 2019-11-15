@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Repository
+
 public class UserTDG implements IUserTDG {
 
     @Autowired
@@ -81,4 +82,3 @@ public class UserTDG implements IUserTDG {
     	return false; 
     	}
     }
-

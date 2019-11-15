@@ -58,8 +58,7 @@
         <div class="container">
           <div style="display:flex">
      <div style="flex:1;padding-left:5px;padding-right:5px;">
-                <a href="viewCatalog"><img src="SearchCatalog.jpg" alt="Search for a vehicle in the catalog"></a>
-
+                <a href="browsecatalog"><img src="SearchCatalog.jpg" alt="Search for a vehicle in the catalog"></a>
 				<div class="bottom-left">Search Catalog</div>
             </div>
             <div style="flex:1;padding-left:5px;">

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
-<title>Main Page</title>
+<title>Manage Client Operations</title>
       <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/album/">
 
     <!-- Bootstrap core CSS -->
@@ -18,7 +18,16 @@
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+function isNumber(evt)
+{
+   var charCode = (evt.which) ? evt.which : event.keyCode
+   if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+
+   return true;
+}
+</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<style>
@@ -53,23 +62,58 @@
 
     <main role="main">
 	  <section class="jumbotron text-center">
+	  <div class="container">
+	  <h1 class="jumbotron-heading">Booking Options</h1>
+	  </div>
+	  </section>
 	  <section class="jumbotron text-center">
 	  <div class="album py-5 bg-light">  
         <div class="container">
           <div style="display:flex">
-     <div style="flex:1;padding-left:5px;padding-right:5px;">
-                <a href="viewCatalog"><img src="SearchCatalog.jpg" alt="Search for a vehicle in the catalog"></a>
-
-				<div class="bottom-left">Search Catalog</div>
+            <div style="flex:1;padding-left:5px;padding-right:5px;">
+                <a href="makerental"><img src="CreateRental.jpg" alt="Search for a vehicle in the catalog"></a>
+				<div class="bottom-left">Rent a vehicle</div>
             </div>
             <div style="flex:1;padding-left:5px;">
-                <a href="clerkmanagepage"><img src="ManageUser.jpg" alt="Manage Client"></a>
-				<div class="bottom-left">Manage Client</div>
+                <a href="returnvehicle"><img src="Return.jpg" alt="Manage Client"></a>
+				<div class="bottom-left">Return a vehicle</div>
+              </div>
+			  <div style="flex:1;padding-left:5px;">
+                <a href="reserve"><img src="MakeReserv.jpg" alt="Manage Client"></a>
+				<div class="bottom-left">Make a reservation</div>
+              </div>
+			  <div style="flex:1;padding-left:5px;">
+                <a href="cancelReserve"><img src="CancelReserv.jpg" alt="Manage Client"></a>
+				<div class="bottom-left">Cancel Reservation</div>
               </div>
 			</div>
 			</div>
 			</div>
 			</section>
+			<section class="jumbotron text-center">
+	  <div class="container">
+	  <h1 class="jumbotron-heading">Client Record Options</h1>
+	  </div>
+	  </section>
+	   <section class="jumbotron text-center">
+	  <div class="album py-5 bg-light">  
+        <div class="container">
+          <div style="display:flex">
+            <div style="flex:1;padding-left:5px;padding-right:5px;">
+                <a href="createclient"><img src="AddUser.jpg" alt="Search for a vehicle in the catalog"></a>
+				<div class="bottom-left">Add new client</div>
+            </div>
+            <div style="flex:1;padding-left:5px;">
+                <a href="modifyclient"><img src="ModifyUser.jpg" alt="Manage Client"></a>
+				<div class="bottom-left">Modify existing client</div>
+              </div>
+			  <div style="flex:1;padding-left:5px;">
+                <a href="deleteclient"><img src="DeleteUser.jpg" alt="Manage Client"></a>
+				<div class="bottom-left">Delete client</div>
+              </div>
+			</div>
+			</div>
+			</div>
 			</section>
 			
     </main>
