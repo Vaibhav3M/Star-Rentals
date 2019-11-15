@@ -4,6 +4,7 @@ import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.model.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@Repository
 public class VehicleTDG implements IVehicleTDG {
 
   //  @Autowired
@@ -40,11 +42,11 @@ public class VehicleTDG implements IVehicleTDG {
 	}
 
 	@Override
-    public boolean addNewVehicle(String type,int year, String model,String color,String licensePlate, String status,String make,String image) throws Exception{
+    public boolean addNewVehicle(String type,int year, String model,String color,String licensePlate, String status,String make) throws Exception{
 
 
 
-		String sql="INSERT INTO c_catalog (Type,Make,Model,Year,Color,License_Plate,Status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
+		String sql="INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
 		System.out.println(sql);
 		Statement st;
 		try {
@@ -63,7 +65,7 @@ public class VehicleTDG implements IVehicleTDG {
     @Override
     public boolean deleteVehicle(String licensePlate) throws Exception{
 
-    	String sql="DELETE FROM c_catalog WHERE LICENSE_PLATE='"+licensePlate+"'";
+    	String sql="DELETE FROM c_catalog WHERE vehicleLicensePlate='"+licensePlate+"'";
 		Statement st;
 		try {
 			st = (Statement) connection.createStatement();
@@ -78,9 +80,9 @@ public class VehicleTDG implements IVehicleTDG {
 
     @Override
     public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status,String image) throws Exception{
-    	//		String sql="INSERT INTO c_catalog (Type,Make,Model,Year,Color,License_Plate,Status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
+    	//		String sql="INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
 
-    	String sql="UPDATE c_catalog SET Type='"+type+"' ,Make='"+make+"' ,Model='"+model+"' ,Year='"+year+"' ,Color='"+color+"' ,Status='"+status+"' ,License_Plate='"+licensePlate+"' WHERE License_Plate='"+licensePlate+"'";
+    	String sql="UPDATE c_catalog SET type='"+type+"' ,make='"+make+"' ,model='"+model+"' ,year='"+year+"' ,color='"+color+"' ,status='"+status+"' ,vehicleLicensePlate='"+licensePlate+"' WHERE vehicleLicensePlate='"+licensePlate+"'";
 		System.out.println(sql);
     	Statement st;
 		try {
@@ -96,7 +98,7 @@ public class VehicleTDG implements IVehicleTDG {
 
     @Override
     public ArrayList<Vehicle> getAllVehicles() throws Exception{
-String sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog";
+String sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog";
 
 ResultSet rs;
 		Statement st;
@@ -124,9 +126,9 @@ ResultSet rs;
 
     	String sql="";
 		if(!criteria.equalsIgnoreCase("year")) {
-		 sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE "+criteria+"='"+value+"'";
+		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE "+criteria+"='"+value+"'";
 		}else {
-	     sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE year "+comparator+Integer.valueOf(value);
+	     sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year "+comparator+Integer.valueOf(value);
 		}
 		Statement st;
 		ArrayList<Vehicle> result=new ArrayList<>();
@@ -152,14 +154,14 @@ ResultSet rs;
     public  ArrayList<Vehicle> getVehicleFromTwoCriteria(String value1,String value2, String comparator, String criteria1, String criteria2) throws Exception{
     	String sql="";
 		if(!criteria1.equalsIgnoreCase("year") && !criteria2.equalsIgnoreCase("year")) {
-		 sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE "+criteria1+"='"+value1+"' AND "
+		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE "+criteria1+"='"+value1+"' AND "
 		+criteria2+"='"+value2+"'";
 		}else if(criteria1.equalsIgnoreCase("year")){
-	     sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
+	     sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
 		+criteria2+"='"+value2+"'";
 		}
 		else if(criteria2.equalsIgnoreCase("year")){
-		     sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE year"+comparator+Integer.valueOf(value2)+" AND "
+		     sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value2)+" AND "
 			+criteria1+"='"+value1+"'";
 			}
 		Statement st;
@@ -186,7 +188,7 @@ ResultSet rs;
     public  ArrayList<Vehicle> getVehicleFromAllCriteria(String value1,String value2,String value3,String value4, String value5, String value6, String value7, String comparator, String criteria1, String criteria2,String criteria3,String criteria4, String criteria5, String criteria6, String criteria7) throws Exception{
 
     	String sql="";
-		 sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
+		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
 					+criteria2+"='"+value2+"' AND "+criteria3+"='"+value3+"' AND " +criteria4+"='"+value4+"'AND " +criteria5+"='"+value5+"' AND" +criteria6+"='"+value6+"'"
 							+ "AND" +criteria7+"='"+value7+"'";
 	Statement st;
@@ -214,10 +216,10 @@ ResultSet rs;
 
     	String sql="";
 		if(criteria1.equalsIgnoreCase("year")){
-		 sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
+		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
 					+criteria2+"='"+value2+"' AND "+criteria3+"='"+value3+"'";
 		}else {
-			sql="Select Type,Make,Model,Year,Color,License_Plate,Status from c_catalog WHERE "+criteria1+"='"+value1+"' AND "
+			sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE "+criteria1+"='"+value1+"' AND "
 					+criteria2+"='"+value2+"' AND "+criteria3+"='"+value3+"'";	
 		}
 	Statement st;
@@ -241,9 +243,30 @@ ResultSet rs;
     }
 
     @Override
-    public Vehicle getVehicleByLicenseNo(String licenseNo) throws Exception{
+    public Vehicle getVehicleByLicensePlate(String licensePlate) throws Exception{
 
+    	String sql="";
+		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE vehicleLicensePlate='"+licensePlate+"'";
 
-        return null;
+		Statement st;
+		Vehicle result = null;
+		
+		try {
+			st = (Statement) connection.createStatement();
+			ResultSet rs= st.executeQuery(sql);
+			while(rs.next()) {
+				result = Utilities.getVehicleObject(rs);
+				
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+    
     }
 }
