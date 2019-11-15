@@ -4,6 +4,7 @@ package com.sdm.StarRental.objectUtilities;
 
 
 
+
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.User;
@@ -81,6 +82,7 @@ public class Utilities {
 
 
 		return transaction;
+
 
 
 
