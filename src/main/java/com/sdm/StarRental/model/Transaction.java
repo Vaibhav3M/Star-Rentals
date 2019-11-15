@@ -7,7 +7,9 @@ public class Transaction {
 
     private int transactionID;
 
-    private String vehicleLicencePlate;
+    private String transactionType;
+
+    private String vehicleLicensePlate;
 
     private String clientLicenseNumber;
 
@@ -31,7 +33,8 @@ public class Transaction {
      * Instantiates a new Transaction.
      *
      * @param transactionID       the transaction id
-     * @param vehicleLicencePlate the vehicle licence plate
+     * @param transactionType     the type of transaction
+     * @param vehicleLicensePlate the vehicle licence plate
      * @param clientLicenseNumber the client license number
      * @param status              the status
      * @param timeStamp           the time stamp
@@ -39,9 +42,10 @@ public class Transaction {
      * @param bookingTill         the booking till
      * @param transactionBy       the transaction by
      */
-    public Transaction(int transactionID, String vehicleLicencePlate, String clientLicenseNumber, String status, String timeStamp, String bookingFrom, String bookingTill, String transactionBy) {
+    public Transaction(int transactionID, String transactionType,String vehicleLicensePlate, String clientLicenseNumber, String status, String timeStamp, String bookingFrom, String bookingTill, String transactionBy) {
         this.transactionID = transactionID;
-        this.vehicleLicencePlate = vehicleLicencePlate;
+        this.transactionType = transactionType;
+        this.vehicleLicensePlate = vehicleLicensePlate;
         this.clientLicenseNumber = clientLicenseNumber;
         this.status = status;
         this.timeStamp = timeStamp;
@@ -68,22 +72,32 @@ public class Transaction {
         this.transactionID = transactionID;
     }
 
+
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
+
     /**
      * Gets vehicle licence plate.
      *
      * @return the vehicle licence plate
      */
-    public String getVehicleLicencePlate() {
-        return vehicleLicencePlate;
+    public String getVehicleLicensePlate() {
+        return vehicleLicensePlate;
     }
 
     /**
      * Sets vehicle licence plate.
      *
-     * @param vehicleLicencePlate the vehicle licence plate
+     * @param vehicleLicensePlate the vehicle licence plate
      */
-    public void setVehicleLicencePlate(String vehicleLicencePlate) {
-        this.vehicleLicencePlate = vehicleLicencePlate;
+    public void setVehicleLicensePlate(String vehicleLicensePlate) {
+        this.vehicleLicensePlate = vehicleLicensePlate;
     }
 
     /**
