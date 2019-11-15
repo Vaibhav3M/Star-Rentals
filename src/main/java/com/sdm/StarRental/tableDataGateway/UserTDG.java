@@ -12,19 +12,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 @Repository
-
 public class UserTDG implements IUserTDG {
 
     @Autowired
     private Connection connection;
 
     @Override
-    public User getUser(String username, String password) throws Exception {
+    public User getUser(String userName, String password) throws Exception {
     	
     User user = null;
     
     Statement st;
-    String sqlQuery = "SELECT Username,Password,Name,User_Type FROM c_users  WHERE Username='"+username+"' AND Password='" +password+"';";
+    String sqlQuery = "SELECT userName,password,userType FROM c_users  WHERE userName='"+userName+"' AND password='" +password+"';";
     ResultSet rs;
     try {
 //try again
@@ -53,9 +52,9 @@ public class UserTDG implements IUserTDG {
     }
 
     @Override
-    public boolean authUser(String username, String password) throws Exception {
+    public boolean authUser(String userName, String password) throws Exception {
     	Statement st; 
-    	String sqlQuery = "SELECT Name FROM c_users WHERE Username='"+username+"' AND Password='" +password+"'"; 
+    	String sqlQuery = "SELECT userName FROM c_users WHERE userName='"+userName+"' AND password='" +password+"'"; 
     	
     	User user; 
     	ResultSet rs; 
@@ -82,3 +81,4 @@ public class UserTDG implements IUserTDG {
     	return false; 
     	}
     }
+

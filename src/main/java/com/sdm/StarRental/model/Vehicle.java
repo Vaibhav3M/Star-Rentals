@@ -17,7 +17,7 @@ public class Vehicle {
 
     private String status;
 
-    private String image;
+    private String make;
 
     /**
      * Instantiates a new Vehicle.
@@ -35,16 +35,16 @@ public class Vehicle {
      * @param color               the color
      * @param vehicleLicencePlate the vehicle licence plate number
      * @param status              the status of the vehicle
-     * @param image               the image
+     * @param make               the make
      */
-    public Vehicle(String type, int year, String model, String color, String vehicleLicencePlate, String status, String image) {
+    public Vehicle(String type, int year, String model, String color, String vehicleLicencePlate, String status, String make) {
         this.type = type;
         this.year = year;
         this.model = model;
         this.color = color;
         this.vehicleLicencePlate = vehicleLicencePlate;
         this.status = status;
-        this.image = image;
+        this.make = make;
     }
 
     /**
@@ -156,20 +156,20 @@ public class Vehicle {
     }
 
     /**
-     * Gets image.
+     * Gets make.
      *
-     * @return the image
+     * @return the make
      */
-    public String getImage() {
-        return image;
+    public String getMake() {
+        return make;
     }
 
     /**
-     * Sets image.
+     * Sets make.
      *
-     * @param image the image
+     * @param make of vehicle
      */
-    public void setImage(String image) {
-        this.image = image;
+    public void setMake(String make) {
+        this.make = make;
     }
 }
