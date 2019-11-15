@@ -10,6 +10,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+<<<<<<< HEAD
+=======
+
+@Repository
+>>>>>>> refs/heads/dev
 
 @Repository
 public class UserTDG implements IUserTDG {
@@ -81,4 +86,7 @@ public class UserTDG implements IUserTDG {
     	return false; 
     	}
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev

@@ -12,6 +12,10 @@ public class User {
     private String password;
     
    
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/dev
 
     /**
      * Instantiates a new User.
@@ -32,6 +36,10 @@ public class User {
         this.userName = userName;
         this.password = password;
         
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/dev
     }
 
     /**
@@ -89,4 +97,8 @@ public class User {
     }
     
    
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/heads/dev
 }

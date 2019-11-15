@@ -17,7 +17,7 @@ public class Vehicle {
 
     private String status;
 
-    private String image;
+    private String make;
 
     /**
      * Instantiates a new Vehicle.
@@ -44,7 +44,7 @@ public class Vehicle {
         this.color = color;
         this.vehicleLicencePlate = vehicleLicencePlate;
         this.status = status;
-        this.image = image;
+        this.make = image;
     }
 
     /**
@@ -160,8 +160,8 @@ public class Vehicle {
      *
      * @return the image
      */
-    public String getImage() {
-        return image;
+    public String getMake() {
+        return make;
     }
 
     /**
@@ -169,7 +169,7 @@ public class Vehicle {
      *
      * @param image the image
      */
-    public void setImage(String image) {
-        this.image = image;
+    public void setMake(String make) {
+        this.make = make;
     }
 }
