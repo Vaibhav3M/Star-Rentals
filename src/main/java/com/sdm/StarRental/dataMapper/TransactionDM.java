@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.tableDataGateway.TransactionTDG;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class TransactionDM {
 
     @Autowired

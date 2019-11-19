@@ -3,11 +3,13 @@ package com.sdm.StarRental.tableDataGateway;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.objectUtilities.Utilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 
 import java.sql.*;
 import java.util.ArrayList;
 
+@Repository
 public class TransactionTDG implements ITransactionTDG {
 
     @Autowired
