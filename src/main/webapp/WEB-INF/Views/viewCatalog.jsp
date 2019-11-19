@@ -383,14 +383,14 @@ body {
 							<c:forEach items="${browsecatalogresults}" var="vehicle">
 
 								<tr>
-									<td>${vehicle.licensePlate}</td>
+									<td>${vehicle.vehicleLicensePlate}</td>
 									<td>${vehicle.type}</td>
 									<td>${vehicle.model}</td>
 									<td>${vehicle.make}</td>
 									<td>${vehicle.color}</td>
 									<td>${vehicle.year}</td>
-									<td><button id="${vehicle.licensePlate}" type="button" class="btn btn-primary btn-sm licenseButtons"
-											onclick="openModal('${vehicle.licensePlate}')">open</button></td>
+									<td><button id="${vehicle.vehicleLicensePlate}" type="button" class="btn btn-primary btn-sm licenseButtons"
+											onclick="openModal('${vehicle.vehicleLicensePlate}')">open</button></td>
 								</tr>
 
 							</c:forEach>

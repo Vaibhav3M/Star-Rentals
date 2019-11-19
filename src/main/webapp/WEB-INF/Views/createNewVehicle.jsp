@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
-<title>New Client Form</title>
+<title>New Vehicle Form</title>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.1/examples/album/">
 
@@ -85,7 +85,7 @@ function isNumber(evt)
 							<div class="form-group"
 								style="flex: 1; padding-left: 5px; padding-right: 5px;">
 
-								<form class="form-horizontal" action="createcatlogform"
+								<form class="form-horizontal" action="createVehicleForm"
 									method="post" enctype="multipart/form-data">
 									<div class="form-group">
 										<a href="#"><img src="NewVehicle.jpg"
@@ -156,7 +156,7 @@ function isNumber(evt)
 								</form>
 							</div>
 
-							<form action="/backtoadminmainpage" method=post>
+							<form action="backtoadminmainpage" method=get>
 
 
 								<center>
