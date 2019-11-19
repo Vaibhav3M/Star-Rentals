@@ -71,7 +71,7 @@
         
       </ul>
      <ul class="nav navbar-nav navbar-left">
-        <li><a href="/"><font size= "6" color="Gray">Car Rentals</font></a></li>
+        <li><a href="/"><font size= "6" color="Gray">Star Rentals</font></a></li>
       </ul>
     </div>
   </nav>
@@ -132,15 +132,15 @@
             </tr>
             </thead>
             <c:forEach items="${client_results}" var="clients">
-              <form action="deleteClientInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${clients.licenseNumber}?');">
+              <form action="deleteClientInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${clients.clientLicenseNumber}?');">
 
-              <tr id = ${clients.licenseNumber}>
+              <tr id = ${clients.clientLicenseNumber}>
                 <td>${clients.firstName}</td>
                 <td>${clients.lastName}</td>
-                <td>${clients.licenseNumber}</td>
+                <td>${clients.clientLicenseNumber}</td>
                 <td>${clients.licenseExpiryDate}</td>
                 <td>${clients.phoneNumber}</td>
-                <td><button  name ="licenseNumber" value=${clients.licenseNumber} type="submit">Delete</button></td> 
+                <td><button  name ="licenseNumber" value=${clients.clientLicenseNumber} type="submit">Delete</button></td>
               </tr>
               </form>
               </tbody>
