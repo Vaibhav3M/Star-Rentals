@@ -33,7 +33,7 @@ public class Utilities {
 		vehicle.setModel(vehicleDetails.getString("model"));
 		vehicle.setYear(Integer.valueOf(vehicleDetails.getString("year")));
 		vehicle.setColor(vehicleDetails.getString("color"));
-		vehicle.setVehicleLicencePlate(vehicleDetails.getString("vehicleLicensePlate"));
+		vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
 		vehicle.setStatus(vehicleDetails.getString("status"));
 		return vehicle;
 	}
