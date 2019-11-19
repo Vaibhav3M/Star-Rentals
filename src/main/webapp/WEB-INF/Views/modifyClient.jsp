@@ -123,10 +123,10 @@
                             <tbody>
                             <c:forEach items="${client_results}" var="clients">
                             <form action="modifyClientInfo" method=post onsubmit="return confirm('Please confirm the modification for  ${clients.licenseNumber}?');">
-                                <tr id = ${clients.licenseNumber}>
+                                <tr id = ${clients.clientLicenseNumber}>
                                     <td><input type="text" name = "firstName" required maxlength="50" value=${clients.firstName}> </td>
                                     <td><input type="text" name = "lastName" required maxlength="50" value=${clients.lastName}></td>
-                                    <td><input type = "text" name = "licenseNumber"  required readonly value = ${clients.licenseNumber}></td>
+                                    <td><input type = "text" name = "licenseNumber"  required readonly value = ${clients.clientLicenseNumber}></td>
                                     <td><input type="date" name = "licenseExpDate" required value=${clients.licenseExpiryDate}></td>
                                     <td><input type="number" name = "phoneNumber" maxlength="10"  value=${clients.phoneNumber}></td>
                                     <td><button type="submit">Modify</button></td>
