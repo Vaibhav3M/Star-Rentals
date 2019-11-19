@@ -79,7 +79,8 @@ public class VehicleTDG implements IVehicleTDG {
     }
 
     @Override
-    public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status,String image) throws Exception{
+    public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status) throws Exception{
+
     	//		String sql="INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
 
     	String sql="UPDATE c_catalog SET type='"+type+"' ,make='"+make+"' ,model='"+model+"' ,year='"+year+"' ,color='"+color+"' ,status='"+status+"' ,vehicleLicensePlate='"+licensePlate+"' WHERE vehicleLicensePlate='"+licensePlate+"'";

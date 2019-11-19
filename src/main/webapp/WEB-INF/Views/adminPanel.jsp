@@ -77,7 +77,7 @@
 					<!-------- CONTAINERS ------>
 					<!-- BROWSE CATALOG -->
 					<div style="flex: 1; padding-left: 5px;">
-						<a href="browsecatalog"><img src="SearchCatalog.jpg"
+						<a href="viewCatalog"><img src="SearchCatalog.jpg"
 							alt="browseCatalog"></a>
 						<div class="bottom-left">Browse Vehicle Catalog</div>
 					</div>
@@ -112,7 +112,7 @@
 					<div style="flex: 1; padding-left: 5px; padding-right: 5px;">
 
 
-						<a href="createcatalog"><img src="NewVehicle.jpg"
+						<a href="createNewVehicle"><img src="NewVehicle.jpg"
 
 							alt="Add vehicle"></a>
 						<div class="bottom-left">Add new Vehicle</div>
@@ -130,7 +130,7 @@
 					<!-- DELETE VEHCICLE -->
 					<div style="flex: 1; padding-left: 5px;">
 
-						<a href="deletevehicle"><img src="DeleteVehicle.jpg"
+						<a href="deleteVehicle"><img src="DeleteVehicle.jpg"
 
 							alt="Delete vehicle"></a>
 						<div class="bottom-left">Delete Vehicle</div>

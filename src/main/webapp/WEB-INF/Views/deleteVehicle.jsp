@@ -71,7 +71,7 @@
         
       </ul>
      <ul class="nav navbar-nav navbar-left">
-        <li><a href="backtomainpage"><font size= "6" color="Gray">Car Rentals</font></a></li>
+        <li><a href="backtoadminmainpage"><font size= "6" color="Gray">Car Rentals</font></a></li>
       </ul>
     </div>
   </nav>
@@ -179,16 +179,16 @@
             </tr>
             </thead>
             <c:forEach items="${vehicle_results}" var="vehicles">
-              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${vehicles.licensePlate}?');">
+              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${vehicles.vehicleLicensePlate}?');">
 
-              <tr id = ${vehicles.licensePlate}>
-                <td>${vehicles.licensePlate}</td>
+              <tr id = ${vehicles.vehicleLicensePlate}>
+                <td>${vehicles.vehicleLicensePlate}</td>
                 <td>${vehicles.type}</td>
                 <td>${vehicles.model}</td>
                 <td>${vehicles.make}</td>
                 <td>${vehicles.year}</td>
 				<td>${vehicles.status}</td>
-                <td><button  name ="licensePlate" value=${vehicles.licensePlate.replace(" ","_")} type="submit">Delete</button></td> 
+                <td><button  name ="licensePlate" value=${vehicles.vehicleLicensePlate.replace(" ","_")} type="submit">Delete</button></td> 
               </tr>
               </form>
               </tbody>
@@ -204,7 +204,7 @@
 
  
   </div>
-  <form action="/backtoadminmainpage" method=post>
+  <form action="/backtoadminmainpage" method=GET>
      
     <center> <button class="btn btn-default" type="submit">Back To Main Page</button></center>
  </form>
