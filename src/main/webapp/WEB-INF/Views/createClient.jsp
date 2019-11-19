@@ -84,7 +84,7 @@ function isNumber(evt)
 							<div class="form-group"
 								style="flex: 1; padding-left: 5px; padding-right: 5px;">
 
-								<form class="form-horizontal" action="createclientform"
+								<form class="form-horizontal" action="createClientForm"
 									method="post">
 									<div class="form-group">
 										<a href="#"><img src="AddUser.jpg"
