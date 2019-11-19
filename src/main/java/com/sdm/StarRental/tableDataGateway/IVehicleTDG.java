@@ -11,7 +11,7 @@ public interface IVehicleTDG {
 
     public boolean deleteVehicle(String licenseNumber) throws Exception;
 
-    public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status,String image) throws Exception;
+    public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status) throws Exception;
 
     public ArrayList<Vehicle> getAllVehicles() throws Exception;
 

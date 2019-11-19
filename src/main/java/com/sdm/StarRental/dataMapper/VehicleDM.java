@@ -24,8 +24,8 @@ public class VehicleDM {
 	    	return vehicleTDG.deleteVehicle(vehicleLicensePlate);
 	    }
 
-	    public boolean modifyVehicle(String type,int year, String model,String make, String color,String vehilceLicensePlate, String status,String image) throws Exception{
-	    	return vehicleTDG.modifyVehicle(type, year, model, make, color, vehilceLicensePlate, status, image);
+	    public boolean modifyVehicle(String type,String make, String model,int year, String color,String vehilceLicensePlate, String status) throws Exception{
+	    	return vehicleTDG.modifyVehicle(type, year, model, make, color, vehilceLicensePlate, status);
 	    }
 
 	    public ArrayList<Vehicle> getAllVehicles() throws Exception{ 

@@ -13,7 +13,7 @@ public class Vehicle {
 
     private String color;
 
-    private String vehicleLicencePlate;
+    private String vehicleLicensePlate;
 
     private String status;
 
@@ -33,16 +33,16 @@ public class Vehicle {
      * @param year                the manufacturing year
      * @param model               the com.sdm.StarRental.model
      * @param color               the color
-     * @param vehicleLicencePlate the vehicle licence plate number
+     * @param vehicleLicensePlate the vehicle licence plate number
      * @param status              the status of the vehicle
      * @param make               the make
      */
-    public Vehicle(String type, int year, String model, String color, String vehicleLicencePlate, String status, String make) {
+    public Vehicle(String type, int year, String model, String color, String vehicleLicensePlate, String status, String make) {
         this.type = type;
         this.year = year;
         this.model = model;
         this.color = color;
-        this.vehicleLicencePlate = vehicleLicencePlate;
+        this.vehicleLicensePlate = vehicleLicensePlate;
         this.status = status;
         this.make = make;
     }
@@ -124,17 +124,17 @@ public class Vehicle {
      *
      * @return the vehicle licence plate number
      */
-    public String getVehicleLicencePlate() {
-        return vehicleLicencePlate;
+    public String getvehicleLicensePlate() {
+        return vehicleLicensePlate;
     }
 
     /**
      * Sets vehicle licence plate number.
      *
-     * @param vehicleLicencePlate the vehicle licence plate number
+     * @param vehicleLicensePlate the vehicle licence plate number
      */
-    public void setVehicleLicencePlate(String vehicleLicencePlate) {
-        this.vehicleLicencePlate = vehicleLicencePlate;
+    public void setvehicleLicensePlate(String vehicleLicensePlate) {
+        this.vehicleLicensePlate = vehicleLicensePlate;
     }
 
     /**
