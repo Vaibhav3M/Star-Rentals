@@ -381,16 +381,16 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${modifyCatalogresults}" var="vehicle">
-                    <form action="modifyCatalogItem" method=post onsubmit="return confirm('Please confirm the modification for  ${vehicle.licensePlate}?');">
+                    <form action="modifyCatalogItem" method=post onsubmit="return confirm('Please confirm the modification for  ${vehicle.vehicleLicensePlate}?');">
 
                     <tr>
-                            <td><input type="text"  name = "licenseNumber" readonly value="${vehicle.licensePlate}"></td>
+                            <td><input type="text"  name = "licenseNumber" readonly value="${vehicle.vehicleLicensePlate}"></td>
                             <td><input type="text" name = "type" required maxlength="50" value=${vehicle.type}></td>
                             <td><input type="text" name = "model" required maxlength="50" value=${vehicle.model}></td>
                             <td><input type="text" name = "make" required maxlength="50" value=${vehicle.make}></td>
                             <td><input type="text" name = "color" required maxlength="50" value=${vehicle.color}></td>
                             <td><input type="number" name = "year" required maxlength="4" value=${vehicle.year}></td>
-                            <td><button id="${vehicle.licensePlate}" type="submit">Save</button></td>
+                            <td><button id="${vehicle.vehicleLicensePlate}" type="submit">Save</button></td>
                         </tr>
                     </form>
 
@@ -417,7 +417,7 @@
 </c:choose>
 </div>
 
-<form action="backtomainpage" method=get>
+<form action="backtoadminmainpage" method=get>
 
     <center> <button class="btn btn-default" type="submit">Back To Main Page</button></center>
 </form>
