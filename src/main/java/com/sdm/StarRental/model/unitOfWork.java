@@ -4,11 +4,6 @@ import com.sdm.StarRental.Enum.unitOfWorkAction;
 
 public class unitOfWork<E> {
 
-	public unitOfWork() {
-		// TODO Auto-generated constructor stub
-		
-	}
-	
 	private unitOfWorkAction action;
 	private E e;
 	
