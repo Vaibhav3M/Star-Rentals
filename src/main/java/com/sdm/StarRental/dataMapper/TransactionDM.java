@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.tableDataGateway.TransactionTDG;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class TransactionDM {
 
+    @Autowired
     TransactionTDG transactionTDG;
 
     public boolean createTransactionService(String vehicleLicencePlate, String transactionType, String clientLicenseNumber,String status,String timeStamp,String bookingFrom,String bookingTill,String transactionBy) throws Exception {
