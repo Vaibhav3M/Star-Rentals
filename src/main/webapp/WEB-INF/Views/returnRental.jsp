@@ -110,8 +110,8 @@
                   <th class="th-sm">Transaction ID</th>
                   <th class="th-sm">Client License Number</th>
                   <th class="th-sm">Vehicle License Plate</th>
-                  <th class="th-sm">Rented Date</th>
-                  <th class="th-sm">Due Date</th>
+                  <th class="th-sm">Booking From Date</th>
+                  <th class="th-sm">Booking Till Date</th>
                   <th class="th-sm"></th>
                </tr>
                </thead>
@@ -120,10 +120,10 @@
 
                      <tr id = ${transaction.licensePlate}>
                         <td>${transaction.transactionID}</td>
-                        <td>${transaction.licenseNumber}</td>
-                        <td>${transaction.licensePlate}</td>
-                        <td>${transaction.rentedFrom}</td>
-                        <td>${transaction.rentedTill}</td>
+                        <td>${transaction.clientLicenseNumber}</td>
+                        <td>${transaction.vehicleLicensePlate}</td>
+                        <td>${transaction.bookingFrom}</td>
+                        <td>${transaction.bookingTill}</td>
 
                         <td><button  class="btn btn-primary" name ="transactionID" value=${transaction.transactionID} type="submit" onclick="myFunction()">Return</button></td>
                      </tr>

@@ -165,7 +165,7 @@
 											<table id="example" class="table table-striped">
 
 												<thead>
-													<tr id=${clients.licenseNumber}>
+													<tr id=${clients.clientLicenseNumber}>
 														<th class="col-md-1">First Name</th>
 														<th class="col-md-2">Last Name</th>
 														<th class="col-md-3">License Number</th>
@@ -176,15 +176,15 @@
 												</thead>
 												<tbody>
 													<c:forEach items="${client_results}" var="clients">
-															<tr id=${clients.licenseNumber}>
+															<tr id=${clients.clientLicenseNumber}>
 																<td class="col-md-1">${clients.firstName}</td>
 																<td class="col-md-2">${clients.lastName}</td>
-																<td class="col-md-3">${clients.licenseNumber}</td>
+																<td class="col-md-3">${clients.clientLicenseNumber}</td>
 																<td class="col-md-4">${clients.licenseExpiryDate}</td>
 																<td class="col-md-5">${clients.phoneNumber}</td>
 																<td class="col-md-6">
 																	<button type="submit"
-																		value=${clients.licenseNumber.replace(" ","_")}
+																		value=${clients.clientLicenseNumber.replace(" ","_")}
 																		name="selectClient">Select</button>
 																</td>
 															</tr>
@@ -238,15 +238,15 @@
 												</thead>
 												<tbody>
 													<c:forEach items="${catalogVehicleResult}" var="vehicle">
-														<tr id=${vehicle.licensePlate}>
+														<tr id=${vehicle.vehicleLicensePlate}>
 															<td class="col-md-1">${vehicle.model}</td>
 															<td class="col-md-2">${vehicle.make}</td>
 															<td class="col-md-3">${vehicle.year}</td>
 															<td class="col-md-4">${vehicle.color}</td>
-															<td class="col-md-5">${vehicle.licensePlate}</td>
+															<td class="col-md-5">${vehicle.vehicleLicensePlate}</td>
 															<td class="col-md-6">
 																<button type="submit"
-																	value=${vehicle.licensePlate.replace(" ","_")}
+																	value=${vehicle.vehicleLicensePlate.replace(" ","_")}
 																	name="selectCar">Select</button>
 															</td>
 														</tr>

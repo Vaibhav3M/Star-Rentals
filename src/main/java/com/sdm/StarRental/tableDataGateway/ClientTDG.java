@@ -4,6 +4,7 @@ import com.mysql.cj.api.mysqla.result.Resultset;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.objectUtilities.Utilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.xml.transform.Result;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+@Repository
 public class ClientTDG implements IClientTDG {
 
     @Autowired
