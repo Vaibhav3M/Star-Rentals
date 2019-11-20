@@ -24,14 +24,17 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	
 	private VehicleDM vehicleDataMapper;
 	
-	@Autowired
-	public VehicleUnitOfWork(VehicleDM vehicleDataMapper ) {
+	
+	public VehicleUnitOfWork() {
 		
-		this.vehicleDataMapper = vehicleDataMapper;
+		this.vehicleDataMapper = new VehicleDM();
+
 	}
 	
 	@Override
 	public void commit() {
+	
+
 		if(jobs.size()==3) {
 			jobs.forEach((key, element) -> {
 				Vehicle vehicle = element.getE();
@@ -87,9 +90,9 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	@Override
 	public void create(Vehicle element) {
 		if(isDirty(element.getvehicleLicensePlate())) {
-			Vehicle newElement = element;
-			jobs.remove(element, jobs.get(element));
-			jobs.put(newElement.getvehicleLicensePlate(), mapToObject(newElement, unitOfWorkAction.CREATE));
+
+			jobs.replace(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.CREATE));
+
 			
 		}
 		else {
@@ -104,64 +107,61 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	public void update(Vehicle element) {
 		 System.out.println("updatkey "+ element.getvehicleLicensePlate());
 		boolean isDirty = isDirty(element.getvehicleLicensePlate());
-		Vehicle newElement;
+
 		if(isDirty) {
-			 System.out.println("update elemnt in unit of work for "+ element.getvehicleLicensePlate() );
 			unitOfWork<Vehicle> value = jobs.get(element.getvehicleLicensePlate());
+			
+			 System.out.println("update elemnt in unit of work for "+ element.getvehicleLicensePlate() );
+			
 			if(value.getAction()==unitOfWorkAction.CREATE) {
-				newElement = element;
-				jobs.remove(element.getvehicleLicensePlate(), jobs.get(element.getvehicleLicensePlate()));
-				jobs.put(newElement.getvehicleLicensePlate(), mapToObject(newElement, unitOfWorkAction.CREATE));		
-
-			}
-			else if(jobs.get(element.getvehicleLicensePlate()).getAction()==unitOfWorkAction.UPDATE) {
-				newElement = element;
-				jobs.remove(element.getvehicleLicensePlate(), jobs.get(element.getvehicleLicensePlate()));
-				jobs.put(newElement.getvehicleLicensePlate(), mapToObject(newElement, unitOfWorkAction.UPDATE));		
+			
+				jobs.replace(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.CREATE));		
 
 			}
 			
-			else if(jobs.get(element.getvehicleLicensePlate()).getAction()==unitOfWorkAction.DELETE) {
-				newElement = element;
-				jobs.remove(element.getvehicleLicensePlate(), jobs.get(element.getvehicleLicensePlate()));
-				jobs.put(newElement.getvehicleLicensePlate(), mapToObject(newElement, unitOfWorkAction.DELETE));		
+			
+			else if(value.getAction()==unitOfWorkAction.UPDATE) {
+				
+				//jobs.replace(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));	
+				System.out.println("Vehicle is pending delete from system");	
 
 			}
 			
-		//	System.out.println("update elemnt key "+ newElement.getVehicleLicencePlate()+ "SIZE IS "+ jobs.size());
+			else if(value.getAction()==unitOfWorkAction.DELETE) {
+				
+				System.out.println("Vehicle is pending delete from system");	
 
+			}
+			
 		}
 		
 		else {
 			jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 
 		}
-		
-		
-		
+				
+
 		commit();
 	}
 
 	@Override
 	public void delete(String key) {
-		Vehicle newElement;
-		if(isDirty(key)) {
-			String newKey = key;
-			newElement = jobs.get(key).getE();
-			jobs.remove(key, jobs.get(key));
-			
-			jobs.put(newKey, mapToObject(newElement, unitOfWorkAction.DELETE));	
-		}
-	else{
+		Vehicle element;
 		try {
-			newElement = vehicleDataMapper.getVehicleByLicenseNo(key);
-			jobs.put(key, mapToObject(newElement, unitOfWorkAction.DELETE));
+			if(!isDirty(key) && vehicleDataMapper.getVehicleByLicenseNo(key).getStatus().contains("Available") ) {
+				 element = vehicleDataMapper.getVehicleByLicenseNo(key);
+				jobs.put(key, mapToObject(element, unitOfWorkAction.DELETE));	
+			}
+else{
+			
+			System.out.println("Vehicle can not be modified, comit pending or vehicle is with customer");
+}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-	}		
+
 		
 		commit();
 	}
@@ -183,7 +183,17 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		unitOfWork<Vehicle> object = new unitOfWork<Vehicle>(action,element);
 		
 		return object;
+
 	}
+	
+
+	private unitOfWork<Vehicle> mapToObject(Vehicle element, unitOfWorkAction action) {
+		unitOfWork<Vehicle> object = new unitOfWork<Vehicle>(action,element);
+		
+		return object;
+	}
+
+
 
 
 

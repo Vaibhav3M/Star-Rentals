@@ -2,6 +2,8 @@ package com.sdm.StarRental.unitOfWork;
 
 
 
+
+
 import com.sdm.StarRental.Enum.unitOfWorkAction;
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.model.Transaction;
@@ -80,6 +82,7 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 	private unitOfWork<Transaction> mapToObject(Transaction element, unitOfWorkAction action) {
 		unitOfWork<Transaction> object = new unitOfWork<Transaction>(action, element);
 		return object;
+
 	}
 
 }
