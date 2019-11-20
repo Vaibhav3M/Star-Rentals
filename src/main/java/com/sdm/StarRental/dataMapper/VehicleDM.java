@@ -37,11 +37,14 @@ public VehicleDM() {
 	    	return result;
 	    }
 
+
 	    public boolean modifyVehicle(String type,String make, String model,int year, String color,String vehilceLicensePlate, String status) throws Exception{
+
 	    	 vehicleTDG.getInstance().establishConntection();
 	    	 boolean result = vehicleTDG.modifyVehicle(type, year, model, make, color, vehilceLicensePlate, status);
 	    	 vehicleTDG.getInstance().closeConnection();
 	    	return result;
+
 	    }
 
 	    public ArrayList<Vehicle> getAllVehicles() throws Exception{ 
