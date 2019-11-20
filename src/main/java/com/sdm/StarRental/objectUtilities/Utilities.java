@@ -13,7 +13,7 @@ public class Utilities {
 
 
 	public static boolean validateSession(HttpSession httpSession) {
-		if ((Integer) httpSession.getAttribute("userLoggedIn") == 1) {
+		if (httpSession.getAttribute("userLoggedIn") != null && (Integer) httpSession.getAttribute("userLoggedIn") == 1) {
 			return true;
 		}
 		return false;
@@ -49,9 +49,6 @@ public class Utilities {
 
 		Client client = new Client();
 
-		if(clientResultSet.next()){
-			clientResultSet.getString(1);
-		}
 
 		client.setFirstName(clientResultSet.getString("firstName"));
 		client.setLastName(clientResultSet.getString("lastName"));
@@ -68,9 +65,6 @@ public class Utilities {
 
 		Transaction transaction = new Transaction();
 
-		if(transactionResultSet.next()){
-			transactionResultSet.getString(1);
-		}
 
 		transaction.setTransactionID(transactionResultSet.getInt("transactionID"));
 		transaction.setTransactionType(transactionResultSet.getString("transactionType"));
