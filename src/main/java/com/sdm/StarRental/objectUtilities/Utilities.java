@@ -4,6 +4,7 @@ package com.sdm.StarRental.objectUtilities;
 
 
 
+
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.User;
@@ -37,6 +38,7 @@ public class Utilities {
 		vehicle.setYear(Integer.valueOf(vehicleDetails.getString("year")));
 		vehicle.setColor(vehicleDetails.getString("color"));
 		vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
+
 
 
 
@@ -84,6 +86,7 @@ public class Utilities {
 
 
 		return transaction;
+
 
 
 

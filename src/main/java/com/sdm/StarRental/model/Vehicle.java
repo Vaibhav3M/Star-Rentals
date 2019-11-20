@@ -41,6 +41,7 @@ public class Vehicle {
 
 
 
+
         this.type = type;
         this.year = year;
         this.model = model;

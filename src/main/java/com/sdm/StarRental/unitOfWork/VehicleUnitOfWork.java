@@ -28,11 +28,13 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	public VehicleUnitOfWork() {
 		
 		this.vehicleDataMapper = new VehicleDM();
+
 	}
 	
 	@Override
 	public void commit() {
 	
+
 		if(jobs.size()==3) {
 			jobs.forEach((key, element) -> {
 				Vehicle vehicle = element.getE();
@@ -90,6 +92,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		if(isDirty(element.getvehicleLicensePlate())) {
 
 			jobs.replace(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.CREATE));
+
 			
 		}
 		else {
@@ -137,6 +140,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 
 		}
 				
+
 		commit();
 	}
 
@@ -152,10 +156,12 @@ else{
 			
 			System.out.println("Vehicle can not be modified, comit pending or vehicle is with customer");
 }
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+
 		
 		commit();
 	}
@@ -177,7 +183,17 @@ else{
 		unitOfWork<Vehicle> object = new unitOfWork<Vehicle>(action,element);
 		
 		return object;
+
 	}
+	
+
+	private unitOfWork<Vehicle> mapToObject(Vehicle element, unitOfWorkAction action) {
+		unitOfWork<Vehicle> object = new unitOfWork<Vehicle>(action,element);
+		
+		return object;
+	}
+
+
 
 
 
