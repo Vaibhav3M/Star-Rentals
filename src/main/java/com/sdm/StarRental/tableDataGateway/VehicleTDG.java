@@ -13,11 +13,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-@Repository
+
 public class VehicleTDG implements IVehicleTDG {
 
-  //  @Autowired
+	private VehicleTDG vehicleTDG;
+ 
     private Connection connection;
+    
+    public VehicleTDG getInstance() {
+    	if (vehicleTDG == null) {
+    	  vehicleTDG = new VehicleTDG();
+    	} 
+    	return vehicleTDG;
+    }
+    
 
     public VehicleTDG() {
     	 try {
@@ -27,7 +36,27 @@ public class VehicleTDG implements IVehicleTDG {
 
          }
     }
+    
+    public void establishConntection() {
+    	 try {
+             connection = getSQLDb();
+             
+         }
+         catch (Exception e){
 
+         }
+
+    }
+    
+    public void closeConnection() {
+    	try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     private Connection getSQLDb() throws SQLException, Exception {
 		// TODO Auto-generated method stub
     	Class.forName("com.mysql.cj.jdbc.Driver");
