@@ -45,6 +45,7 @@ public VehicleDM() {
 	    	 vehicleTDG.getInstance().closeConnection();
 	    	return result;
 
+
 	    }
 
 	    public ArrayList<Vehicle> getAllVehicles() throws Exception{ 
