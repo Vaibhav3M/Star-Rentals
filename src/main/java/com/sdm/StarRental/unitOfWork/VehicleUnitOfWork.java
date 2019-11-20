@@ -157,10 +157,14 @@ else{
 			System.out.println("Vehicle can not be modified, comit pending or vehicle is with customer");
 }
 
+
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
+
+
 
 		
 		commit();
