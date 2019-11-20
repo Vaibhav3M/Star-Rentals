@@ -1,23 +1,22 @@
 package com.sdm.StarRental.objectUtilities;
 
-
-
-
-
-
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.User;
 import com.sdm.StarRental.model.Vehicle;
 
+import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Utilities {
 
-	public Utilities() {
-		// TODO Auto-generated constructor stub
-		
+
+	public static boolean validateSession(HttpSession httpSession) {
+		if ((Integer) httpSession.getAttribute("userLoggedIn") == 1) {
+			return true;
+		}
+		return false;
 	}
 	
 	
