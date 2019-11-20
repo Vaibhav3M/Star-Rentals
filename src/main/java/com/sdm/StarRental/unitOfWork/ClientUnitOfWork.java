@@ -2,6 +2,7 @@ package com.sdm.StarRental.unitOfWork;
 
 
 
+
 import com.sdm.StarRental.Enum.unitOfWorkAction;
 import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.model.Client;
@@ -101,6 +102,7 @@ public class ClientUnitOfWork implements IUnitOfWork<Client,String> {
 	private unitOfWork<Client> mapToObject(Client element, unitOfWorkAction action) {
 		unitOfWork<Client> object = new unitOfWork<Client>(action, element);
 		return object;
+
 	}
 
 }

@@ -39,6 +39,8 @@ public class Vehicle {
      */
     public Vehicle(String type, int year, String model, String color, String vehicleLicensePlate, String status, String make) {
 
+
+
         this.type = type;
         this.year = year;
         this.model = model;

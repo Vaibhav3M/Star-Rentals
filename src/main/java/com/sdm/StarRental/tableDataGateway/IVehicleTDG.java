@@ -14,6 +14,8 @@ public interface IVehicleTDG {
     public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status) throws Exception;
 
 
+
+
     public ArrayList<Vehicle> getAllVehicles() throws Exception;
 
     public ArrayList<Vehicle> getVehicleFromOneCriteria(String value, String comparator, String criteria) throws Exception;
