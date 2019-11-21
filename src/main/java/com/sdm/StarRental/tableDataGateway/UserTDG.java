@@ -7,15 +7,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Repository
+
 public class UserTDG implements IUserTDG {
 
-    @Autowired
+    private UserTDG userTDG;
     private Connection connection;
+    
+    public UserTDG getInstance() {
+    	if(userTDG== null) {
+    		userTDG = new UserTDG();
+    	}
+    	
+    	return userTDG;
+    }
+    
+    public void establishConntection() {
+   	 try {
+            connection = Utilities.getSQLDb(connection);;
+            
+        }
+        catch (Exception e){
+
+        }
+
+   }
+   
+   public void closeConnection() {
+   	try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   }
+    
+    public UserTDG() {
+
+   	 try {
+            connection = Utilities.getSQLDb(connection);
+        }
+        catch (Exception e){
+
+        }
+   
+    	
+    }
+    
+    
+
 
     @Override
     public User getUser(String userName, String password) throws Exception {

@@ -9,22 +9,28 @@ import com.sdm.StarRental.tableDataGateway.UserTDG;
 @Service
 public class UserDM  {
 	
-	@Autowired
-	private UserTDG userTDG;
+	UserTDG userTDG;
 	
-	public void setUser(UserTDG userTDG) {
-		this.userTDG = userTDG;
+	public UserDM() {
+		
+		this.userTDG = new UserTDG();
+		
 	}
 	
-	
 	public User getUser(String userName, String password)throws Exception{
-		return this.userTDG.getUser(userName, password);
+		userTDG.getInstance().establishConntection();
+		User result = userTDG.getUser(userName, password);
+		userTDG.getInstance().closeConnection();
+		return result;
 		
 	}
 	
 	
     public boolean authUser(String userName,String password) throws Exception{
-    return this.userTDG.authUser(userName, password);
+    	userTDG.getInstance().establishConntection();
+    	boolean result = userTDG.authUser(userName, password);
+    	userTDG.getInstance().closeConnection();
+    return result;
     }
 	
 }

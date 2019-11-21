@@ -30,7 +30,7 @@ public class VehicleTDG implements IVehicleTDG {
 
     public VehicleTDG() {
     	 try {
-             connection = getSQLDb();
+             connection = Utilities.getSQLDb(connection);;
          }
          catch (Exception e){
 
@@ -39,7 +39,7 @@ public class VehicleTDG implements IVehicleTDG {
     
     public void establishConntection() {
     	 try {
-             connection = getSQLDb();
+             connection =Utilities.getSQLDb(connection);;
              
          }
          catch (Exception e){
@@ -57,18 +57,7 @@ public class VehicleTDG implements IVehicleTDG {
 		}
     }
     
-    private Connection getSQLDb() throws SQLException, Exception {
-		// TODO Auto-generated method stub
-    	Class.forName("com.mysql.cj.jdbc.Driver");
-        String url      = "jdbc:mysql://localhost:3306/car_rental";
-        String user     = "root";
-        String pass = "root";
-
-        connection =
-            DriverManager.getConnection(url,user,pass);
-
-        return connection;
-	}
+   
 
 	@Override
     public boolean addNewVehicle(String type,int year, String model,String color,String licensePlate, String status,String make) throws Exception{
