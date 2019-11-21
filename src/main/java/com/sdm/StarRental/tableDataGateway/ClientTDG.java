@@ -15,6 +15,19 @@ public class ClientTDG implements IClientTDG {
 
     private Connection connection;
 
+    private static ClientTDG clientTDG;
+
+    private ClientTDG(){};
+
+    public static ClientTDG getInstance(){
+
+        if(clientTDG == null){
+            clientTDG = new ClientTDG();
+        }
+
+        return clientTDG;
+    }
+
     public void establishConnection() {
 
         try {
@@ -90,7 +103,7 @@ public class ClientTDG implements IClientTDG {
 
         establishConnection();
 
-        String sql2="UPDATE c_clients SET licenseNumber='"+licenseNumber+"' ,firstName='"+firstName+"' ,lastName='"+lastName+"' ,phoneNumber='"+phoneNumber+"' ,licenseExpiryDate='"+licenseExpiryDate+"' WHERE licenseNumber='"+licenseNumber+"'";
+        String sql2="UPDATE c_clients SET licenseNumber= '"+licenseNumber+"' ,firstName='"+firstName+"' ,lastName='"+lastName+"' ,phoneNumber='"+phoneNumber+"' ,licenseExpiryDate='"+licenseExpiryDate+"' WHERE licenseNumber='"+licenseNumber+"'";
 
         System.out.println(sql2);
        // String sql = "UPDATE c_clients SET licenseNumber='"+ licenseNumber + " firstName=" + firstName + " lastName =" + lastName + " phoneNumber= " + phoneNumber + " licenseExpiryDate = " + licenseExpiryDate + "' WHERE licenseNumber = + '\"+licenseNumber+\"'";
