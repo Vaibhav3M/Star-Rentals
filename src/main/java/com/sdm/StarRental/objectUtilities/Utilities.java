@@ -28,6 +28,7 @@ public class Utilities {
 
     public static Connection getSQLDb(Connection connection) throws SQLException, ClassNotFoundException {
 
+
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/car_rental";
         String user = "root";
@@ -45,8 +46,11 @@ public class Utilities {
         user.setPassword(userDetails.getString("password"));
         user.setUserType(userDetails.getString("userType"));
         return user;
+
     }
 
+
+  
     public static Vehicle getVehicleObject(ResultSet vehicleDetails) throws SQLException {
         Vehicle vehicle = new Vehicle();
         // Type,Make,Model,Year,Color,License_Plate,Status
@@ -56,9 +60,6 @@ public class Utilities {
         vehicle.setYear(Integer.valueOf(vehicleDetails.getString("year")));
         vehicle.setColor(vehicleDetails.getString("color"));
         vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
-
-
-
         vehicle.setStatus(vehicleDetails.getString("status"));
         return vehicle;
     }
@@ -74,10 +75,10 @@ public class Utilities {
         client.setLicenseExpiryDate(clientResultSet.getString("licenseExpiryDate"));
         client.setPhoneNumber(clientResultSet.getString("phoneNumber"));
 
-
         return client;
 
     }
+
 
     public static Transaction getTransactionObject(ResultSet transactionResultSet) throws SQLException {
 
@@ -96,6 +97,7 @@ public class Utilities {
 
 
         return transaction;
+
 
 
     }
