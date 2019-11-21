@@ -7,12 +7,14 @@ import com.sdm.StarRental.model.User;
 import com.sdm.StarRental.model.Vehicle;
 
 import javax.servlet.http.HttpSession;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Utilities {
+
 
 
     public static boolean validateSession(HttpSession httpSession) {
@@ -28,6 +30,7 @@ public class Utilities {
         String url = "jdbc:mysql://localhost:3306/car_rental";
         String user = "root";
         String pass = "root";
+
 
         connection = DriverManager.getConnection(url, user, pass);
 
@@ -54,7 +57,6 @@ public class Utilities {
         vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
 
 
-
         vehicle.setStatus(vehicleDetails.getString("status"));
         return vehicle;
     }
@@ -69,6 +71,7 @@ public class Utilities {
         client.setLicenseNumber(clientResultSet.getString("licenseNumber"));
         client.setLicenseExpiryDate(clientResultSet.getString("licenseExpiryDate"));
         client.setPhoneNumber(clientResultSet.getString("phoneNumber"));
+
 
 
         return client;
@@ -92,6 +95,7 @@ public class Utilities {
 
 
         return transaction;
+
 
 
     }
