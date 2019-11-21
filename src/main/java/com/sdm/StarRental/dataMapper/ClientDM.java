@@ -1,7 +1,6 @@
 package com.sdm.StarRental.dataMapper;
 
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 
 
 import com.sdm.StarRental.model.Client;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientDM {
 
-    @Autowired
-    ClientTDG clientTDG;
+    ClientTDG clientTDG = ClientTDG.getInstance();
+
 
     public boolean createClientService(String firstName, String lastName, String phoneNumber,String licenseNumber, String licenseExpiryDate) throws Exception {
 

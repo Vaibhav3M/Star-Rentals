@@ -10,6 +10,7 @@ import com.sdm.StarRental.dataMapper.UserDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.User;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.tableDataGateway.UserTDG;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 
@@ -121,11 +122,11 @@ public class LoginPageController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String userLogOut(HttpSession httpSession) {
-		/*
-		 * if(Utilities.validateSession(httpSession)) { httpSession.invalidate(); }
-		 */
-		
+	public String Main(HttpSession httpSession) {
+		if(Utilities.validateSession(httpSession)) {
+			httpSession.invalidate();
+		}
+
 		return "loginPage";
 	}
 	
