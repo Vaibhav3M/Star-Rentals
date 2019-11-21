@@ -11,7 +11,10 @@ import javax.servlet.http.HttpSession;
 public class AOPSessionHandler {
 
 
-    @Before("execution(* com.sdm.StarRental.controller..*(..)) && !execution(* com.sdm.StarRental.controller.LogInPageController.*(..))")
+
+    @Before("execution(* com.sdm.StarRental.controller..*(..)) && !execution(* com.sdm.StarRental.controller.LogInPageController.*(..))&& !execution(* com.sdm.StarRental.controller.clerkManagePageController.*(..))")
+
+
 
     public void beforeControllerValidateSession(JoinPoint joinPoint) throws Exception {
 
