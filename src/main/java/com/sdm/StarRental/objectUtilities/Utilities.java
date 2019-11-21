@@ -25,32 +25,6 @@ public class Utilities {
 		return false;
 	}
 	
-	
-	public static User getUserObject(ResultSet userDetails) throws SQLException {
-		User user = new User();
-		user.setUserName(userDetails.getString("userName"));
-		user.setPassword(userDetails.getString("password"));
-		user.setUserType(userDetails.getString("userType"));
-		return user;
-	}
-	
-	public static Vehicle getVehicleObject(ResultSet vehicleDetails) throws SQLException {
-		Vehicle vehicle = new Vehicle();
-		// Type,Make,Model,Year,Color,License_Plate,Status
-		vehicle.setType(vehicleDetails.getString("type"));
-		vehicle.setMake(vehicleDetails.getString("make"));
-		vehicle.setModel(vehicleDetails.getString("model"));
-		vehicle.setYear(Integer.valueOf(vehicleDetails.getString("year")));
-		vehicle.setColor(vehicleDetails.getString("color"));
-		vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
-
-
-    public static boolean validateSession(HttpSession httpSession) {
-        if (httpSession.getAttribute("userLoggedIn") != null && (Integer) httpSession.getAttribute("userLoggedIn") == 1) {
-            return true;
-        }
-        return false;
-    }
 
     public static Connection getSQLDb(Connection connection) throws SQLException, ClassNotFoundException {
 
