@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
-public class createClientController {
+public class ManageClientController {
 
-    private static Logger logger = LoggerFactory.getLogger(createClientController.class);
+    private static Logger logger = LoggerFactory.getLogger(ManageClientController.class);
 
     ClientDM clientDM;
     ClientUnitOfWork clientUnitOfWork;
 
-    public createClientController(){
+    public ManageClientController(){
         clientDM = new ClientDM();
         clientUnitOfWork = new ClientUnitOfWork(clientDM);
     }
