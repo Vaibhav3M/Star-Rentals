@@ -54,6 +54,7 @@ public class Utilities {
         vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
 
 
+
         vehicle.setStatus(vehicleDetails.getString("status"));
         return vehicle;
     }

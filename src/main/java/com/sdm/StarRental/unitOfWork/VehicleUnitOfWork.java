@@ -185,16 +185,6 @@ else{
 		return object;
 
 	}
-	
-
-	private unitOfWork<Vehicle> mapToObject(Vehicle element, unitOfWorkAction action) {
-		unitOfWork<Vehicle> object = new unitOfWork<Vehicle>(action,element);
-		
-		return object;
-	}
-
-
-
 
 
 }
