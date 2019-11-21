@@ -132,15 +132,15 @@
             </tr>
             </thead>
             <c:forEach items="${client_results}" var="clients">
-              <form action="deleteClientInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${clients.clientLicenseNumber}?');">
+              <form action="deleteClientInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${clients.licenseNumber}?');">
 
-              <tr id = ${clients.clientLicenseNumber}>
+              <tr id = ${clients.licenseNumber}>
                 <td>${clients.firstName}</td>
                 <td>${clients.lastName}</td>
-                <td>${clients.clientLicenseNumber}</td>
+                <td>${clients.licenseNumber}</td>
                 <td>${clients.licenseExpiryDate}</td>
                 <td>${clients.phoneNumber}</td>
-                <td><button  name ="licenseNumber" value=${clients.clientLicenseNumber} type="submit">Delete</button></td>
+                <td><button  name ="licenseNumber" value=${clients.licenseNumber} type="submit">Delete</button></td>
               </tr>
               </form>
               </tbody>

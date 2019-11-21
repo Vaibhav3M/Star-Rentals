@@ -63,7 +63,7 @@
 				<div class="bottom-left">Search Catalog</div>
             </div>
             <div style="flex:1;padding-left:5px;">
-                <a href="clerkmanagepage"><img src="ManageUser.jpg" alt="Manage Client"></a>
+                <a href="clerkManagePage"><img src="ManageUser.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Manage Client</div>
               </div>
 			</div>

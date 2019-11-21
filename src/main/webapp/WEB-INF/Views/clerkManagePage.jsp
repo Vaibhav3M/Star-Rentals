@@ -19,14 +19,14 @@
     <link href="album.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-// function isNumber(evt)
-// {
-//    var charCode = (evt.which) ? evt.which : event.keyCode
-//    if (charCode > 31 && (charCode < 48 || charCode > 57))
-//       return false;
-//
-//    return true;
-// }
+function isNumber(evt)
+{
+   var charCode = (evt.which) ? evt.which : event.keyCode
+   if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+
+   return true;
+}
 </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -71,19 +71,19 @@
         <div class="container">
           <div style="display:flex">
             <div style="flex:1;padding-left:5px;padding-right:5px;">
-                <a href="makerental"><img src="CreateRental.jpg" alt="Search for a vehicle in the catalog"></a>
+                <a href="makeRental"><img src="CreateRental.jpg" alt="Search for a vehicle in the catalog"></a>
 				<div class="bottom-left">Rent a vehicle</div>
             </div>
             <div style="flex:1;padding-left:5px;">
-                <a href="returnvehicle"><img src="Return.jpg" alt="Manage Client"></a>
+                <a href="returnVehicle"><img src="Return.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Return a vehicle</div>
               </div>
 			  <div style="flex:1;padding-left:5px;">
-                <a href="reserve"><img src="MakeReserv.jpg" alt="Manage Client"></a>
+                <a href="createNewReservation"><img src="MakeReserv.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Make a reservation</div>
               </div>
 			  <div style="flex:1;padding-left:5px;">
-                <a href="cancelReserve"><img src="CancelReserv.jpg" alt="Manage Client"></a>
+                <a href="cancelReservation"><img src="CancelReserv.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Cancel Reservation</div>
               </div>
 			</div>
@@ -100,15 +100,15 @@
         <div class="container">
           <div style="display:flex">
             <div style="flex:1;padding-left:5px;padding-right:5px;">
-                <a href="createclient"><img src="AddUser.jpg" alt="Search for a vehicle in the catalog"></a>
+                <a href="createClient"><img src="AddUser.jpg" alt="Search for a vehicle in the catalog"></a>
 				<div class="bottom-left">Add new client</div>
             </div>
             <div style="flex:1;padding-left:5px;">
-                <a href="modifyclient"><img src="ModifyUser.jpg" alt="Manage Client"></a>
+                <a href="modifyClient"><img src="ModifyUser.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Modify existing client</div>
               </div>
 			  <div style="flex:1;padding-left:5px;">
-                <a href="deleteclient"><img src="DeleteUser.jpg" alt="Manage Client"></a>
+                <a href="deleteClient"><img src="DeleteUser.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Delete client</div>
               </div>
 			</div>

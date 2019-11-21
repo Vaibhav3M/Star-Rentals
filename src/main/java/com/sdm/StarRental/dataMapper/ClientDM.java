@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientDM {
 
-    @Autowired
     ClientTDG clientTDG;
+
+    public ClientDM(){
+
+        this.clientTDG = new ClientTDG();
+    }
 
     public boolean createClientService(String firstName, String lastName, String phoneNumber,String licenseNumber, String licenseExpiryDate) throws Exception {
 

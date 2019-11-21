@@ -1,28 +1,29 @@
 package com.sdm.StarRental.unitOfWork;
 
 
-
-
-
 import com.sdm.StarRental.Enum.unitOfWorkAction;
 import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.unitOfWork;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
 public class ClientUnitOfWork implements IUnitOfWork<Client,String> {
 
-	public ClientUnitOfWork(ClientDM clientDM) { this.clientDM = clientDM; }
 
 	//TODO: assign unique values
 	@Value("{unit-of-work.batch-no}")
 	private String unitOfWorkBatchNo;
 
-	private HashMap<String, unitOfWork<Client>> data = new HashMap();
 
 	private ClientDM clientDM;
+
+	public ClientUnitOfWork(ClientDM clientDM) { this.clientDM = clientDM; }
+
+	private HashMap<String, unitOfWork<Client>> data = new HashMap();
 
 
 	@Override
