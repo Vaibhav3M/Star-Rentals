@@ -32,7 +32,7 @@ public class returnRentalController {
     public returnRentalController(){
         vehicleDM = new VehicleDM();
         transactionDM = new TransactionDM();
-        vehicleUnitOfWork = new VehicleUnitOfWork();
+        vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
 
         transactionUnitOfWork = TransactionUnitOfWork.getInstance();
 

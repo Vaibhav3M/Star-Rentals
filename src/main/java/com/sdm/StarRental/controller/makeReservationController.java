@@ -39,9 +39,9 @@ public class makeReservationController {
     public makeReservationController(){
         vehicleDM = new VehicleDM();
         clientDM = new ClientDM();
-        vehicleUnitOfWork = new VehicleUnitOfWork();
-
         transactionUnitOfWork = TransactionUnitOfWork.getInstance();
+        vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
+        
 
     }
 

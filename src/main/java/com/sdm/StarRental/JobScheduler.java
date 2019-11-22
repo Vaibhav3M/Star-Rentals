@@ -9,7 +9,6 @@ import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 @Component
 public class JobScheduler {
 
-	@Autowired
 	private VehicleUnitOfWork vehicleUnitOfWork;
 	
 	//fixedRate is in milliseconds
