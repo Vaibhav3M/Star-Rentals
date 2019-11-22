@@ -15,7 +15,7 @@ public class JobScheduler {
 	//fixedRate is in milliseconds
 	@Scheduled(fixedRate = 2000)
 	public void scheduleTaskWithFixedRate() {
-		System.out.println("Job Executed");
+		//System.out.println("Job Executed");
 		//vehicleUnitOfWork.commit();
 	}
 }
