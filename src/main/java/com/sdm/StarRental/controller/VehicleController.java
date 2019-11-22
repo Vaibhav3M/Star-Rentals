@@ -54,11 +54,6 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
 	}
 	
-	
-	
-	
-	
-	
 	@RequestMapping(value = "/createNewVehicle",method = RequestMethod.GET)
 	public String createNewVehicle() {	
 		return "createNewVehicle";
@@ -73,7 +68,6 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 		int year =Integer.parseInt(reqPar.get("year")); 
 		String color = reqPar.get("color"); 
 		String vehicleLicensePlate= reqPar.get("licensePlate");
-	//	Vehicle v = new Vehicle("SUV", 1999, "BENZ", "WHITE", "AY7 324", "RENTED", "MERC");
 		Vehicle vehicle = new Vehicle(type, year, model, color, vehicleLicensePlate, "Available", make);
 		vehicleUnitOfWork.create(vehicle); 
 		return "adminPanel";
@@ -203,30 +197,30 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
          }
 
-		/*
-		 * if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
-		 * vehicles=catalogService.sortByYear(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("model")) {
-		 * vehicles=catalogService.sortByModel(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make"))
-		 * { vehicles=catalogService.sortByMake(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("licensePlate")) {
-		 * vehicles=catalogService.sortByLicensePlate(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("color")) {
-		 * vehicles=catalogService.sortByColor(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type"))
-		 * { vehicles=catalogService.sortByType(vehicles);
-		 * 
-		 * }
-		 */
+		
+		  if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
+		  vehicles=vehicleDataMapper.sortByYear(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("model")) {
+		  vehicles=vehicleDataMapper.sortByModel(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make"))
+		  { vehicles=vehicleDataMapper.sortByMake(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("licensePlate")) {
+		  vehicles=vehicleDataMapper.sortByLicensePlate(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("color")) {
+		  vehicles=vehicleDataMapper.sortByColor(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type"))
+		  { vehicles=vehicleDataMapper.sortByType(vehicles);
+		  
+		  }
+		 
          logger.info("Catalog length" + vehicles.size());
          model.addAttribute("SearchParams", reqPar);
          if (vehicles != null) {
@@ -242,7 +236,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
      }
 	 
      @RequestMapping(value = "/modifyCatalogItem", method = RequestMethod.POST)
-     public String updateClientInfo(@RequestParam Map<String, String> reqParam, ModelMap model, HttpSession httpSession)
+     public String modifyCatalogItem(@RequestParam Map<String, String> reqParam, ModelMap model, HttpSession httpSession)
              throws Exception {
 
          Vehicle selectedVehicle = vehicleDataMapper.getVehicleByLicenseNo(reqParam.get("licenseNumber"));
@@ -268,7 +262,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
      }
 
      @RequestMapping(value = "/deleteVehicle",method = RequestMethod.GET)
-     public String getCustomerList(@RequestParam Map<String,String> reqParam, ModelMap model, HttpSession httpSession)
+     public String deleteVehicle(@RequestParam Map<String,String> reqParam, ModelMap model, HttpSession httpSession)
              throws Exception {
 
              ArrayList<Vehicle> vehicle = vehicleDataMapper.getAllVehicles();
@@ -379,25 +373,25 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
   		}
   		
-//  		if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
-//  			vehicles=vehicleDataMapper.sortByYear(vehicles);
-//  			
-//  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("model")) {
-//  			vehicles=vehicleDataMapper.sortByModel(vehicles);
-//  			
-//  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make")) {
-//  			vehicles=vehicleDataMapper.sortByMake(vehicles);
-//  			
-//  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("licensePlate")) {
-//  			vehicles=vehicleDataMapper.sortByLicensePlate(vehicles);
-//  			
-//  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("color")) {
-//  			vehicles=vehicleDataMapper.sortByColor(vehicles);
-//  			
-//  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type")) {
-//  			vehicles=vehicleDataMapper.sortByType(vehicles);
-//  			
-//  		}
+  		if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
+  			vehicles=vehicleDataMapper.sortByYear(vehicles);
+  			
+  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("model")) {
+  			vehicles=vehicleDataMapper.sortByModel(vehicles);
+  			
+  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make")) {
+  			vehicles=vehicleDataMapper.sortByMake(vehicles);
+  			
+  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("licensePlate")) {
+  			vehicles=vehicleDataMapper.sortByLicensePlate(vehicles);
+  			
+  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("color")) {
+  			vehicles=vehicleDataMapper.sortByColor(vehicles);
+  			
+  		}else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type")) {
+  			vehicles=vehicleDataMapper.sortByType(vehicles);
+  			
+  		}
   		logger.info("Catalog length" + vehicles.size());
   		model.addAttribute("SearchParams", reqPar);
   		if (vehicles != null) {
@@ -413,7 +407,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
   	}
        
      @RequestMapping(value = "/deleteVehicleInfo",method = RequestMethod.POST)
-     public String deleteVehicleInfo(@RequestParam Map<String,String> reqParam, ModelMap model,HttpSession httpSession) throws Exception{
+     public String deleteVehicleAction(@RequestParam Map<String,String> reqParam, ModelMap model,HttpSession httpSession) throws Exception{
 
          
      	String vehicleLicense = reqParam.get("licensePlate").replace("_", " ");
@@ -577,30 +571,30 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
  		}
  		
-		/*
-		 * if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
-		 * vehicles=vehicleDataMapper.sortByYear(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("model")) {
-		 * vehicles=catalogService.sortByModel(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make"))
-		 * { vehicles=catalogService.sortByMake(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("licensePlate")) {
-		 * vehicles=catalogService.sortByLicensePlate(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") &&
-		 * reqPar.get("sortBy").equals("color")) {
-		 * vehicles=catalogService.sortByColor(vehicles);
-		 * 
-		 * }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type"))
-		 * { vehicles=catalogService.sortByType(vehicles);
-		 * 
-		 * }
-		 */
+		
+		  if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("year")) {
+		  vehicles=vehicleDataMapper.sortByYear(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("model")) {
+		  vehicles=vehicleDataMapper.sortByModel(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("make"))
+		  { vehicles=vehicleDataMapper.sortByMake(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("licensePlate")) {
+		  vehicles=vehicleDataMapper.sortByLicensePlate(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") &&
+		  reqPar.get("sortBy").equals("color")) {
+		  vehicles=vehicleDataMapper.sortByColor(vehicles);
+		  
+		  }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type"))
+		  { vehicles=vehicleDataMapper.sortByType(vehicles);
+		  
+		  }
+		 
  		logger.info("Catalog length" + vehicles.size());
  		model.addAttribute("SearchParams", reqPar);
  		if (vehicles != null) {

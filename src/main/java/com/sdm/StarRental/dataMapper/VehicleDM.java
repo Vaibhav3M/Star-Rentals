@@ -1,10 +1,17 @@
 package com.sdm.StarRental.dataMapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sdm.StarRental.comparator.CatalogSortByColor;
+import com.sdm.StarRental.comparator.CatalogSortByLicensePlate;
+import com.sdm.StarRental.comparator.CatalogSortByMake;
+import com.sdm.StarRental.comparator.CatalogSortByModel;
+import com.sdm.StarRental.comparator.CatalogSortByType;
+import com.sdm.StarRental.comparator.CatalogSortByYear;
 import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.tableDataGateway.VehicleTDG;
 
@@ -89,5 +96,44 @@ public VehicleDM() {
 	    	 vehicleTDG.getInstance().closeConnection();
 	    	return result;
 	    }
+
+
+		public ArrayList<Vehicle> sortByYear(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByYear());
+			return vehicles;
+			
+		}
+
+
+		public ArrayList<Vehicle> sortByModel(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByModel());
+			return vehicles;
+		}
+
+
+		public ArrayList<Vehicle> sortByLicensePlate(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByLicensePlate());
+			return vehicles;
+			
+		}
+
+
+		public ArrayList<Vehicle> sortByMake(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByMake());
+			return vehicles;
+		
+		}
+
+
+		public ArrayList<Vehicle> sortByColor(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByColor());
+			return vehicles;
+		}
+
+
+		public ArrayList<Vehicle> sortByType(ArrayList<Vehicle> vehicles) {
+			Collections.sort(vehicles, new CatalogSortByType());
+			return vehicles;
+		}
 }
 
