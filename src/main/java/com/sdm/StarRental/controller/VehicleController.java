@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 
 import java.util.ArrayList;
@@ -44,16 +45,40 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 	public String redirectUserAdmin(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession)
 			throws Exception {
 		System.out.println("Here for admin........");
-		//if (Utilities.validateSession(httpSession)) {
+		if (Utilities.validateSession(httpSession)) {
 
-	//	model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
+	model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
 			return "adminPanel";
-		//}
+		}
 
-		//return "unauthorized";
+		return "unauthorized";
 
 	}
 	
+
+	@RequestMapping(value = "/backtomainpage", method = RequestMethod.GET)
+	public String redirectUser(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession)
+			throws Exception {
+
+		if (Utilities.validateSession(httpSession)) {
+
+			model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
+
+			String userType = String.valueOf(httpSession.getAttribute("userType"));
+			System.out.println("session user type is.................... " + userType);
+			
+			if(userType.equalsIgnoreCase("admin")){
+				return "adminPanel";
+			}
+
+			return "clerkMainPage";
+		}
+
+		return "unauthorized";
+
+	}
+	
+
 	@RequestMapping(value = "/createNewVehicle",method = RequestMethod.GET)
 	public String createNewVehicle() {	
 		return "createNewVehicle";
