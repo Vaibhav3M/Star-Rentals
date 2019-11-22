@@ -62,7 +62,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="backtomainpage"><font size= "6" color="Gray">Car Rentals</font></a></li>
+                <li><a href="backtomainpage"><font size= "6" color="Gray">Star Rentals</font></a></li>
             </ul>
         </div>
     </nav>
