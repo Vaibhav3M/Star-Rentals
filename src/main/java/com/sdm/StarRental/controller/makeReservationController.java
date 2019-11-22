@@ -4,10 +4,14 @@ import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
+import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
+import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,17 +21,24 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Controller
 public class makeReservationController {
 
     private static Logger logger =
             LoggerFactory.getLogger(makeRentalController.class);
 
-    @Autowired
-    private VehicleDM catalogService;
-    @Autowired
-    private TransactionDM transactionService;
-    @Autowired
-    private ClientDM clientService;
+    private VehicleDM vehicleDM;
+    private ClientDM clientDM;
+
+    private VehicleUnitOfWork vehicleUnitOfWork;
+    private TransactionUnitOfWork transactionUnitOfWork;
+
+    public makeReservationController(){
+        vehicleDM = new VehicleDM();
+        clientDM = new ClientDM();
+        vehicleUnitOfWork = new VehicleUnitOfWork();
+        transactionUnitOfWork = new TransactionUnitOfWork();
+    }
 
     ArrayList<Client> gClients;
     ArrayList<Vehicle> gVehicles;
@@ -37,13 +48,13 @@ public class makeReservationController {
     ArrayList<Client> searchedClients;
 
 
-    @RequestMapping(value = "/reserve", method = RequestMethod.GET)
+    @RequestMapping(value = "/createNewReservation", method = RequestMethod.GET)
     public String makeReservationPageSetup (@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) throws Exception
     {
         //  if (true) {
 
-        gVehicles = catalogService.getVehicleFromOneCriteria("Available", null, "status");
-        gClients =clientService.getAllClientsService();
+        gVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
+        gClients =  clientDM.getAllClientsService();
 
         if (!gVehicles.isEmpty()) {
             model.addAttribute("catalog_vehicle_found", "RESULT_FOUND");
@@ -81,11 +92,11 @@ public class makeReservationController {
         ArrayList<Client> clients = new ArrayList<>();
 
         if (!reqParam.get("First_Name").equals("") && reqParam.get("License_Number").equals("")) {
-            clients = clientService.getClientDetailsOneParamService("First_Name", reqParam.get("First_Name"));
+            clients = clientDM.getClientDetailsOneParamService("First_Name", reqParam.get("First_Name"));
         } else if (reqParam.get("First_Name").equals("") && !reqParam.get("License_Number").equals("")) {
-            clients = clientService.getClientDetailsOneParamService("License_Number", reqParam.get("License_Number"));
+            clients = clientDM.getClientDetailsOneParamService("License_Number", reqParam.get("License_Number"));
         } else if (!reqParam.get("First_Name").equals("") && !reqParam.get("License_Number").equals("")) {
-            clients = clientService.getClientDetailsTwoParamService("First_Name", reqParam.get("First_Name"), "License_Number",
+            clients = clientDM.getClientDetailsTwoParamService("First_Name", reqParam.get("First_Name"), "License_Number",
                     reqParam.get("License_Number"));
         } else if (reqParam.get("First_Name").equals("") && reqParam.get("License_Number").equals("")) {
             clients.addAll(gClients);
@@ -249,24 +260,36 @@ public class makeReservationController {
 
 
 
-    @RequestMapping(value = "/makereservation", method = RequestMethod.POST)
+    @RequestMapping(value = "/makeReservation", method = RequestMethod.POST)
     public String makeReservation( @RequestParam Map<String, String> reqParam,ModelMap modelMap, HttpSession httpSession ) throws Exception {
-        String firstName = reqParam.get("firstName").toString();
-        String lastName = reqParam.get("lastName").toString();
-        String licenseNumber = reqParam.get("licenseNumber").toString();
-        String licensePlate = reqParam.get("licensePlate").toString();
+
         String from = reqParam.get("fromDate");
         String till =reqParam.get("tillDate");
 
 
-        if(licenseNumber.isEmpty() || licensePlate.isEmpty() || from.isEmpty() || till.isEmpty()) return "createnewreservation";
+        Vehicle vehicleSelected = vehicleDM.getVehicleByLicenseNo(selectedCar.replace("_", " "));
+        Client clientSelected = clientDM.getClientDetailsOneParamService("licenseNumber", selectedClient).get(0);
+
+        if(selectedCar.isEmpty() || selectedClient.isEmpty() || from.isEmpty() || till.isEmpty()) return "createNewReservation";
 
 
-        Vehicle vehicle = catalogService.getVehicleByLicenseNo(licensePlate);
-        catalogService.modifyVehicle(vehicle.getType(), vehicle.getMake(), vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),
-                vehicle.getvehicleLicensePlate(), "Reserved");
-        transactionService.createTransactionService(licensePlate, "Reservation",licenseNumber, "Reserved",
-                "",from, till, "" );
+        // create transaction
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType("Reservation");
+        transaction.setStatus("Reserved");
+        transaction.setVehicleLicensePlate(vehicleSelected.getvehicleLicensePlate());
+        transaction.setClientLicenseNumber(clientSelected.getLicenseNumber());
+        transaction.setBookingFrom(reqParam.get("fromDate"));
+        transaction.setBookingTill(reqParam.get("tillDate"));
+        transaction.setTimeStamp("");
+        transaction.setTransactionBy(httpSession.getAttribute("userNameLoggedIn").toString());
+
+        transactionUnitOfWork.create(transaction);
+        //	logger.info("Here2");
+        // update vehicle status
+        vehicleSelected.setStatus("Reserved");
+        vehicleUnitOfWork.update(vehicleSelected);
+
 //httpSession.getAttribute("userNameLoggedIn").toString()
         return "clerkMainPage";
     }

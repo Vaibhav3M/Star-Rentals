@@ -116,9 +116,9 @@
                </tr>
                </thead>
                <c:forEach items="${transactionsResults}" var="transaction">
-                  <form action="returnClientForm" method=post onsubmit="return confirm('Please confirm return of ${transaction.licensePlate}');">
+                  <form action="returnClientForm" method=post onsubmit="return confirm('Please confirm return of ${transaction.vehicleLicensePlate}');">
 
-                     <tr id = ${transaction.licensePlate}>
+                     <tr id = ${transaction.vehicleLicensePlate}>
                         <td>${transaction.transactionID}</td>
                         <td>${transaction.clientLicenseNumber}</td>
                         <td>${transaction.vehicleLicensePlate}</td>

@@ -55,6 +55,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
 	}
 	
+
 	@RequestMapping(value = "/backtomainpage", method = RequestMethod.GET)
 	public String redirectUser(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession)
 			throws Exception {
@@ -77,6 +78,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
 	}
 	
+
 	@RequestMapping(value = "/createNewVehicle",method = RequestMethod.GET)
 	public String createNewVehicle() {	
 		return "createNewVehicle";

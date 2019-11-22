@@ -75,7 +75,7 @@ function isNumber(evt)
 				<div class="bottom-left">Rent a vehicle</div>
             </div>
             <div style="flex:1;padding-left:5px;">
-                <a href="returnVehicle"><img src="Return.jpg" alt="Manage Client"></a>
+                <a href="returnRental"><img src="Return.jpg" alt="Manage Client"></a>
 				<div class="bottom-left">Return a vehicle</div>
               </div>
 			  <div style="flex:1;padding-left:5px;">

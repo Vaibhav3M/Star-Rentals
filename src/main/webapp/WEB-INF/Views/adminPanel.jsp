@@ -84,7 +84,7 @@
 					
 					<!-- VIEW TRANSACTION -->	
 					<div style="flex: 1; padding-left: 5px;">
-						<a href="viewtransactions"><img src="ViewTransactions.jpg"
+						<a href="viewTransactions"><img src="ViewTransactions.jpg"
 
 							alt="viewTransactions"></a>
 						<div class="bottom-left">View Transactions</div>
