@@ -15,7 +15,9 @@ public class TransactionTDG implements ITransactionTDG {
 
     private static TransactionTDG transactionTDG;
 
-    private TransactionTDG(){};
+
+    private TransactionTDG(){}
+
 
     public static TransactionTDG getInstance() {
 
@@ -51,6 +53,7 @@ public class TransactionTDG implements ITransactionTDG {
 
         String sql = "INSERT INTO `c_transactions` (`transactionType`, `vehicleLicensePlate`, `clientLicenseNumber`, `status`, `bookingFrom`, `bookingTill`, `transactionBy`) VALUES ('" + transactionType + "', '" + vehicleLicensePlate + "', '" + clientLicenseNumber + "', '" + status + "', '" + bookingFrom + "', '" + bookingTill + "', '" + transactionBy + "')";
 
+        System.out.println(sql);
         Statement st;
 
         try {

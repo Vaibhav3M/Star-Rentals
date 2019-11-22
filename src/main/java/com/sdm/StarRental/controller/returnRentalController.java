@@ -33,7 +33,9 @@ public class returnRentalController {
         vehicleDM = new VehicleDM();
         transactionDM = new TransactionDM();
         vehicleUnitOfWork = new VehicleUnitOfWork();
-        transactionUnitOfWork = new TransactionUnitOfWork();
+
+        transactionUnitOfWork = TransactionUnitOfWork.getInstance();
+
     }
 
     ArrayList<Transaction> relatedTransactions = new ArrayList<>();

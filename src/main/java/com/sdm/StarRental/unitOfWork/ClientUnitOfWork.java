@@ -19,9 +19,19 @@ public class ClientUnitOfWork implements IUnitOfWork<Client, String> {
 
     private ClientDM clientDM;
 
+    private static ClientUnitOfWork clientUnitOfWork;
 
-    public ClientUnitOfWork(ClientDM clientDM) {
+    private ClientUnitOfWork(ClientDM clientDM) {
+
         this.clientDM = clientDM;
+    }
+
+    public static ClientUnitOfWork getInstance(ClientDM clientDM){
+        if(clientUnitOfWork == null) {
+            clientUnitOfWork = new ClientUnitOfWork(clientDM);
+        }
+
+        return clientUnitOfWork;
     }
 
     private HashMap<String, unitOfWork<Client>> data = new HashMap();
