@@ -48,7 +48,7 @@
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-left">
-                    <li><font size="6" color="Gray">Car Rentals</font></li>
+                    <li><font size="6" color="Gray">Star Rentals</font></li>
                 </ul>
             </div>
         </nav>

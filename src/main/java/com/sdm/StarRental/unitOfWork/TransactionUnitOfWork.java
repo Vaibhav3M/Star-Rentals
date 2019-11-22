@@ -9,27 +9,39 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
-@Service
 public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 
 	//TODO: assign unique values
 	@Value("{unit-of-work.batch-no}")
 	private String unitOfWorkBatchNo;
+	private HashMap<String, unitOfWork<Transaction>> data = new HashMap();
+
+	private static TransactionUnitOfWork transactionUnitOfWork;
 
 	TransactionDM transactionDM;
 
-	public TransactionUnitOfWork() {
-
+	private TransactionUnitOfWork(){
 		this.transactionDM = new TransactionDM();
+
+	}
+	private TransactionUnitOfWork(TransactionDM transactionDM) {
+
+		this.transactionDM = transactionDM;
+	}
+
+	public static TransactionUnitOfWork getInstance(){
+
+		if(transactionUnitOfWork == null){
+			transactionUnitOfWork = new TransactionUnitOfWork();
+		}
+
+		return transactionUnitOfWork;
 	}
 
 
-	private HashMap<Integer, unitOfWork<Transaction>> data = new HashMap();
-
-
 	@Override
-	public void create(Transaction element) {
-		data.put(element.getTransactionID(), mapToObject(element,unitOfWorkAction.CREATE));
+	public void  create(Transaction element) {
+		data.put(element.getVehicleLicensePlate()+element.getClientLicenseNumber(), mapToObject(element,unitOfWorkAction.CREATE));
 		commit();
 	}
 
@@ -67,7 +79,7 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 				commitCreateTransaction(transaction);
 
 			});
-			data = new HashMap<Integer, unitOfWork<Transaction>>();
+			data = new HashMap<String, unitOfWork<Transaction>>();
 		}
 
 	}
