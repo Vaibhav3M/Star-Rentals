@@ -17,7 +17,7 @@ public class Utilities {
 
 
 
-]
+
 
     public static boolean validateSession(HttpSession httpSession) {
         if (httpSession.getAttribute("userLoggedIn") != null && (Integer) httpSession.getAttribute("userLoggedIn") == 1) {
@@ -62,8 +62,6 @@ public class Utilities {
         vehicle.setYear(Integer.valueOf(vehicleDetails.getString("year")));
         vehicle.setColor(vehicleDetails.getString("color"));
         vehicle.setvehicleLicensePlate(vehicleDetails.getString("vehicleLicensePlate"));
-
-
         vehicle.setStatus(vehicleDetails.getString("status"));
         return vehicle;
     }
@@ -78,8 +76,6 @@ public class Utilities {
         client.setLicenseNumber(clientResultSet.getString("licenseNumber"));
         client.setLicenseExpiryDate(clientResultSet.getString("licenseExpiryDate"));
         client.setPhoneNumber(clientResultSet.getString("phoneNumber"));
-
-
 
         return client;
 
