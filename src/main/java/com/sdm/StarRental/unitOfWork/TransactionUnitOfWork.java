@@ -1,26 +1,28 @@
 package com.sdm.StarRental.unitOfWork;
 
-
-
-
-
 import com.sdm.StarRental.Enum.unitOfWorkAction;
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.unitOfWork;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
 public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
-
-	public TransactionUnitOfWork() { }
-
-	TransactionDM transactionDM;
 
 	//TODO: assign unique values
 	@Value("{unit-of-work.batch-no}")
 	private String unitOfWorkBatchNo;
+
+	TransactionDM transactionDM;
+
+	public TransactionUnitOfWork() {
+
+		this.transactionDM = new TransactionDM();
+	}
+
 
 	private HashMap<Integer, unitOfWork<Transaction>> data = new HashMap();
 
@@ -59,10 +61,10 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 	@Override
 	public void commit() {
 
-		if (data.size() == 5) {
+		if (data.size() == 3) {
 			data.forEach((key, element) -> {
 				Transaction transaction = element.getE();
-				commitCreateClient(transaction);
+				commitCreateTransaction(transaction);
 
 			});
 			data = new HashMap<Integer, unitOfWork<Transaction>>();
@@ -70,7 +72,7 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 
 	}
 
-	private void commitCreateClient(Transaction transaction) {
+	private void commitCreateTransaction(Transaction transaction) {
 		try {
 			transactionDM.createTransactionService(transaction.getVehicleLicensePlate(),transaction.getTransactionType(),transaction.getClientLicenseNumber(),transaction.getStatus(),transaction.getTimeStamp(),transaction.getBookingFrom(),transaction.getBookingTill(),transaction.getTransactionBy());
 		} catch (Exception e) {

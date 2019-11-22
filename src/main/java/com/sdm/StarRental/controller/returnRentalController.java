@@ -4,9 +4,11 @@ import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
+import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,21 +18,29 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Controller
 public class returnRentalController {
 
     private static Logger logger = LoggerFactory.getLogger(returnRentalController.class);
 
-
-    @Autowired
-    private TransactionDM transactionDM;
-    @Autowired
     private VehicleDM vehicleDM;
+    private TransactionDM transactionDM;
+
+    private VehicleUnitOfWork vehicleUnitOfWork;
+    private TransactionUnitOfWork transactionUnitOfWork;
+
+    public returnRentalController(){
+        vehicleDM = new VehicleDM();
+        transactionDM = new TransactionDM();
+        vehicleUnitOfWork = new VehicleUnitOfWork();
+        transactionUnitOfWork = new TransactionUnitOfWork();
+    }
 
     ArrayList<Transaction> relatedTransactions = new ArrayList<>();
 
 
     @RequestMapping(value = "/returnRental", method = RequestMethod.GET)
-    public String returnVehicle(@RequestParam Map<String, String> reqPar, ModelMap modelMap, HttpSession httpSession) throws Exception {
+    public String returnVehicleEntry(@RequestParam Map<String, String> reqPar, ModelMap modelMap, HttpSession httpSession) throws Exception {
 
 //        ArrayList<Catalog> rentedVehicles = catalogService.getVehicleFromOneCriteria("Rented", null, "status");
 
@@ -38,7 +48,7 @@ public class returnRentalController {
 
         ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
         for(Vehicle vehicle : vehicleDM.getAllVehicles()) {
-            if(vehicle.getStatus().equals("Rented")) {
+            if(vehicle.getStatus().equalsIgnoreCase("Rented")) {
                 rentedVehicles.add(vehicle);
             }
         }
@@ -46,11 +56,10 @@ public class returnRentalController {
         relatedTransactions.clear();
         for (Vehicle vehicle : rentedVehicles) {
             ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
-
             if (!transactions.isEmpty()) {
                 Transaction currTransaction = transactions.get(transactions.size() - 1);
-                if (currTransaction != null) {
-                    relatedTransactions.addAll(transactions);
+                if (currTransaction != null && currTransaction.getStatus().equalsIgnoreCase("Rented")) {
+                    relatedTransactions.add(currTransaction);
                 }
             }
 
@@ -114,16 +123,21 @@ public class returnRentalController {
 
 
     @RequestMapping(value = "/returnClientForm",method = RequestMethod.POST)
-    public String deleteClientInfo(@RequestParam Map<String,String> reqParam, ModelMap model,HttpSession httpSession) throws Exception{
+    public String returnVehicleForm(@RequestParam Map<String,String> reqParam, ModelMap model,HttpSession httpSession) throws Exception{
 
         int transactionID = Integer.parseInt(reqParam.get("transactionID"));
 
         for (int i=0;i<relatedTransactions.size();i++){
             Transaction currTransaction = relatedTransactions.get(i);
             if(currTransaction.getTransactionID() == transactionID){
-                transactionDM.createTransactionService(currTransaction.getVehicleLicensePlate(),"Rental" ,currTransaction.getClientLicenseNumber(),"Return","","NA","NA",currTransaction.getTransactionBy());
+
+               // transactionDM.createTransactionService(currTransaction.getVehicleLicensePlate(),"Rental" ,currTransaction.getClientLicenseNumber(),"Return","","NA","NA",currTransaction.getTransactionBy());
+                currTransaction.setStatus("Returned");
+                transactionUnitOfWork.create(currTransaction);
                 Vehicle vehicle = vehicleDM.getVehicleByLicenseNo(currTransaction.getVehicleLicensePlate());
-                vehicleDM.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(),vehicle.getYear(),vehicle.getColor(),vehicle.getvehicleLicensePlate(),"Available");
+                vehicle.setStatus("Available");
+               // vehicleDM.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(),vehicle.getYear(),vehicle.getColor(),vehicle.getvehicleLicensePlate(),"Available");
+                vehicleUnitOfWork.update(vehicle);
                 relatedTransactions.remove(i);
             }
         }

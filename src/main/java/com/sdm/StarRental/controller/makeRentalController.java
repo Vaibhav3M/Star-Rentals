@@ -4,10 +4,15 @@ import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
+import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.tableDataGateway.VehicleTDG;
+import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;
+import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
+import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,16 +22,23 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Controller
 public class makeRentalController {
 
         private static Logger logger = LoggerFactory.getLogger(makeRentalController.class);
 
-        @Autowired
         private VehicleDM vehicleDM;
-        @Autowired
-        private TransactionDM transactionDM;
-        @Autowired
         private ClientDM clientDM;
+
+        private VehicleUnitOfWork vehicleUnitOfWork;
+        private TransactionUnitOfWork transactionUnitOfWork;
+
+        public makeRentalController(){
+            vehicleDM = new VehicleDM();
+            clientDM = new ClientDM();
+            vehicleUnitOfWork = new VehicleUnitOfWork();
+            transactionUnitOfWork = new TransactionUnitOfWork();
+        }
 
         ArrayList<Client> gClients;
         ArrayList<Vehicle> gVehicles;
@@ -244,18 +256,9 @@ public class makeRentalController {
         public String makeRentalDates(@RequestParam Map<String, String> reqPar, ModelMap modelMap, HttpSession httpSession)
 			throws Exception {
 
-        String fromDate = "";
-        String tillDate = "";
-
-	/*	if (reqPar.get("fromDate") != null) {
-			fromDate = reqPar.get("fromDate");
-		}
-		if (reqPar.get("tillDate") != null) {
-			tillDate = reqPar.get("tillDate");
-		}*/
 
         Vehicle vehicleSelected = vehicleDM.getVehicleByLicenseNo(selectedCar.replace("_", " "));
-        Client clientSelected = clientDM.getClientDetailsOneParamService("License_Number", selectedClient).get(0);
+        Client clientSelected = clientDM.getClientDetailsOneParamService("licenseNumber", selectedClient).get(0);
 
         // checks
         if (reqPar.get("tillDate").isEmpty() || reqPar.get("fromDate").isEmpty() || selectedCar.isEmpty() || selectedClient.isEmpty()) {
@@ -263,12 +266,23 @@ public class makeRentalController {
         }
 
         // create transaction
-        transactionDM.createTransactionService(vehicleSelected.getvehicleLicensePlate(),"Rental",clientSelected.getLicenseNumber(),"Rented","now",reqPar.get("tillDate"),reqPar.get("fromDate"),"");
-        //	logger.info("Here2");
-        // update vehicle status
-        vehicleDM.modifyVehicle(vehicleSelected.getType(), vehicleSelected.getMake(), vehicleSelected.getModel(),
-                vehicleSelected.getYear(), vehicleSelected.getColor(), vehicleSelected.getvehicleLicensePlate(), "Rented");
-        //logger.info("Here1");
+            Transaction transaction = new Transaction();
+            transaction.setTransactionType("Rental");
+            transaction.setStatus("Rented");
+            transaction.setVehicleLicensePlate(vehicleSelected.getvehicleLicensePlate());
+            transaction.setClientLicenseNumber(clientSelected.getLicenseNumber());
+            transaction.setBookingFrom(reqPar.get("fromDate"));
+            transaction.setBookingTill(reqPar.get("tillDate"));
+            transaction.setTimeStamp("");
+            transaction.setTransactionBy(httpSession.getAttribute("userNameLoggedIn").toString());
+
+            transactionUnitOfWork.create(transaction);
+
+            //	logger.info("Here2");
+         // update vehicle status
+            vehicleSelected.setStatus("Rented");
+            vehicleUnitOfWork.update(vehicleSelected);
+
 
 
         selectedClient="";
