@@ -15,7 +15,9 @@ public class TransactionTDG implements ITransactionTDG {
 
     private static TransactionTDG transactionTDG;
 
+
     private TransactionTDG(){}
+
 
     public static TransactionTDG getInstance() {
 

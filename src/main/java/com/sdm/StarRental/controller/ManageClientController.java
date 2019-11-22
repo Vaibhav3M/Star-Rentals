@@ -25,7 +25,9 @@ public class ManageClientController {
 
     public ManageClientController(){
         clientDM = new ClientDM();
+
         clientUnitOfWork  = ClientUnitOfWork.getInstance(clientDM);
+
     }
 
     @RequestMapping(value = "/createClient",method = RequestMethod.GET)
