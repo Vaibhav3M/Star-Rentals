@@ -256,4 +256,10 @@ public class ManageClientController {
         return "modifyClient";
     }
 
+    @RequestMapping(value = "/backtomanagepage", method = RequestMethod.GET)
+    public String backToMainPage(){
+
+        return "clerkManagePage";
+    }
+
 }
