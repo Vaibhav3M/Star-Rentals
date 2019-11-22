@@ -99,13 +99,13 @@
 				<h4>Search By</h4>
 				<label class="control-label col-sm-3">Vehicle License</label>
 				<div class="input-group">
-					<input type="text" name="licensePlate" class="form-control"
+					<input type="text" name="clientLicenseNumber" class="form-control"
 						placeholder="License Plate">
 
 				</div>
 				<label class="control-label col-sm-3">Client License</label>
 				<div class="input-group">
-					<input type="text" name="licenseNumber" class="form-control"
+					<input type="text" name="vehicleLicensePlate" class="form-control"
 						placeholder="License Number">
 
 				</div>
@@ -122,18 +122,18 @@
 				
 				<div class="control-label col-sm-3">
 				
-							<input type="date" id="transactionDate"
+							<input type="date" id="timeStamp"
 												class="auto-style1" placeholder="Transaction Date"
-												name="transactionDate" height=40px style="width: 100%" />
+												name="timeStamp" height=40px style="width: 100%" />
 									</div>
 									
 									<label class="control-label col-sm-2">Valid From</label>
 				
 				<div class="control-label col-sm-3">
 				
-							<input type="date" id="validFrom"
+							<input type="date" id="bookingFrom"
 												class="auto-style1" placeholder=""
-												name="validFrom" height=40px style="width: 100%" />
+												name="bookingFrom" height=40px style="width: 100%" />
 									</div>
 										<label class="control-label col-sm-3">Valid Till</label>
 				
@@ -141,9 +141,9 @@
 				
 				
 				
-							<input type="date" id="validTill"
+							<input type="date" id="bookingTill"
 												class="auto-style1" placeholder=""
-												name="validTill" height=40px style="width: 100%" />
+												name="bookingTill" height=40px style="width: 100%" />
 									</div>
 									
 
@@ -175,13 +175,14 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
+												<input type="hidden" name="transactionType" value='${SearchParams.get("transactionType")}'>
 												<input type="hidden" name="sortBy" value="transactionID">
 												<button class="btn btn-default" type="submit">Transaction ID</button>
 											</form>
@@ -189,40 +190,40 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
-												<input type="hidden" name="sortBy" value="licensePlate">
+												<input type="hidden" name="sortBy" value="clientLicenseNumber">
 												<button class="btn btn-default" type="submit">License Plate</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
-												<input type="hidden" name="sortBy" value="licenseNumber">
+												<input type="hidden" name="sortBy" value="vehicleLicensePlate">
 												<button class="btn btn-default" type="submit">License Number</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
 												<input type="hidden" name="sortBy" value="status">
 												<button class="btn btn-default" type="submit">Status</button>
@@ -231,42 +232,42 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
-												<input type="hidden" name="sortBy" value="transactionDate">
+												<input type="hidden" name="sortBy" value="timeStamp">
 												<button class="btn btn-default" type="submit">Transaction date</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
-												<input type="hidden" name="sortBy" value="rentedFrom">
+												<input type="hidden" name="sortBy" value="bookingFrom">
 												<button class="btn btn-default" type="submit">Valid From</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value='${SearchParams.get("transactionID")}'>
-												<input type="hidden" name="licenseNumber" value='${SearchParams.get("licenseNumber")}'>
-												<input type="hidden" name="licensePlate" value='${SearchParams.get("licensePlate")}'>
+												<input type="hidden" name="vehicleLicensePlate" value='${SearchParams.get("vehicleLicensePlate")}'>
+												<input type="hidden" name="clientLicenseNumber" value='${SearchParams.get("clientLicenseNumber")}'>
 												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
-												<input type="hidden" name="transactionDate" value='${SearchParams.get("transactionDate")}'>
-												<input type="hidden" name="validFrom" value='${SearchParams.get("rentedFrom")}'>
-												<input type="hidden" name="validTill" value='${SearchParams.get("rentedTill")}'>
+												<input type="hidden" name="timeStamp" value='${SearchParams.get("timeStamp")}'>
+												<input type="hidden" name="bookingFrom" value='${SearchParams.get("bookingFrom")}'>
+												<input type="hidden" name="bookingTill" value='${SearchParams.get("bookingTill")}'>
 												<input type="hidden" name="transactionBy" value='${SearchParams.get("transactionBy")}'>
-												<input type="hidden" name="sortBy" value="rentedTill">
+												<input type="hidden" name="sortBy" value="bookingTill">
 												<button class="btn btn-default" type="submit">Valid Till</button>
 											</form>
 										</th>
@@ -278,12 +279,12 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
 												<input type="hidden" name="sortBy" value="transactionID">
 												<button class="btn btn-default" type="submit">Transaction ID</button>
@@ -293,14 +294,14 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
-												<input type="hidden" name="sortBy" value="licensePlate">
+												<input type="hidden" name="sortBy" value="clientLicenseNumber">
 												<button class="btn btn-default" type="submit">License Plate</button>
 											</form>
 										</th>
@@ -308,14 +309,14 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
-												<input type="hidden" name="sortBy" value="licenseNumber">
+												<input type="hidden" name="sortBy" value="vehicleLicensePlate">
 												<button class="btn btn-default" type="submit">License Number</button>
 											</form>
 										</th>
@@ -323,12 +324,12 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
 												<input type="hidden" name="sortBy" value="status">
 												<button class="btn btn-default" type="submit">Status</button>
@@ -337,54 +338,54 @@
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
-												<input type="hidden" name="sortBy" value="transactionDate">
+												<input type="hidden" name="sortBy" value="timeStamp">
 												<button class="btn btn-default" type="submit">Transaction Date</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
-												<input type="hidden" name="sortBy" value="rentedFrom">
+												<input type="hidden" name="sortBy" value="bookingFrom">
 												<button class="btn btn-default" type="submit">Valid From</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
-												<input type="hidden" name="sortBy" value="rentedTill">
+												<input type="hidden" name="sortBy" value="bookingTill">
 												<button class="btn btn-default" type="submit">Valid Till</button>
 											</form>
 										</th>
 										<th class="th-sm">
 											<form action="searchTransactions" method=post>
 												<input type="hidden" name="transactionID" value=''>
-												<input type="hidden" name="licenseNumber" value=''>
-												<input type="hidden" name="licensePlate" value=''>
+												<input type="hidden" name="vehicleLicensePlate" value=''>
+												<input type="hidden" name="clientLicenseNumber" value=''>
 												<input type="hidden" name="status" value=''>
-												<input type="hidden" name="transactionDate" value=''>
-												<input type="hidden" name="validFrom" value=''>
-												<input type="hidden" name="validTill" value=''>
+												<input type="hidden" name="timeStamp" value=''>
+												<input type="hidden" name="bookingFrom" value=''>
+												<input type="hidden" name="bookingTill" value=''>
 												<input type="hidden" name="transactionBy" value=''>
 												<input type="hidden" name="sortBy" value="transactionBy">
 												<button class="btn btn-default" type="submit">Action By</button>
@@ -395,16 +396,16 @@
 							</c:choose>
 						</thead>
             <c:forEach items="${transaction_results}" var="transactions">
-              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${transactions.licenseNumber}?');">
+              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${transactions.vehicleLicensePlate}?');">
 
               <tr>
 			  <td>${transactions.transactionID}</td>
-                <td>${transactions.licensePlate}</td>
-                <td>${transactions.licenseNumber}</td>
+                <td>${transactions.clientLicenseNumber}</td>
+                <td>${transactions.vehicleLicensePlate}</td>
                 <td>${transactions.status}</td>
-                <td>${transactions.transactionDate}</td>
-                <td>${transactions.rentedFrom}</td>
-				<td>${transactions.rentedTill}</td>
+                <td>${transactions.timeStamp}</td>
+                <td>${transactions.bookingFrom}</td>
+				<td>${transactions.bookingTill}</td>
 				<td>${transactions.transactionBy}</td>
               </tr>
               </form>

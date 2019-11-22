@@ -2,7 +2,6 @@ package com.sdm.StarRental.tableDataGateway;
 
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.objectUtilities.Utilities;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -12,34 +11,71 @@ import java.util.ArrayList;
 @Repository
 public class TransactionTDG implements ITransactionTDG {
 
-    @Autowired
     private Connection connection;
+
+    private static TransactionTDG transactionTDG;
+
+    private TransactionTDG(){};
+
+    public static TransactionTDG getInstance() {
+
+        if (transactionTDG == null) {
+            transactionTDG = new TransactionTDG();
+        }
+
+        return transactionTDG;
+    }
+
+    public void establishConnection() {
+
+        try {
+            connection = Utilities.getSQLDb(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
-    public boolean createTransaction(String vehicleLicensePlate, String transactionType,  String clientLicenseNumber, String status, String timeStamp, String bookingFrom, String bookingTill, String transactionBy) throws Exception {
+    public boolean createTransaction(String vehicleLicensePlate, String transactionType, String clientLicenseNumber, String status, String timeStamp, String bookingFrom, String bookingTill, String transactionBy) throws Exception {
 
+        establishConnection();
 
-        String sql = "INSERT INTO `c_transactions` (`transactionType`, `vehicleLicensePlate`, `clientLicenseNumber`, `status`, `bookingFrom`, `bookingTill`, `transactionBy`) VALUES ('"+transactionType+"', '"+vehicleLicensePlate+"', '"+clientLicenseNumber+"', '"+status+"', '"+bookingFrom+"', '"+bookingTill+"', '"+transactionBy+"')";
+        String sql = "INSERT INTO `c_transactions` (`transactionType`, `vehicleLicensePlate`, `clientLicenseNumber`, `status`, `bookingFrom`, `bookingTill`, `transactionBy`) VALUES ('" + transactionType + "', '" + vehicleLicensePlate + "', '" + clientLicenseNumber + "', '" + status + "', '" + bookingFrom + "', '" + bookingTill + "', '" + transactionBy + "')";
 
         Statement st;
-        try { st = connection.createStatement();
 
-            st.executeUpdate(sql); }
-        catch
+        try {
+            st = connection.createStatement();
+
+            st.executeUpdate(sql);
+        } catch
         (SQLException e) {
             System.out.println("Exception =" + e.getMessage());
 
-            return false; }
-        catch (Exception e) {
+            return false;
+        } catch (Exception e) {
             System.out.println("Exception =" + e.getMessage());
-            return false; }
+            return false;
+        }finally {
+          closeConnection();
+        }
         return true;
 
     }
 
     @Override
     public Transaction getTransactionByID(int id) throws Exception {
+
+        establishConnection();
 
         Transaction resultTransaction;
 
@@ -49,7 +85,7 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
             resultTransaction = Utilities.getTransactionObject(resultSet);
 
@@ -60,6 +96,9 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
             return null;
         }
+        finally {
+            closeConnection();
+        }
 
         return resultTransaction;
 
@@ -69,6 +108,7 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getAllTransactions() throws Exception {
 
+        establishConnection();
 
         String sql = "SELECT * FROM c_transactions";
 
@@ -78,9 +118,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -91,14 +131,19 @@ public class TransactionTDG implements ITransactionTDG {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        finally {
+            closeConnection();
+        }
 
         return resultList;
     }
 
     @Override
-    public ArrayList<Transaction> getTransactionForType(String transactionType) throws Exception{
+    public ArrayList<Transaction> getTransactionForType(String transactionType) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE transactionType = " + "'"+transactionType+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE transactionType = " + "'" + transactionType + "'";
 
         Statement st;
 
@@ -106,9 +151,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -118,6 +163,9 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            closeConnection();
         }
 
         return resultList;
@@ -128,7 +176,9 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForClient(String clientLicenseNumber) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE clientLicenseNumber = " + "'"+clientLicenseNumber+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE clientLicenseNumber = " + "'" + clientLicenseNumber + "'";
 
         Statement st;
 
@@ -136,9 +186,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -148,6 +198,9 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            closeConnection();
         }
 
         return resultList;
@@ -157,7 +210,9 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForVehicle(String vehicleLicensePlate) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE vehicleLicensePlate = " + "'"+vehicleLicensePlate+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE vehicleLicensePlate = " + "'" + vehicleLicensePlate + "'";
 
         Statement st;
 
@@ -165,9 +220,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -177,6 +232,8 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
 
         return resultList;
@@ -186,7 +243,9 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForStatus(String status) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE status = " + "'"+status+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE status = " + "'" + status + "'";
 
 
         Statement st;
@@ -195,9 +254,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -207,6 +266,9 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            closeConnection();
         }
 
         return resultList;
@@ -215,7 +277,9 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForRentedTill(String bookingTill) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE bookingTill = " + "'"+bookingTill+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE bookingTill = " + "'" + bookingTill + "'";
 
         Statement st;
 
@@ -223,9 +287,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -235,6 +299,9 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        finally {
+            closeConnection();
         }
 
         return resultList;
@@ -243,7 +310,9 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForRentedFrom(String bookingFrom) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE bookingFrom = " + "'"+bookingFrom+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE bookingFrom = " + "'" + bookingFrom + "'";
 
         Statement st;
 
@@ -251,9 +320,9 @@ public class TransactionTDG implements ITransactionTDG {
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -263,6 +332,8 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
 
         return resultList;
@@ -271,16 +342,18 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForTwoCriteria(String val1, String val2, String criteria1, String criteria2) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " +  "'"+val1+"'" + " AND " + criteria2+ " = " + "'"+val2+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " + "'" + val1 + "'" + " AND " + criteria2 + " = " + "'" + val2 + "'";
 
         Statement st;
         ArrayList<Transaction> resultList = new ArrayList<>();
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -290,6 +363,8 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
 
         return resultList;
@@ -298,16 +373,18 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForThreeCriteria(String val1, String val2, String val3, String criteria1, String criteria2, String criteria3) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " +  "'"+val1+"'" + " AND " + criteria2+ " = " + "'"+val2+"'" + "AND" + criteria3 + " = " + "'"+val3+"'";
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " + "'" + val1 + "'" + " AND " + criteria2 + " = " + "'" + val2 + "'" + "AND" + criteria3 + " = " + "'" + val3 + "'";
 
         Statement st;
         ArrayList<Transaction> resultList = new ArrayList<>();
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -317,6 +394,8 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
 
         return resultList;
@@ -325,16 +404,17 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> getTransactionForFourCriteria(String val1, String val2, String val3, String val4, String criteria1, String criteria2, String criteria3, String criteria4) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " +  "'"+val1+"'" + " AND " + criteria2+ " = " + "'"+val2+"'" + "AND" + criteria3 + " = " + "'"+val3+"'" + "AND" + criteria4 + " = " + "'"+val4+"'";
+        establishConnection();
+        String sql = "SELECT * FROM c_transactions WHERE " + criteria1 + " = " + "'" + val1 + "'" + " AND " + criteria2 + " = " + "'" + val2 + "'" + "AND" + criteria3 + " = " + "'" + val3 + "'" + "AND" + criteria4 + " = " + "'" + val4 + "'";
 
         Statement st;
         ArrayList<Transaction> resultList = new ArrayList<>();
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -345,22 +425,27 @@ public class TransactionTDG implements ITransactionTDG {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        finally {
+            closeConnection();
+        }
         return resultList;
     }
 
     @Override
     public ArrayList<Transaction> getTransactionForAllCriteria(String vehicleLicensePlate, String clientLicenseNumber, String status, String bookingFrom, String bookingTill, String transactionBy, String criteria) throws Exception {
 
-        String sql = "SELECT * FROM c_transactions WHERE " + "vehicleLicensePlate" + " = " +  "'"+vehicleLicensePlate+"'" + " AND " + "clientLicenseNumber" + " = " + "'"+clientLicenseNumber+"'" + "AND" + "status" + " = " + "'"+status+"'" + "AND" + "bookingFrom" + " = " + "'"+bookingFrom+"'" + "AND" + "bookingTill" + " = " + "'"+bookingTill+"'" + "AND" + "transactionBy" + " = " + "'"+transactionBy+"'" ;
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE " + "vehicleLicensePlate" + " = " + "'" + vehicleLicensePlate + "'" + " AND " + "clientLicenseNumber" + " = " + "'" + clientLicenseNumber + "'" + "AND" + "status" + " = " + "'" + status + "'" + "AND" + "bookingFrom" + " = " + "'" + bookingFrom + "'" + "AND" + "bookingTill" + " = " + "'" + bookingTill + "'" + "AND" + "transactionBy" + " = " + "'" + transactionBy + "'";
 
         Statement st;
         ArrayList<Transaction> resultList = new ArrayList<>();
 
         try {
             st = connection.createStatement();
-            ResultSet resultSet= st.executeQuery(sql);
+            ResultSet resultSet = st.executeQuery(sql);
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 resultList.add(Utilities.getTransactionObject(resultSet));
 
@@ -370,6 +455,8 @@ public class TransactionTDG implements ITransactionTDG {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            closeConnection();
         }
         return resultList;
     }

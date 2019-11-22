@@ -165,7 +165,7 @@
 											<table id="example" class="table table-striped">
 
 												<thead>
-													<tr id=${clients.clientLicenseNumber}>
+													<tr id=${clients.licenseNumber}>
 														<th class="col-md-1">First Name</th>
 														<th class="col-md-2">Last Name</th>
 														<th class="col-md-3">License Number</th>
@@ -176,15 +176,15 @@
 												</thead>
 												<tbody>
 													<c:forEach items="${client_results}" var="clients">
-															<tr id=${clients.clientLicenseNumber}>
+															<tr id=${clients.licenseNumber}>
 																<td class="col-md-1">${clients.firstName}</td>
 																<td class="col-md-2">${clients.lastName}</td>
-																<td class="col-md-3">${clients.clientLicenseNumber}</td>
+																<td class="col-md-3">${clients.licenseNumber}</td>
 																<td class="col-md-4">${clients.licenseExpiryDate}</td>
 																<td class="col-md-5">${clients.phoneNumber}</td>
 																<td class="col-md-6">
 																	<button type="submit"
-																		value=${clients.clientLicenseNumber.replace(" ","_")}
+																		value=${clients.licenseNumber.replace(" ","_")}
 																		name="selectClient">Select</button>
 																</td>
 															</tr>
