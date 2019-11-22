@@ -132,7 +132,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 			else if(value.getAction()==unitOfWorkAction.UPDATE) {
 				
 				//jobs.replace(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));	
-				System.out.println("Vehicle is pending delete from system");	
+				System.out.println("Vehicle is pending modification from Admin");	
 
 			}
 			
@@ -145,7 +145,13 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
+			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")  ) {
+				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
+	
+			}
+			else {
+				System.out.println("You cannot modify a vehicle with a customer");
+			}
 
 		}
 				
