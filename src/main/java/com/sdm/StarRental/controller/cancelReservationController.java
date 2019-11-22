@@ -5,6 +5,8 @@ import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
+import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,18 @@ public class cancelReservationController {
 
     private static Logger logger = LoggerFactory.getLogger(cancelReservationController.class);
 
-    @Autowired
     private VehicleDM vehicleDM;
-    @Autowired
     private TransactionDM transactionDM;
-    @Autowired
-    private ClientDM clientDM;
+
+    private VehicleUnitOfWork vehicleUnitOfWork;
+    private TransactionUnitOfWork transactionUnitOfWork;
+
+    public cancelReservationController(){
+        vehicleDM = new VehicleDM();
+        transactionDM = new TransactionDM();
+        vehicleUnitOfWork = new VehicleUnitOfWork();
+        transactionUnitOfWork = new TransactionUnitOfWork();
+    }
 
     ArrayList<Transaction> relatedReservations = new ArrayList<>();
 
@@ -72,17 +80,21 @@ public class cancelReservationController {
     @RequestMapping(value = "/cancelReservationForm", method = RequestMethod.POST)
     public String deleteReservationInfo(@RequestParam Map<String, String> reqParam, ModelMap model, HttpSession httpSession) throws Exception {
 
-        String licensePlate = reqParam.get("licensePlate");
+        String licensePlate = reqParam.get("vehicleLicensePlate");
         licensePlate = licensePlate.replace("_", " ");
         Vehicle vehicle = vehicleDM.getVehicleByLicenseNo(licensePlate);
 
 
         for (int i = 0; i < relatedReservations.size(); i++) {
             Transaction currTransaction = relatedReservations.get(i);
-            if (currTransaction.getClientLicenseNumber().equalsIgnoreCase(licensePlate)) {
+            if (currTransaction.getVehicleLicensePlate().equalsIgnoreCase(licensePlate)) {
 
-                transactionDM.createTransactionService(currTransaction.getVehicleLicensePlate(),currTransaction.getTransactionType(), currTransaction.getClientLicenseNumber(),"Available","now","NA","NA", currTransaction.getTransactionBy());
-                vehicleDM.modifyVehicle(vehicle.getType(), vehicle.getMake(), vehicle.getModel(), vehicle.getYear(), vehicle.getColor(), vehicle.getvehicleLicensePlate(), "Available");
+               // transactionDM.createTransactionService(currTransaction.getVehicleLicensePlate(),currTransaction.getTransactionType(), currTransaction.getClientLicenseNumber(),"Available","now","NA","NA", currTransaction.getTransactionBy());
+                currTransaction.setStatus("UnReserved");
+                transactionUnitOfWork.create(currTransaction);
+              //  vehicleDM.modifyVehicle(vehicle.getType(), vehicle.getMake(), vehicle.getModel(), vehicle.getYear(), vehicle.getColor(), vehicle.getvehicleLicensePlate(), "Available");
+                vehicle.setStatus("Available");
+                vehicleUnitOfWork.update(vehicle);
                 relatedReservations.remove(i);
             }
         }

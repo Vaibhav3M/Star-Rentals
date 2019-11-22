@@ -78,13 +78,13 @@
                     </tr>
                     </thead>
                     <c:forEach items="${ReservationsResults}" var="reservations">
-                        <form action="cancelreservationForm" method=post onsubmit="return confirm('Please confirm cancellation of  ${reservations.licensePlate}?');">
+                        <form action="cancelReservationForm" method=post onsubmit="return confirm('Please confirm cancellation of  ${reservations.vehicleLicensePlate}?');">
 
                             <tr>
                                 <td>${reservations.clientLicenseNumber}</td>
                                 <td>${reservations.vehicleLicensePlate}</td>
                                 <td>${reservations.bookingFrom}</td>
-                                <td><button name ="licensePlate" value=${reservations.licensePlate.replace(" ","_")} type="submit">Cancel</button></td>
+                                <td><button name ="vehicleLicensePlate" value=${reservations.vehicleLicensePlate.replace(" ","_")} type="submit">Cancel</button></td>
                             </tr>
                         </form>
                         </tbody>
