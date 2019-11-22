@@ -54,7 +54,13 @@ public class makeReservationController {
     {
         //  if (true) {
 
-        gVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
+        ArrayList<Vehicle> availableVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
+        gVehicles = new ArrayList<>();
+        for(Vehicle v:availableVehicles){
+            if(!vehicleUnitOfWork.isDirty(v.getvehicleLicensePlate())){
+                gVehicles.add(v);
+            }
+        }
         gClients =  clientDM.getAllClientsService();
 
         if (!gVehicles.isEmpty()) {
