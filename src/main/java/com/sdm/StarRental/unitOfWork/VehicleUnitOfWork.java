@@ -14,22 +14,31 @@ import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.model.unitOfWork;
 
 @Service
-@Scope("singleton")
 public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 
 	@Value("{unit-of-work.batch-no}")
 	private String unitOfWorkBatchNo;
 	
 	private HashMap<String, unitOfWork<Vehicle>> jobs = new HashMap<String, unitOfWork<Vehicle>>();
+	private static VehicleUnitOfWork vehicleUnitOfWork;
+	VehicleDM vehicleDataMapper;
 	
-	private VehicleDM vehicleDataMapper;
 	
-	
-	public VehicleUnitOfWork() {
+	private VehicleUnitOfWork () {
 		
 		this.vehicleDataMapper = new VehicleDM();
 
 	}
+	
+	public static VehicleUnitOfWork getInstance() {
+		if(vehicleUnitOfWork== null) {
+			vehicleUnitOfWork = new VehicleUnitOfWork();
+		}
+	
+	
+		return vehicleUnitOfWork;
+	}
+	
 	
 	@Override
 	public void commit() {
