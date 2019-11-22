@@ -37,7 +37,6 @@ public class makeRentalController {
             vehicleDM = new VehicleDM();
             clientDM = new ClientDM();
             vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
-
             transactionUnitOfWork = TransactionUnitOfWork.getInstance();
 
         }
