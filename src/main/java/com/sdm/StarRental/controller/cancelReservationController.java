@@ -35,8 +35,8 @@ public class cancelReservationController {
     public cancelReservationController(){
         vehicleDM = new VehicleDM();
         transactionDM = new TransactionDM();
-        vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
 
+        vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
         transactionUnitOfWork =  TransactionUnitOfWork.getInstance();
 
     }
