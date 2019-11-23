@@ -63,6 +63,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
 			model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
 
+
 			String userType = String.valueOf(httpSession.getAttribute("userType"));
 			System.out.println("session user type is.................... " + userType);
 			

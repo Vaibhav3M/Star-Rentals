@@ -39,6 +39,7 @@ public class makeRentalController {
             vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
             transactionUnitOfWork = TransactionUnitOfWork.getInstance();
 
+
         }
 
         ArrayList<Client> gClients;
@@ -54,7 +55,15 @@ public class makeRentalController {
 			throws Exception {
         //	if (Utilities.validateSession(httpSession)) {
 
-        gVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
+        ArrayList<Vehicle> availableVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
+        gVehicles = new ArrayList<>();
+        for(Vehicle v:availableVehicles){
+            if(!vehicleUnitOfWork.isDirty(v.getvehicleLicensePlate())){
+                gVehicles.add(v);
+            }
+        }
+
+
         gClients = clientDM.getAllClientsService();
 
         if (!gVehicles.isEmpty()) {
