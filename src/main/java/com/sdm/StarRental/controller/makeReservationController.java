@@ -31,14 +31,18 @@ public class makeReservationController {
     private ClientDM clientDM;
 
 
+
     private VehicleUnitOfWork vehicleUnitOfWork;
     private TransactionUnitOfWork transactionUnitOfWork;
 
     public makeReservationController(){
         vehicleDM = new VehicleDM();
         clientDM = new ClientDM();
-        vehicleUnitOfWork = new VehicleUnitOfWork();
         transactionUnitOfWork = TransactionUnitOfWork.getInstance();
+        vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
+
+
+
     }
 
     ArrayList<Client> gClients;

@@ -28,18 +28,17 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class VehicleController {
 
-	public VehicleController() {
-		// TODO Auto-generated constructor stub
-	}
-
 private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 	
-	
-	@Autowired
 	private VehicleDM vehicleDataMapper;
 	
-	@Autowired
 	private VehicleUnitOfWork vehicleUnitOfWork;
+	
+	public VehicleController() {
+		vehicleDataMapper = new VehicleDM();
+		vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
+		
+	}
 	
 	@RequestMapping(value = "/backtoadminmainpage", method = RequestMethod.GET)
 	public String redirectUserAdmin(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession)
@@ -63,6 +62,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 		if (Utilities.validateSession(httpSession)) {
 
 			model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
+
 
 			String userType = String.valueOf(httpSession.getAttribute("userType"));
 			System.out.println("session user type is.................... " + userType);
