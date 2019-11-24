@@ -6,6 +6,7 @@ import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.joda.time.DateTime;
@@ -48,7 +49,6 @@ public class makeReservationController {
 
 
 
-
     }
 
     ArrayList<Client> gClients;
@@ -62,8 +62,8 @@ public class makeReservationController {
     @RequestMapping(value = "/createNewReservation", method = RequestMethod.GET)
     public String makeReservationPageSetup (@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) throws Exception
     {
-        //  if (true) {
-
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
         ArrayList<Vehicle> availableVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
         gVehicles = new ArrayList<>();
         for(Vehicle v:availableVehicles){
@@ -91,9 +91,9 @@ public class makeReservationController {
 
         return "createNewReservation";
 
-        //	} else {
-        //	  return "unauthorized";
-        //}
+        	} else {
+        	  return "unauthorized";
+        }
     }
 
 
@@ -108,16 +108,17 @@ public class makeReservationController {
 
         ArrayList<Client> clients = new ArrayList<>();
 
-        if (!reqParam.get("First_Name").equals("") && reqParam.get("License_Number").equals("")) {
-            clients = clientDM.getClientDetailsOneParamService("First_Name", reqParam.get("First_Name"));
-        } else if (reqParam.get("First_Name").equals("") && !reqParam.get("License_Number").equals("")) {
-            clients = clientDM.getClientDetailsOneParamService("License_Number", reqParam.get("License_Number"));
-        } else if (!reqParam.get("First_Name").equals("") && !reqParam.get("License_Number").equals("")) {
-            clients = clientDM.getClientDetailsTwoParamService("First_Name", reqParam.get("First_Name"), "License_Number",
-                    reqParam.get("License_Number"));
-        } else if (reqParam.get("First_Name").equals("") && reqParam.get("License_Number").equals("")) {
+        if (!reqParam.get("lastName").equals("") && reqParam.get("licenseNumber").equals("")) {
+            clients = clientDM.getClientDetailsOneParamService("lastName", reqParam.get("lastName"));
+        } else if (reqParam.get("lastName").equals("") && !reqParam.get("licenseNumber").equals("")) {
+            clients = clientDM.getClientDetailsOneParamService("licenseNumber", reqParam.get("licenseNumber"));
+        } else if (!reqParam.get("lastName").equals("") && !reqParam.get("licenseNumber").equals("")) {
+            clients = clientDM.getClientDetailsTwoParamService("lastName", reqParam.get("lastName"), "licenseNumber",
+                    reqParam.get("licenseNumber"));
+        } else if (reqParam.get("lastName").equals("") && reqParam.get("licenseNumber").equals("")) {
             clients.addAll(gClients);
         }
+
 
         if (clients != null && !clients.isEmpty()) {
 
@@ -162,9 +163,9 @@ public class makeReservationController {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
 
         // Catalog vehicle;
-        if (!reqPar.get("LICENSE_PLATE").equals("")) {
+        if (!reqPar.get("vehicleLicenseNumber").equals("")) {
             for (Vehicle c : gVehicles) {
-                if (c.getvehicleLicensePlate().equalsIgnoreCase(reqPar.get("LICENSE_PLATE"))) {
+                if (c.getvehicleLicensePlate().equalsIgnoreCase(reqPar.get("vehicleLicenseNumber"))) {
                     vehicles.add(c);
                 }
             }
