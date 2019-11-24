@@ -11,10 +11,15 @@ public class JobScheduler {
 
 	private VehicleUnitOfWork vehicleUnitOfWork;
 	
+	public JobScheduler() {
+		vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
+	}
+	
+	
 	//fixedRate is in milliseconds
-	@Scheduled(fixedRate = 2000)
+	@Scheduled(fixedRate = 10000)
 	public void scheduleTaskWithFixedRate() {
-		//System.out.println("Job Executed");
-		//vehicleUnitOfWork.commit();
+		System.out.println("Job Executed");
+		vehicleUnitOfWork.scheduleCommit();;
 	}
 }
