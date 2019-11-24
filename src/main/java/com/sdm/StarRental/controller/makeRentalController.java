@@ -6,6 +6,7 @@ import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.tableDataGateway.TransactionTDG;
 import com.sdm.StarRental.tableDataGateway.VehicleTDG;
 import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;
@@ -55,8 +56,9 @@ public class makeRentalController {
         @RequestMapping(value = "/makeRental", method = RequestMethod.GET)
         public String makeRental(@RequestParam Map<String, String> reqPar, ModelMap modelMap, HttpSession httpSession)
 			throws Exception {
-        //	if (Utilities.validateSession(httpSession)) {
 
+            if (Utilities.validateSession(httpSession)) {
+                modelMap.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
         ArrayList<Vehicle> availableVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
         gVehicles = new ArrayList<>();
         for(Vehicle v:availableVehicles){
@@ -85,9 +87,9 @@ public class makeRentalController {
         }
 
         return "makeRental";
-        //	} else {
-        //	return "unauthorized";
-        //}
+        	} else {
+        	return "unauthorized";
+        }
     }
 
 

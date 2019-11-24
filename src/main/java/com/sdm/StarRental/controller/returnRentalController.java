@@ -4,6 +4,7 @@ import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.slf4j.Logger;
@@ -47,33 +48,39 @@ public class returnRentalController {
 //        ArrayList<Catalog> rentedVehicles = catalogService.getVehicleFromOneCriteria("Rented", null, "status");
 
 
+        if (Utilities.validateSession(httpSession)) {
+            modelMap.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
 
-        ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
-        for(Vehicle vehicle : vehicleDM.getAllVehicles()) {
-            if(vehicle.getStatus().equalsIgnoreCase("Rented")) {
-                rentedVehicles.add(vehicle);
-            }
-        }
-
-        relatedTransactions.clear();
-        for (Vehicle vehicle : rentedVehicles) {
-            ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
-            if (!transactions.isEmpty()) {
-                Transaction currTransaction = transactions.get(transactions.size() - 1);
-                if (currTransaction != null && currTransaction.getStatus().equalsIgnoreCase("Rented")) {
-                    relatedTransactions.add(currTransaction);
+                ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
+                for (Vehicle vehicle : vehicleDM.getAllVehicles()) {
+                    if (vehicle.getStatus().equalsIgnoreCase("Rented")) {
+                        rentedVehicles.add(vehicle);
+                    }
                 }
+
+                relatedTransactions.clear();
+                for (Vehicle vehicle : rentedVehicles) {
+                    ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
+                    if (!transactions.isEmpty()) {
+                        Transaction currTransaction = transactions.get(transactions.size() - 1);
+                        if (currTransaction != null && currTransaction.getStatus().equalsIgnoreCase("Rented")) {
+                            relatedTransactions.add(currTransaction);
+                        }
+                    }
+
+                }
+
+                if (relatedTransactions != null) {
+                    modelMap.addAttribute("vehiclecatalogfound", "RESULT_FOUND");
+                    modelMap.addAttribute("transactionsResults", relatedTransactions);
+                } else {
+                    modelMap.addAttribute("transactionsResults", "No vehicle is rented at the moment!!");
+                }
+                return "returnRental";
+            }else
+            {
+                return "unauthorised";
             }
-
-        }
-
-        if (relatedTransactions != null) {
-            modelMap.addAttribute("vehiclecatalogfound", "RESULT_FOUND");
-            modelMap.addAttribute("transactionsResults", relatedTransactions);
-        } else {
-            modelMap.addAttribute("transactionsResults", "No vehicle is rented at the moment!!");
-        }
-        return "returnRental";
     }
 
 

@@ -2,6 +2,7 @@ package com.sdm.StarRental.controller;
 
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.model.Transaction;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,8 @@ public class viewTransactionController {
     @RequestMapping(value = "/viewTransactions", method = RequestMethod.GET)
     public String loadTransactions(@RequestParam Map<Integer, Transaction> reqPar, ModelMap model, HttpSession httpSession) throws Exception {
 
-        //if(Utilities.validateSession(httpSession)) {
-        ArrayList<Transaction> transactions = transactionDM.getAllTransactionsService();
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));        ArrayList<Transaction> transactions = transactionDM.getAllTransactionsService();
         if (!transactions.isEmpty()) {
             logger.info("Transaction length" + transactions.size());
 
@@ -44,11 +45,11 @@ public class viewTransactionController {
             model.addAttribute("transaction_found", "RESULT_NOT_FOUND");
         }
         return "viewTransactions";
-        //	}
+        	}
 
-        //	else {
-        //		return "unauthorized";
-        //	}
+        	else {
+        		return "unauthorized";
+        	}
     }
 
 

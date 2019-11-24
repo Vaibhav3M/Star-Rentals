@@ -2,6 +2,7 @@ package com.sdm.StarRental.controller;
 
 import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.model.Client;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,19 +32,19 @@ public class ManageClientController {
 
     @RequestMapping(value = "/createClient",method = RequestMethod.GET)
     public String createClient(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) {
-//        if(Utilities.validateSession(httpSession)) {
-//            return "createnewclientform";
-//        }else {
-//            return "unauthorized";
-//        }
-        return "createClient";
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
+            return "createClient";
+        }else {
+            return "unauthorized";
+        }
     }
 
 
     @RequestMapping(value = "/createClientForm",method = RequestMethod.POST)
     public String createClientForm(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) throws Exception {
-       // if(Utilities.validateSession(httpSession)) {
-
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
             String licenseNumber = reqPar.get("licenseNumber");
             String firstName = reqPar.get("firstName");
             String lastName = reqPar.get("lastName");
@@ -64,9 +65,9 @@ public class ManageClientController {
 
                 return "createClient";
 
-//        }else {
-//            return "unauthorized";
-//        }
+        }else {
+            return "unauthorized";
+        }
     }
 
     @RequestMapping(value = "/deleteClient",method = RequestMethod.GET)

@@ -6,6 +6,7 @@ import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.joda.time.DateTime;
@@ -60,8 +61,8 @@ public class makeReservationController {
     @RequestMapping(value = "/createNewReservation", method = RequestMethod.GET)
     public String makeReservationPageSetup (@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) throws Exception
     {
-        //  if (true) {
-
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));
         ArrayList<Vehicle> availableVehicles = vehicleDM.getVehicleFromOneCriteria("Available", null, "status");
         gVehicles = new ArrayList<>();
         for(Vehicle v:availableVehicles){
@@ -89,9 +90,9 @@ public class makeReservationController {
 
         return "createNewReservation";
 
-        //	} else {
-        //	  return "unauthorized";
-        //}
+        	} else {
+        	  return "unauthorized";
+        }
     }
 
 
