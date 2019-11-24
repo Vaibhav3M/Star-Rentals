@@ -61,6 +61,29 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		
 	}
 
+	
+	
+	
+	public void scheduleCommit() {
+		System.out.println("Pending Jobs Are being Commited");
+			jobs.forEach((key, element) -> {
+				Vehicle vehicle = element.getE();
+				System.out.println(element.getE().toString());
+				if (element.getAction() == unitOfWorkAction.CREATE) {
+					System.out.println("action is create");
+					commitCreateVehicle(vehicle);
+				} 
+				else if(element.getAction() == unitOfWorkAction.UPDATE) {
+					commitUpdateVehicle(vehicle);
+				} else if(element.getAction() == unitOfWorkAction.DELETE) {
+					commitDeleteVehicle(vehicle);
+				}
+			});
+			jobs = new HashMap<String, unitOfWork<Vehicle>>();
+		
+		
+	}
+	
 	private void commitDeleteVehicle(Vehicle vehicle) {
 		try {
 			vehicleDataMapper.deleteVehicle(vehicle.getvehicleLicensePlate());
