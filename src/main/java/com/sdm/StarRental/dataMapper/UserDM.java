@@ -6,7 +6,7 @@ import com.sdm.StarRental.model.User;
 import com.sdm.StarRental.tableDataGateway.IUserTDG;
 import com.sdm.StarRental.tableDataGateway.UserTDG;
 
-@Service
+
 public class UserDM  {
 	
 	UserTDG userTDG;
