@@ -69,9 +69,9 @@
                 <td>
                     <form action="/searchClientMakeReservation" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name=First_Name
-                                   placeholder="First Name"/> <input type="text"
-                                                                     class="form-control" name=License_Number
+                            <input type="text" class="form-control" name=lastName
+                                   placeholder="Last Name"/> <input type="text"
+                                                                     class="form-control" name=licenseNumber
                                                                      placeholder="License Number"/> <span
                                 class="input-group-btn">
 									<button class="btn btn-default" type="submit">Search</button>
@@ -87,7 +87,7 @@
                 <td>
                     <form action="/searchCarMakeReservation" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" name=LICENSE_PLATE
+                            <input type="text" class="form-control" name=vehicleLicenseNumber
                                    placeholder="Car License Plate"> <span
                                 class="input-group-btn">
 									<button class="btn btn-default" type="submit">Search</button>

@@ -82,31 +82,31 @@ public class returnRentalController {
 
         ArrayList<Transaction> searchedTransactions = new ArrayList<>();
 
-        if (!reqParam.get("client_license").equals("") && reqParam.get("vehicle_licensePlate").equals("")) {
+        if (!reqParam.get("licenseNumber").equals("") && reqParam.get("vehicleLicensePlate").equals("")) {
 
             for (Transaction transaction : relatedTransactions) {
-                if (transaction.getClientLicenseNumber().equalsIgnoreCase(reqParam.get("client_license"))) {
+                if (transaction.getClientLicenseNumber().equalsIgnoreCase(reqParam.get("licenseNumber"))) {
                     searchedTransactions.add(transaction);
                 }
             }
 
-        } else if (reqParam.get("client_license").equals("") && !reqParam.get("vehicle_licensePlate").equals("")) {
+        } else if (reqParam.get("licenseNumber").equals("") && !reqParam.get("vehicleLicensePlate").equals("")) {
 
             for (Transaction transaction : relatedTransactions) {
-                if (transaction.getVehicleLicensePlate().equalsIgnoreCase(reqParam.get("vehicle_licensePlate"))) {
+                if (transaction.getVehicleLicensePlate().equalsIgnoreCase(reqParam.get("vehicleLicensePlate"))) {
                     searchedTransactions.add(transaction);
                 }
 
             }
 
-        } else if (!reqParam.get("client_license").equals("") && !reqParam.get("vehicle_licensePlate").equals("")) {
+        } else if (!reqParam.get("licenseNumber").equals("") && !reqParam.get("vehicleLicensePlate").equals("")) {
 
             for (Transaction transaction : relatedTransactions) {
-                if (transaction.getClientLicenseNumber().equalsIgnoreCase(reqParam.get("client_license")) && transaction.getVehicleLicensePlate().equalsIgnoreCase(reqParam.get("vehicle_licensePlate"))) {
+                if (transaction.getClientLicenseNumber().equalsIgnoreCase(reqParam.get("licenseNumber")) && transaction.getVehicleLicensePlate().equalsIgnoreCase(reqParam.get("vehicleLicensePlate"))) {
                     searchedTransactions.add(transaction);
                 }
             }
-        }else if (reqParam.get("client_license").equals("") && reqParam.get("vehicle_licensePlate").equals("")) {
+        }else if (reqParam.get("licenseNumber").equals("") && reqParam.get("vehicleLicensePlate").equals("")) {
 
             searchedTransactions.addAll(relatedTransactions);
         }
