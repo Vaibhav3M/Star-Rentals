@@ -10,7 +10,7 @@
 <meta name="author" content="">
 <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
 
-<title>Browse Catalog</title>
+<title>Browse Vehicle Catalog</title>
 
 
 <!-- Bootstrap core CSS -->

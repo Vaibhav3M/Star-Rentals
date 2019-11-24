@@ -337,7 +337,7 @@
                                         <input type="hidden" name="color" value=''>
                                         <input type="hidden" name="condition" value=''>
                                         <input type="hidden" name="year" value=''>
-                                        <input type="hidden" name="sortBy" value="com.sdm.StarRental.model">
+                                        <input type="hidden" name="sortBy" value="model">
                                         <button class="btn btn-default" type="submit">Model</button>
                                     </form>
                                 </th>
