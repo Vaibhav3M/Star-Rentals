@@ -90,7 +90,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
 							Clerk Name</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span>
+					<li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>
 							Logout</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-left">
@@ -111,13 +111,13 @@
 		<div class="row" >
 			<table border="0" style="width: 50%; text-align: center; overflow: hidden;">
 				<tr>
-					<td><label>Name of Client :</label></td>
+					<td><label>Client detials :</label></td>
 					<td>
 						<form action="/searchClient" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" name=First_Name
-									placeholder="First Name" /> <input type="text"
-									class="form-control" name=License_Number
+								<input type="text" class="form-control" name=lastName
+									placeholder="Last Name" /> <input type="text"
+									class="form-control" name=licenseNumber
 									placeholder="License Number" /> <span class="input-group-btn">
 									<button class="btn btn-default" type="submit">Search</button>
 								</span>
@@ -132,7 +132,7 @@
 					<td>
 						<form action="/searchCar" method="get">
 							<div class="input-group">
-								<input type="text" class="form-control" name=LICENSE_PLATE
+								<input type="text" class="form-control" name=vehicleLicenseNumber
 									placeholder="Car License Plate"> <span
 									class="input-group-btn">
 									<button class="btn btn-default" type="submit">Search</button>

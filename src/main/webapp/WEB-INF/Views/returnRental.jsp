@@ -83,11 +83,11 @@
          <h4>Search By</h4>
          <label class="control-label col-sm-3">Client License </label>
          <div class="input-group">
-            <input type="text" name = "client_license" class="form-control" placeholder="">
+            <input type="text" name = "licenseNumber" class="form-control" placeholder="">
          </div>
          <label class="control-label col-sm-3">Vehicle License</label>
          <div class="input-group">
-            <input type="text" name = "vehicle_licensePlate" class="form-control" placeholder="">
+            <input type="text" name = "vehicleLicensePlate" class="form-control" placeholder="">
          </div>
          <button class="btn btn-default" type="submit">Search</button>
       </div>

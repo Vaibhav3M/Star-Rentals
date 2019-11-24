@@ -1,5 +1,6 @@
 package com.sdm.StarRental.tableDataGateway;
 
+import com.sdm.StarRental.comparator.*;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.objectUtilities.Utilities;
 import org.springframework.stereotype.Repository;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Repository
 public class TransactionTDG implements ITransactionTDG {
@@ -500,47 +502,44 @@ public class TransactionTDG implements ITransactionTDG {
     @Override
     public ArrayList<Transaction> sortByStatus(ArrayList<Transaction> list) {
 
-        ArrayList<Transaction> resultList = new ArrayList<>();
+        Collections.sort(list,  new TransactionSortByStatus());
 
-        return resultList;
+        return list;
     }
 
     @Override
     public ArrayList<Transaction> sortByTransactiondate(ArrayList<Transaction> list) {
 
-        ArrayList<Transaction> resultList = new ArrayList<>();
-
-        return resultList;
+        Collections.sort(list,  new TransactionSortByTransactionDate());
+        return list;
     }
 
     @Override
     public ArrayList<Transaction> sortBylicensePlate(ArrayList<Transaction> list) {
 
-        ArrayList<Transaction> resultList = new ArrayList<>();
-
-        return resultList;
+        Collections.sort(list,  new TransactionSortByLicensePlate());
+        return list;
     }
 
     @Override
     public ArrayList<Transaction> sortByRentedTill(ArrayList<Transaction> list) {
-        ArrayList<Transaction> resultList = new ArrayList<>();
 
-        return resultList;
+        Collections.sort(list,  new TransactionSortByBookingTill());
+        return list;
     }
 
     @Override
     public ArrayList<Transaction> sortByRentedFrom(ArrayList<Transaction> list) {
 
-        ArrayList<Transaction> resultList = new ArrayList<>();
+        Collections.sort(list,  new TransactionSortByBookingFrom());
+        return list;
 
-        return resultList;
     }
 
     @Override
     public ArrayList<Transaction> sortByClient(ArrayList<Transaction> list) {
 
-        ArrayList<Transaction> resultList = new ArrayList<>();
-
-        return resultList;
+        Collections.sort(list,  new TransactionSortByClient());
+        return list;
     }
 }

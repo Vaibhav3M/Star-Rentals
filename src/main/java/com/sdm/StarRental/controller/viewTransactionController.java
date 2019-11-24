@@ -30,8 +30,8 @@ public class viewTransactionController {
     @RequestMapping(value = "/viewTransactions", method = RequestMethod.GET)
     public String loadTransactions(@RequestParam Map<Integer, Transaction> reqPar, ModelMap model, HttpSession httpSession) throws Exception {
 
-        //if(Utilities.validateSession(httpSession)) {
-        ArrayList<Transaction> transactions = transactionDM.getAllTransactionsService();
+        if (Utilities.validateSession(httpSession)) {
+            model.addAttribute("loggedinusername", httpSession.getAttribute("userNameLoggedIn"));        ArrayList<Transaction> transactions = transactionDM.getAllTransactionsService();
         if (!transactions.isEmpty()) {
             logger.info("Transaction length" + transactions.size());
 
@@ -44,11 +44,11 @@ public class viewTransactionController {
             model.addAttribute("transaction_found", "RESULT_NOT_FOUND");
         }
         return "viewTransactions";
-        //	}
+        	}
 
-        //	else {
-        //		return "unauthorized";
-        //	}
+        	else {
+        		return "unauthorized";
+        	}
     }
 
 
@@ -354,36 +354,50 @@ public class viewTransactionController {
         }
 
 
-//        //sort
-//        //by status
-//        if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
-//            transactions = transactionDM.sortByStatusService(transactions);
-//        }
-//
-//        //by vehicleLicensePlate
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("vehicleLicensePlate")) {
-//            transactions = transactionDM.(transactions);
-//        }
-//
-//        //by Client
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("clientclientLicenseNumber")) {
-//            transactions = transactionDM.sortByClient(transactions);
-//        }
-//
-//        //by tansactionDate
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("timeStamp")) {
-//            transactions = transactionDM.sortBytimeStamp(transactions);
-//        }
-//
-//        //by bookingFrom
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingFrom")) {
-//            transactions = transactionDM.sortBybookingFrom(transactions);
-//        }
-//
-//        //by bookingTill
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
-//            transactions = transactionDM.sortBybookingTill(transactions);
-//        }
+
+        //sort
+        //by status
+        if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
+            transactions = transactionDM.sortByStatusService(transactions);
+        }
+
+        //by vehicleLicensePlate
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("vehicleLicensePlate")) {
+            transactions = transactionDM.sortBylicensePlate(transactions);
+        }
+
+        //by Client
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("clientLicenseNumber")) {
+            transactions = transactionDM.sortByClient(transactions);
+        }
+
+        //by tansactionDate
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("timeStamp")) {
+            transactions = transactionDM.sortByTransactiondate(transactions);
+        }
+
+        //by bookingFrom
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingFrom")) {
+            transactions = transactionDM.sortByRentedFrom(transactions);
+        }
+
+        //by bookingTill
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
+            transactions = transactionDM.sortByRentedTill(transactions);
+        }
+
+        logger.info("Transaction length" + transactions.size());
+        model.addAttribute("transaction_found", reqPar);
+
+
+        if (transactions != null) {
+            model.addAttribute("transaction_found", "RESULT_FOUND");
+            model.addAttribute("transaction_results", transactions);
+        } else {
+            model.addAttribute("transaction_found", "RESULT_NOT_FOUND");
+            model.addAttribute("transaction_results", "transactions do not exist");
+        }
+
 
         logger.info("Transaction length" + transactions.size());
         model.addAttribute("transaction_found", reqPar);
