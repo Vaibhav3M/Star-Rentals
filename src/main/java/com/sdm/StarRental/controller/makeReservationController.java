@@ -44,11 +44,6 @@ public class makeReservationController {
         vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
 
 
-
-
-
-
-
     }
 
     ArrayList<Client> gClients;

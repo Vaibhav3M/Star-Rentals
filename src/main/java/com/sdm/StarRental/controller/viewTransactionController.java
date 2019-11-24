@@ -2,7 +2,6 @@ package com.sdm.StarRental.controller;
 
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.model.Transaction;
-import com.sdm.StarRental.objectUtilities.Utilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -355,6 +354,7 @@ public class viewTransactionController {
         }
 
 
+
         //sort
         //by status
         if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
@@ -385,6 +385,19 @@ public class viewTransactionController {
         else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
             transactions = transactionDM.sortByRentedTill(transactions);
         }
+
+        logger.info("Transaction length" + transactions.size());
+        model.addAttribute("transaction_found", reqPar);
+
+
+        if (transactions != null) {
+            model.addAttribute("transaction_found", "RESULT_FOUND");
+            model.addAttribute("transaction_results", transactions);
+        } else {
+            model.addAttribute("transaction_found", "RESULT_NOT_FOUND");
+            model.addAttribute("transaction_results", "transactions do not exist");
+        }
+
 
         logger.info("Transaction length" + transactions.size());
         model.addAttribute("transaction_found", reqPar);
