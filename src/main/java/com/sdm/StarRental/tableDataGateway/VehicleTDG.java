@@ -156,6 +156,7 @@ ResultSet rs;
 		}
 		Statement st;
 		ArrayList<Vehicle> result=new ArrayList<>();
+		System.out.println(sql);
 		try {
 			st = (Statement) connection.createStatement();
 			ResultSet rs= st.executeQuery(sql);
