@@ -25,6 +25,7 @@ public class ManageClientController {
 
     public ManageClientController(){
         clientDM = new ClientDM();
+
         clientUnitOfWork  = ClientUnitOfWork.getInstance(clientDM);
     }
 

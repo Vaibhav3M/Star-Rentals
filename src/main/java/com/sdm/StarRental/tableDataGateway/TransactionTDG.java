@@ -17,6 +17,8 @@ public class TransactionTDG implements ITransactionTDG {
 
     private TransactionTDG(){}
 
+
+
     public static TransactionTDG getInstance() {
 
         if (transactionTDG == null) {

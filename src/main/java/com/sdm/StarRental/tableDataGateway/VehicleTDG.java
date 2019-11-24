@@ -16,11 +16,15 @@ import java.util.ArrayList;
 
 public class VehicleTDG implements IVehicleTDG {
 
-	private VehicleTDG vehicleTDG;
+	private static VehicleTDG vehicleTDG;
  
     private Connection connection;
     
-    public VehicleTDG getInstance() {
+    private VehicleTDG() {
+    	
+    }
+    
+    public static VehicleTDG getInstance() {
     	if (vehicleTDG == null) {
     	  vehicleTDG = new VehicleTDG();
     	} 
@@ -28,16 +32,7 @@ public class VehicleTDG implements IVehicleTDG {
     }
     
 
-    public VehicleTDG() {
-    	 try {
-             connection = Utilities.getSQLDb(connection);;
-         }
-         catch (Exception e){
-
-         }
-    }
-    
-    public void establishConntection() {
+    public void establishConnection() {
     	 try {
              connection =Utilities.getSQLDb(connection);;
              
@@ -62,7 +57,7 @@ public class VehicleTDG implements IVehicleTDG {
 	@Override
     public boolean addNewVehicle(String type,int year, String model,String color,String licensePlate, String status,String make) throws Exception{
 
-
+		establishConnection();
 
 		String sql="INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
 		System.out.println(sql);
@@ -75,6 +70,9 @@ public class VehicleTDG implements IVehicleTDG {
 		} catch (Exception e) {
 			return false;
 		}
+		finally {
+            closeConnection();
+        }
 		return true;
 		
 	
@@ -92,18 +90,17 @@ public class VehicleTDG implements IVehicleTDG {
 			return false;
 		} catch (Exception e) {
 			return false;
-		}
+		}finally {
+            closeConnection();
+        }
+		
 		return true;
     }
 
     @Override
     public boolean modifyVehicle(String type,int year, String model,String make, String color,String licensePlate, String status) throws Exception{
 
-
-
-
-    	//		String sql="INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) VALUES ('"+type+"','"+make+"','"+model+"',"+year+",'"+color+"','"+licensePlate+"','"+status+"')";
-
+    	 establishConnection();
     	String sql="UPDATE c_catalog SET type='"+type+"' ,make='"+make+"' ,model='"+model+"' ,year='"+year+"' ,color='"+color+"' ,status='"+status+"' ,vehicleLicensePlate='"+licensePlate+"' WHERE vehicleLicensePlate='"+licensePlate+"'";
 		System.out.println(sql);
     	Statement st;
@@ -114,13 +111,16 @@ public class VehicleTDG implements IVehicleTDG {
 			return false;
 		} catch (Exception e) {
 			return false;
-		}
+		}finally {
+            closeConnection();
+        }
 		return true;
     }
 
     @Override
     public ArrayList<Vehicle> getAllVehicles() throws Exception{
-String sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog";
+    	 establishConnection();
+    	String sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog";
 
 ResultSet rs;
 		Statement st;
@@ -139,13 +139,15 @@ ResultSet rs;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
+		}finally {
+            closeConnection();
+        }
 		return result;
     }
 
     @Override
     public ArrayList<Vehicle> getVehicleFromOneCriteria(String value, String comparator, String criteria) throws Exception{
-
+    	 establishConnection();
     	String sql="";
 		if(!criteria.equalsIgnoreCase("year")) {
 		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE "+criteria+"='"+value+"'";
@@ -168,12 +170,15 @@ ResultSet rs;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
+		}finally {
+            closeConnection();
+        }
 		return result;
     }
 
     @Override
     public  ArrayList<Vehicle> getVehicleFromTwoCriteria(String value1,String value2, String comparator, String criteria1, String criteria2) throws Exception{
+    	 establishConnection();
     	String sql="";
 		if(!criteria1.equalsIgnoreCase("year") && !criteria2.equalsIgnoreCase("year")) {
 		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE "+criteria1+"='"+value1+"' AND "
@@ -202,13 +207,15 @@ ResultSet rs;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
+		}finally {
+            closeConnection();
+        }
 		return result;	
     }
 
     @Override
     public  ArrayList<Vehicle> getVehicleFromAllCriteria(String value1,String value2,String value3,String value4, String value5, String value6, String value7, String comparator, String criteria1, String criteria2,String criteria3,String criteria4, String criteria5, String criteria6, String criteria7) throws Exception{
-
+    	 establishConnection();
     	String sql="";
 		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
 					+criteria2+"='"+value2+"' AND "+criteria3+"='"+value3+"' AND " +criteria4+"='"+value4+"'AND " +criteria5+"='"+value5+"' AND" +criteria6+"='"+value6+"'"
@@ -229,13 +236,15 @@ ResultSet rs;
 	} catch (Exception e) {
 		e.printStackTrace();
 		return null;
-	}
+	}finally {
+        closeConnection();
+    }
 	return result;	
     }
 
     @Override
     public  ArrayList<Vehicle> getVehicleFromThreeCriteria(String value1,String value2,String value3, String comparator, String criteria1, String criteria2,String criteria3) throws Exception{
-
+    	 establishConnection();
     	String sql="";
 		if(criteria1.equalsIgnoreCase("year")){
 		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE year"+comparator+Integer.valueOf(value1)+" AND "
@@ -260,13 +269,15 @@ ResultSet rs;
 	} catch (Exception e) {
 		e.printStackTrace();
 		return null;
-	}
+	}finally {
+        closeConnection();
+    }
 	return result;	
     }
 
     @Override
     public Vehicle getVehicleByLicensePlate(String licensePlate) throws Exception{
-
+    	 establishConnection();
     	String sql="";
 		 sql="Select type,make,model,year,color,vehicleLicensePlate,status from c_catalog WHERE vehicleLicensePlate='"+licensePlate+"'";
 
@@ -287,7 +298,9 @@ ResultSet rs;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
-		}
+		}finally {
+            closeConnection();
+        }
 		return result;
     
     }

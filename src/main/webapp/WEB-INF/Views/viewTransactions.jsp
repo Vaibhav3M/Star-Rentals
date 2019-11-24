@@ -423,7 +423,7 @@
 
  
   </div>
-  <form action="backtoadminmainpage" method=post>
+  <form action="backtoadminmainpage" method=get>
      
     <center> <button class="btn btn-default" type="submit">Back To Home Page</button></center>
  </form>

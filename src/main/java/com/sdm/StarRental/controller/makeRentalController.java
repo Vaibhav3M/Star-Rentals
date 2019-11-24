@@ -38,8 +38,10 @@ public class makeRentalController {
         public makeRentalController(){
             vehicleDM = new VehicleDM();
             clientDM = new ClientDM();
-            vehicleUnitOfWork = new VehicleUnitOfWork();
+            vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
             transactionUnitOfWork = TransactionUnitOfWork.getInstance();
+
+
         }
 
         ArrayList<Client> gClients;
