@@ -85,4 +85,34 @@ public class TransactionDM {
         return transactionTDG.sortByStatus(list);
     }
 
+    public ArrayList<Transaction> sortByTransactiondate(ArrayList<Transaction> list) {
+
+
+        return transactionTDG.sortByTransactiondate(list);
+    }
+
+
+    public ArrayList<Transaction> sortBylicensePlate(ArrayList<Transaction> list) {
+
+
+        return transactionTDG.sortBylicensePlate(list);
+    }
+
+    public ArrayList<Transaction> sortByRentedTill(ArrayList<Transaction> list) {
+
+        return transactionTDG.sortByRentedTill(list);
+    }
+
+    public ArrayList<Transaction> sortByRentedFrom(ArrayList<Transaction> list) {
+
+
+        return transactionTDG.sortByRentedFrom(list);
+    }
+
+    public ArrayList<Transaction> sortByClient(ArrayList<Transaction> list) {
+
+
+        return transactionTDG.sortByClient(list);
+    }
+
 }

@@ -354,36 +354,36 @@ public class viewTransactionController {
         }
 
 
-//        //sort
-//        //by status
-//        if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
-//            transactions = transactionDM.sortByStatusService(transactions);
-//        }
-//
-//        //by vehicleLicensePlate
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("vehicleLicensePlate")) {
-//            transactions = transactionDM.(transactions);
-//        }
-//
-//        //by Client
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("clientclientLicenseNumber")) {
-//            transactions = transactionDM.sortByClient(transactions);
-//        }
-//
-//        //by tansactionDate
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("timeStamp")) {
-//            transactions = transactionDM.sortBytimeStamp(transactions);
-//        }
-//
-//        //by bookingFrom
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingFrom")) {
-//            transactions = transactionDM.sortBybookingFrom(transactions);
-//        }
-//
-//        //by bookingTill
-//        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
-//            transactions = transactionDM.sortBybookingTill(transactions);
-//        }
+        //sort
+        //by status
+        if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
+            transactions = transactionDM.sortByStatusService(transactions);
+        }
+
+        //by vehicleLicensePlate
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("vehicleLicensePlate")) {
+            transactions = transactionDM.sortBylicensePlate(transactions);
+        }
+
+        //by Client
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("clientLicenseNumber")) {
+            transactions = transactionDM.sortByClient(transactions);
+        }
+
+        //by tansactionDate
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("timeStamp")) {
+            transactions = transactionDM.sortByTransactiondate(transactions);
+        }
+
+        //by bookingFrom
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingFrom")) {
+            transactions = transactionDM.sortByRentedFrom(transactions);
+        }
+
+        //by bookingTill
+        else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
+            transactions = transactionDM.sortByRentedTill(transactions);
+        }
 
         logger.info("Transaction length" + transactions.size());
         model.addAttribute("transaction_found", reqPar);
