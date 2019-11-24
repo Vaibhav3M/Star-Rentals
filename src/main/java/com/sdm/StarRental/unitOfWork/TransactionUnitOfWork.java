@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
-@Service
 public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 
 	//TODO: assign unique values
@@ -19,8 +18,8 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 
 	private static TransactionUnitOfWork transactionUnitOfWork;
 
-	TransactionDM transactionDM;
 
+	TransactionDM transactionDM;
 
 	private TransactionUnitOfWork(){
 		this.transactionDM = new TransactionDM();
@@ -39,6 +38,7 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 
 		return transactionUnitOfWork;
 	}
+
 
 
 
