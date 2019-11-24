@@ -94,7 +94,7 @@
 							Logout</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-left">
-					<<li><a href="/"><font size= "6" color="Gray">Star Rentals</font></a></li>
+					<<li><font size= "6" color="Gray">Star Rentals</font></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -307,7 +307,7 @@
 				
 			</div></center>
 		</div>
-							<form action="backtomanagepage" method=get>
+							<form action="backToManagePageMR" method=post>
 
 								<center>
 									<button class="btn btn-default" type="submit">Back To
