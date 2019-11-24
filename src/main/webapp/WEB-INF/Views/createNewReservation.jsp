@@ -48,7 +48,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-left">
                 <
-                <li><a href="/"><font size="6" color="Gray">Star Rentals</font></a></li>
+                <li><font size="6" color="Gray">Star Rentals</font></a></li>
             </ul>
         </div>
     </nav>
