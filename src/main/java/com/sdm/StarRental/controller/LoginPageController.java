@@ -41,10 +41,13 @@ public class LoginPageController {
 
 	private static Logger logger = LoggerFactory.getLogger(LoginPageController.class);
 
-	@Autowired
 	private UserDM userService;
-	@Autowired
-	private VehicleUnitOfWork test;;
+	
+	public LoginPageController() {
+		userService = new UserDM();
+		
+	}
+
 	
 	/**
 	 * This method loads the login page
@@ -55,7 +58,7 @@ public class LoginPageController {
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequestMapping(value = "/loginpage", method = RequestMethod.GET)
+	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String getUser(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession)
 			throws Exception {
@@ -130,34 +133,6 @@ public class LoginPageController {
 		return "loginPage";
 	}
 	
-	
-	
-	public void test() throws Exception {
-		//INSERT INTO c_catalog (type,make,model,year,color,vehicleLicensePlate,status) 
-		//VALUES ('HYUN','MERC','BENZ',1999,'WHITE','XZ7 327','RENTED')
-
-		Vehicle v = new Vehicle("SUV", 1999, "BENZ", "WHITE", "AY7 324", "RENTED", "MERC");
-		Vehicle v1 = new Vehicle("SUV", 1998, "BENZ", "WHITE", "XZ8 225", "RENTED", "MERC");
-		Vehicle v2 = new Vehicle("SUV", 1999, "BENZ", "WHITE", "BZ9 226", "RENTED", "MERC");
-		Vehicle v3 = new Vehicle("SUV", 1997, "BENZ", "WHITE", "XZ6 327", "RENTED", "MERC");
-		Vehicle v4 = new Vehicle("SUV", 1996, "BENZ", "WHITE", "XZ5 338", "RENTED", "MERC");
-		//Vehicle v5 = new Vehicle("SUV", 1994, "BENZ", "GREY", "XZ4 229", "RENTED", "MERC");
-		Vehicle v6 = new Vehicle("SUV", 1994, "BENZ", "PINK", "XZ3 229", "RENTED", "MERC");
-		
-		//test.create(v6);
-		Vehicle v5 = new Vehicle("SUV", 1999, "BENZ", "BROWN", "XY7 224", "RENTED", "MERC");
-		
-		test.update(v5);
-		test.create(v);
-		v = new Vehicle("SUV", 1899, "BENZ", "WHITE", "XY7 324", "RENTED", "MERC");
-		test.delete("XY7 324");
-		test.update(v);
-		test.create(v2);
-		//test.create(v2);
-		System.out.println("vehicle added");
-		
-		
-	}
 }
 
 

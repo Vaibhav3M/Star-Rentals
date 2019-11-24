@@ -42,8 +42,6 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	
 	@Override
 	public void commit() {
-	
-
 		if(jobs.size()==3) {
 			jobs.forEach((key, element) -> {
 				Vehicle vehicle = element.getE();

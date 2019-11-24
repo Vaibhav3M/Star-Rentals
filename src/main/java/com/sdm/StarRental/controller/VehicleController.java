@@ -136,19 +136,25 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
          ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
          // One search criteria
-         if (!reqPar.get("model").equals("") && reqPar.get("make").equals("") && reqPar.get("color").equals("")
+         if (!reqPar.get("model").equals("") && reqPar.get("make").equals("")  && reqPar.get("status").equals("")&& reqPar.get("color").equals("")
                  && reqPar.get("year").equals("")) {
              vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("model"), null, "model");
-         } else if (reqPar.get("model").equals("") && !reqPar.get("make").equals("") && reqPar.get("color").equals("")
+         } else if (reqPar.get("model").equals("") && reqPar.get("make").equals("") && !reqPar.get("status").equals("") && reqPar.get("color").equals("")
                  && reqPar.get("year").equals("")) {
-             vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("make"), null, "make");
-         } else if (reqPar.get("model").equals("") && reqPar.get("make").equals("") && !reqPar.get("color").equals("")
+             vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("status"), null, "status");
+         } else if (reqPar.get("model").equals("") && reqPar.get("status").equals("") && reqPar.get("make").equals("") && !reqPar.get("color").equals("")
                  && reqPar.get("year").equals("")) {
              vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("color"), null, "color");
-         } else if (reqPar.get("model").equals("") && reqPar.get("make").equals("") && reqPar.get("color").equals("")
+         } else if (reqPar.get("model").equals("") && reqPar.get("status").equals("") && reqPar.get("make").equals("") && reqPar.get("color").equals("")
                  && !reqPar.get("year").equals("")) {
              vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("year"), reqPar.get("condition"), "year");
          }
+         else if (reqPar.get("model").equals("") && !reqPar.get("make").equals("") && reqPar.get("status").equals("") && reqPar.get("color").equals("")
+                 && reqPar.get("year").equals("")) {
+        	 System.out.println("Status search  ");
+             vehicles = vehicleDataMapper.getVehicleFromOneCriteria(reqPar.get("make"), null, "make");
+         } 
+         
          // Two search criteria
          else if (!reqPar.get("model").equals("") && !reqPar.get("make").equals("") && reqPar.get("color").equals("")
                  && reqPar.get("year").equals("")) {
@@ -243,6 +249,11 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 		  
 		  }else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("type"))
 		  { vehicles=vehicleDataMapper.sortByType(vehicles);
+		  
+		  }
+		  
+		  else if(reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status"))
+		  { vehicles=vehicleDataMapper.sortByStatus(vehicles);
 		  
 		  }
 		 

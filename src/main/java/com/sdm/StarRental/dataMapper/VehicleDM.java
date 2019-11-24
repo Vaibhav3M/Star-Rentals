@@ -10,13 +10,13 @@ import com.sdm.StarRental.comparator.CatalogSortByColor;
 import com.sdm.StarRental.comparator.CatalogSortByLicensePlate;
 import com.sdm.StarRental.comparator.CatalogSortByMake;
 import com.sdm.StarRental.comparator.CatalogSortByModel;
+import com.sdm.StarRental.comparator.CatalogSortByStatus;
 import com.sdm.StarRental.comparator.CatalogSortByType;
 import com.sdm.StarRental.comparator.CatalogSortByYear;
 import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.tableDataGateway.VehicleTDG;
 
 
-@Service
 public class VehicleDM {
 	
 	VehicleTDG vehicleTDG;
@@ -113,6 +113,13 @@ public VehicleDM() {
 
 		public ArrayList<Vehicle> sortByType(ArrayList<Vehicle> vehicles) {
 			Collections.sort(vehicles, new CatalogSortByType());
+			return vehicles;
+		}
+
+
+		public ArrayList<Vehicle> sortByStatus(ArrayList<Vehicle> vehicles) {
+			// TODO Auto-generated method stub
+			Collections.sort(vehicles, new CatalogSortByStatus());
 			return vehicles;
 		}
 }

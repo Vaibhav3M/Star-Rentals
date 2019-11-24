@@ -79,7 +79,7 @@ body {
 					</button>
 					<h4 class="modal-title" id="myModalLabel">Vehicle Details</h4>
 				</div>
-				<div class="col-md-3 bg" id="loadingIcon">
+				<div class="col-md-4 bg" id="loadingIcon">
 			        <div class="loader" id="loader-1"></div>
 			     </div>
 				<div class="modal-body">
@@ -88,7 +88,18 @@ body {
 							<div class="col-xs-12 col-md-12">
 							    <img class="img-responsive center-block" alt="vehicleImage" id="modal-vehicleImage">
 						    </div>
+						    
 					    </div>
+					    
+					    <div class="panel panel-primary">
+					      <div class="panel-heading">
+					        <h3 class="panel-title">Status</h3>
+					      </div>
+					      <div class="panel-body" id="modal-vehicleStatus">
+					      </div>
+					    </div>
+					    
+					    
 						<div class="panel panel-primary">
 					      <div class="panel-heading">
 					        <h3 class="panel-title">Type</h3>
@@ -131,13 +142,7 @@ body {
 					      <div class="panel-body" id="modal-vehicleLicensePlate">
 					      </div>
 					    </div>
-					    <div class="panel panel-primary">
-					      <div class="panel-heading">
-					        <h3 class="panel-title">Status</h3>
-					      </div>
-					      <div class="panel-body" id="modal-vehicleStatus">
-					      </div>
-					    </div>
+					
 				    </div>
 				</div>
 				<div class="modal-footer" id="modalFooterButtons">
@@ -147,7 +152,7 @@ body {
 	</div>
 
 	<center>
-		<img src="CancelReserv.jpg" alt="Search for a vehicle in the catalog">
+		<img src="SearchCatalog.jpg" alt="Search for a vehicle in the catalog">
 	</center>
 	<center>
 		<h3>Catalog Search</h3>
@@ -169,14 +174,28 @@ body {
 						placeholder="Make">
 
 				</div>
+				
 				<label class="control-label col-sm-2">Color</label>
 				<div class="input-group">
 					<input type="text" name="color" class="form-control"
 						placeholder="Color">
 
 				</div>
-				<label class="control-label col-sm-2">Year</label>
+				<div>
+				<label class="control-label col-sm-2">Status</label>
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+					 <select class="form-control" name="status">
+						<option></option>
+						<option>Available</option>
+						<option>Reserved</option>
+						<option>Rented</option>
+						<option>UnReserved</option>
+					</select>
 
+				</div>
+				</div>
+				
+				<label class="control-label col-sm-2">Year</label>
 				<div class="btn-group btn-group-toggle" data-toggle="buttons">
 					<label class="btn btn-secondary active"> <input
 						type="radio" name="condition" id="option1" value="="
@@ -243,7 +262,9 @@ body {
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="licensePlate">
 												<button class="btn btn-default" type="submit">license Plate</button>
 											</form>
@@ -254,7 +275,9 @@ body {
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="type">
 												<button class="btn btn-default" type="submit">Type</button>
 											</form>
@@ -265,7 +288,9 @@ body {
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="model">
 												<button class="btn btn-default" type="submit">Model</button>
 											</form>
@@ -276,7 +301,9 @@ body {
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="make">
 												<button class="btn btn-default" type="submit">Make</button>
 											</form>
@@ -287,22 +314,46 @@ body {
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="color">
 												<button class="btn btn-default" type="submit">Color</button>
 											</form>
 										</th>
+										
 										<th class="th-sm">
 											<form action="searchbrowsecatalog" method=post>
 												<input type="hidden" name="model" value='${SearchParams.get("model")}'>
 												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
 												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
 												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
 												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+													
+												<input type="hidden" name="sortBy" value="status">
+												<button class="btn btn-default" type="submit">Status</button>
+											</form>
+										</th>
+										
+										
+										
+										
+										<th class="th-sm">
+											<form action="searchbrowsecatalog" method=post>
+												<input type="hidden" name="model" value='${SearchParams.get("model")}'>
+												<input type="hidden" name="make" value='${SearchParams.get("make")}'>
+												<input type="hidden" name="color" value='${SearchParams.get("color")}'>
+												<input type="hidden" name="condition" value='${SearchParams.get("condition")}'>
+												<input type="hidden" name="status" value='${SearchParams.get("status")}'>
+												<input type="hidden" name="year" value='${SearchParams.get("year")}'>
+												
 												<input type="hidden" name="sortBy" value="year">
 												<button class="btn btn-default" type="submit">Year</button>
 											</form>
 										</th>
+										
+							
 										<th class="th-sm"></th>
 									</tr>
 								</c:when>
@@ -314,7 +365,9 @@ body {
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
+												
 												<input type="hidden" name="sortBy" value="licensePlate">
 												<button class="btn btn-default" type="submit">license Plate</button>
 											</form>
@@ -325,7 +378,9 @@ body {
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
+												
 												<input type="hidden" name="sortBy" value="type">
 												<button class="btn btn-default" type="submit">Type</button>
 											</form>
@@ -336,7 +391,9 @@ body {
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
+												
 												<input type="hidden" name="sortBy" value="model">
 												<button class="btn btn-default" type="submit">Model</button>
 											</form>
@@ -347,7 +404,9 @@ body {
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
+												
 												<input type="hidden" name="sortBy" value="make">
 												<button class="btn btn-default" type="submit">Make</button>
 											</form>
@@ -358,17 +417,35 @@ body {
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
 												<input type="hidden" name="sortBy" value="color">
 												<button class="btn btn-default" type="submit">Color</button>
 											</form>
 										</th>
+										
 										<th class="th-sm">
 											<form action="searchbrowsecatalog" method=post>
 												<input type="hidden" name="model" value=''>
 												<input type="hidden" name="make" value=''>
 												<input type="hidden" name="color" value=''>
 												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
+												<input type="hidden" name="year" value=''>
+												<input type="hidden" name="sortBy" value="status">
+												<button class="btn btn-default" type="submit">Status</button>
+											</form>
+										</th>
+										
+										
+										
+										<th class="th-sm">
+											<form action="searchbrowsecatalog" method=post>
+												<input type="hidden" name="model" value=''>
+												<input type="hidden" name="make" value=''>
+												<input type="hidden" name="color" value=''>
+												<input type="hidden" name="condition" value=''>
+												<input type="hidden" name="status" value=''>
 												<input type="hidden" name="year" value=''>
 												<input type="hidden" name="sortBy" value="year">
 												<button class="btn btn-default" type="submit">Year</button>
@@ -388,6 +465,7 @@ body {
 									<td>${vehicle.model}</td>
 									<td>${vehicle.make}</td>
 									<td>${vehicle.color}</td>
+									<td>${vehicle.status}</td>
 									<td>${vehicle.year}</td>
 									<td><button id="${vehicle.vehicleLicensePlate}" type="button" class="btn btn-primary btn-sm licenseButtons"
 											onclick="openModal('${vehicle.vehicleLicensePlate}')">open</button></td>

@@ -12,7 +12,6 @@
 
 <!-- Optional theme 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
-<a class="btn btn-default login-btn" href="#loginform">Login</a>
 <section id="loginform" class="outer-wrapper">
 
   <div class="inner-wrapper">
@@ -29,12 +28,7 @@
     <label>Password</label>
     <input type="password" class="form-control" name="userPass" placeholder="Password">
   </div>
-  
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Remember me
-    </label>
-  </div>
+
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
     </div>
