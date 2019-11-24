@@ -6,7 +6,6 @@ import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.tableDataGateway.TransactionTDG;
 import org.springframework.stereotype.Service;
 
-@Service
 public class TransactionDM {
 
     TransactionTDG transactionTDG = TransactionTDG.getInstance();
@@ -54,6 +53,11 @@ public class TransactionDM {
     public ArrayList<Transaction> getTransactionForRentedFromService(String bookingFrom) throws Exception{
 
         return transactionTDG.getTransactionForRentedFrom(bookingFrom);
+    }
+
+    public ArrayList<Transaction> getTransactionForTransactionDate(String timeStamp) throws Exception{
+
+        return transactionTDG.getTransactionForTransactionDate(timeStamp);
     }
 
     public ArrayList<Transaction> getTransactionForTwoCriteriaService(String val1, String val2, String criteria1,String criteria2) throws Exception{

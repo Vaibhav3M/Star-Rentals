@@ -18,6 +18,7 @@ public interface ITransactionTDG {
     public ArrayList<Transaction> getTransactionForStatus(String status) throws Exception;
     public ArrayList<Transaction> getTransactionForRentedTill(String bookingTill) throws Exception;
     public ArrayList<Transaction> getTransactionForRentedFrom(String bookingFrom) throws Exception;
+    public ArrayList<Transaction> getTransactionForTransactionDate(String timeStamp) throws Exception;
     public ArrayList<Transaction> getTransactionForTwoCriteria(String val1, String val2, String criteria1,String criteria2) throws Exception;
     public ArrayList<Transaction> getTransactionForThreeCriteria(String val1, String val2, String val3, String criteria1,String criteria2, String criteria3) throws Exception;
     public ArrayList<Transaction> getTransactionForFourCriteria(String val1, String val2, String val3, String val4,String criteria1, String criteria2, String criteria3, String criteria4) throws Exception;

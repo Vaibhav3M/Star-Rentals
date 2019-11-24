@@ -7,7 +7,6 @@ import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.tableDataGateway.ClientTDG;
 import org.springframework.stereotype.Service;
 
-@Service
 public class ClientDM {
 
     ClientTDG clientTDG = ClientTDG.getInstance();

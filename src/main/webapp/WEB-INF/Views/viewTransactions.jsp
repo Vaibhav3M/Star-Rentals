@@ -113,9 +113,10 @@
 				<div class="input-group">
 					</label> <select class="form-control" name="status">
 						<option></option>
-						<option>Available</option>
 						<option>Rented</option>
+						<option>Returned</option>
 						<option>Reserved</option>
+						<option>UnReserved</option>
 					</select>
 				</div>
 				<label class="control-label col-sm-3">Transaction Date</label>

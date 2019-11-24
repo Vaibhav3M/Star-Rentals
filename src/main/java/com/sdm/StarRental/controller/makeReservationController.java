@@ -8,6 +8,7 @@ import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -279,6 +280,7 @@ public class makeReservationController {
 
         if(selectedCar.isEmpty() || selectedClient.isEmpty() || from.isEmpty() || till.isEmpty()) return "createNewReservation";
 
+        DateTime dateTime = new DateTime();
 
         // create transaction
         Transaction transaction = new Transaction();
@@ -288,7 +290,7 @@ public class makeReservationController {
         transaction.setClientLicenseNumber(clientSelected.getLicenseNumber());
         transaction.setBookingFrom(reqParam.get("fromDate"));
         transaction.setBookingTill(reqParam.get("tillDate"));
-        transaction.setTimeStamp("");
+        transaction.setTimeStamp(dateTime.toString());
         transaction.setTransactionBy(httpSession.getAttribute("userNameLoggedIn").toString());
 
         transactionUnitOfWork.create(transaction);
@@ -299,5 +301,11 @@ public class makeReservationController {
 
 //httpSession.getAttribute("userNameLoggedIn").toString()
         return "clerkMainPage";
+    }
+
+    @RequestMapping(value = "/backToManagePageNR", method = RequestMethod.POST)
+    public String backToMainPage(){
+
+        return "clerkManagePage";
     }
 }

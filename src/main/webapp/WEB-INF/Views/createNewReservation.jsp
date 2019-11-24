@@ -263,7 +263,7 @@
     </center>
 </div>
 
-<form action="backtomanagepage" method=get>
+<form action="backToManagePageNR" method=post>
 
     <center>
         <button class="btn btn-default" type="submit">Back To

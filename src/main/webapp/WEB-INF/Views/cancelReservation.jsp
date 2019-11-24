@@ -98,7 +98,7 @@
     </c:when>
 </c:choose>
 
-<form action="backtomanagepage" method=get>
+<form action="backToManagePageCR" method=post>
 
     <center>
         <button class="btn btn-default" type="submit">Back To Manage Page</button>

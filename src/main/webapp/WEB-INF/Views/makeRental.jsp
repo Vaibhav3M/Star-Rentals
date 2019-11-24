@@ -307,7 +307,7 @@
 				
 			</div></center>
 		</div>
-							<form action="backtomanagepage" method=get>
+							<form action="backToManagePageMR" method=post>
 
 								<center>
 									<button class="btn btn-default" type="submit">Back To

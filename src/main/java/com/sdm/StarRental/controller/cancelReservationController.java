@@ -111,4 +111,10 @@ public class cancelReservationController {
         return "cancelReservation";
     }
 
+    @RequestMapping(value = "/backToManagePageCR", method = RequestMethod.POST)
+    public String backToMainPage(){
+
+        return "clerkManagePage";
+    }
+
 }

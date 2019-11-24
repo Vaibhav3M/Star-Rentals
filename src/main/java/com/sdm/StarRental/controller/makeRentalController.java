@@ -6,10 +6,12 @@ import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
+import com.sdm.StarRental.tableDataGateway.TransactionTDG;
 import com.sdm.StarRental.tableDataGateway.VehicleTDG;
 import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;
 import com.sdm.StarRental.unitOfWork.TransactionUnitOfWork;
 import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -273,6 +275,8 @@ public class makeRentalController {
             return "makeRental";
         }
 
+            DateTime dateTime = new DateTime();
+
         // create transaction
             Transaction transaction = new Transaction();
             transaction.setTransactionType("Rental");
@@ -281,7 +285,7 @@ public class makeRentalController {
             transaction.setClientLicenseNumber(clientSelected.getLicenseNumber());
             transaction.setBookingFrom(reqPar.get("fromDate"));
             transaction.setBookingTill(reqPar.get("tillDate"));
-            transaction.setTimeStamp("");
+            transaction.setTimeStamp(dateTime.toLocalDateTime().toString());
             transaction.setTransactionBy(httpSession.getAttribute("userNameLoggedIn").toString());
 
             transactionUnitOfWork.create(transaction);
@@ -300,6 +304,12 @@ public class makeRentalController {
         if(searchedClients!=null) {
             searchedClients.clear();
         }
+        return "clerkManagePage";
+    }
+
+    @RequestMapping(value = "/backToManagePageMR", method = RequestMethod.POST)
+    public String backToMainPage(){
+
         return "clerkManagePage";
     }
 
