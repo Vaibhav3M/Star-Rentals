@@ -51,7 +51,7 @@ public class TransactionTDG implements ITransactionTDG {
 
         establishConnection();
 
-        String sql = "INSERT INTO `c_transactions` (`transactionType`, `vehicleLicensePlate`, `clientLicenseNumber`, `status`, `bookingFrom`, `bookingTill`, `transactionBy`) VALUES ('" + transactionType + "', '" + vehicleLicensePlate + "', '" + clientLicenseNumber + "', '" + status + "', '" + bookingFrom + "', '" + bookingTill + "', '" + transactionBy + "')";
+        String sql = "INSERT INTO `c_transactions` (`transactionType`, `vehicleLicensePlate`, `clientLicenseNumber`, `status`, `bookingFrom`, `bookingTill`, `transactionBy`, `timeStamp`) VALUES ('" + transactionType + "', '" + vehicleLicensePlate + "', '" + clientLicenseNumber + "', '" + status + "', '" + bookingFrom + "', '" + bookingTill + "', '" + transactionBy + "' , '" + timeStamp + "')";
 
         System.out.println(sql);
         Statement st;
@@ -316,6 +316,39 @@ public class TransactionTDG implements ITransactionTDG {
         establishConnection();
 
         String sql = "SELECT * FROM c_transactions WHERE bookingFrom = " + "'" + bookingFrom + "'";
+
+        Statement st;
+
+        ArrayList<Transaction> resultList = new ArrayList<>();
+
+        try {
+            st = connection.createStatement();
+            ResultSet resultSet = st.executeQuery(sql);
+
+            while (resultSet.next()) {
+
+                resultList.add(Utilities.getTransactionObject(resultSet));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            closeConnection();
+        }
+
+        return resultList;
+    }
+
+
+    @Override
+    public ArrayList<Transaction> getTransactionForTransactionDate(String timeStamp) throws Exception {
+
+        establishConnection();
+
+        String sql = "SELECT * FROM c_transactions WHERE timeStamp = " + "'" + timeStamp + "'";
 
         Statement st;
 

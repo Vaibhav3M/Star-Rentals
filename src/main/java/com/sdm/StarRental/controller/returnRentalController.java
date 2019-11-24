@@ -158,4 +158,10 @@ public class returnRentalController {
         return "returnRental";
     }
 
+    @RequestMapping(value = "/backToManagePageRR", method = RequestMethod.POST)
+    public String backToMainPage(){
+
+        return "clerkManagePage";
+    }
+
 }
