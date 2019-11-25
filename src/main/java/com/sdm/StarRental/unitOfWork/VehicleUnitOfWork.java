@@ -173,15 +173,32 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")|| element.getStatus().contains("Rented")  ) {
+      
+			Vehicle beforMod = null;
+			try {
+				beforMod = vehicleDataMapper.getVehicleByLicenseNo(element.getvehicleLicensePlate());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(beforMod.getStatus().contains("Available")) {
 				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
-	
-			}
-			else {
-				System.out.println("You cannot modify a vehicle with a customer");
-			}
 
-		}
+			}
+			
+			else if(beforMod.getStatus().contains("Rented") && element.getStatus().contains("Available")) {
+				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
+
+			}
+			
+			else if(beforMod.getStatus().contains("Reserved") && element.getStatus().contains("Available")) {
+				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
+
+			}
+			
+		
+}
 				
 
 		commit();
