@@ -65,12 +65,15 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	
 	
 	public void scheduleCommit() {
-		System.out.println("Pending Jobs Are being Commited");
+
+		
+		if(jobs.size()!=0) {
+			System.out.println("Pending Job done");
 			jobs.forEach((key, element) -> {
 				Vehicle vehicle = element.getE();
 				System.out.println(element.getE().toString());
 				if (element.getAction() == unitOfWorkAction.CREATE) {
-					System.out.println("action is create");
+
 					commitCreateVehicle(vehicle);
 				} 
 				else if(element.getAction() == unitOfWorkAction.UPDATE) {
@@ -80,6 +83,10 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 				}
 			});
 			jobs = new HashMap<String, unitOfWork<Vehicle>>();
+
+		}
+		
+
 		
 		
 	}
@@ -166,7 +173,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")  ) {
+			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")|| element.getStatus().contains("Rented")  ) {
 				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 	
 			}
