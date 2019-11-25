@@ -6,9 +6,7 @@ import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.Vehicle;
-
 import com.sdm.StarRental.objectUtilities.Utilities;
-
 import com.sdm.StarRental.tableDataGateway.TransactionTDG;
 import com.sdm.StarRental.tableDataGateway.VehicleTDG;
 import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;

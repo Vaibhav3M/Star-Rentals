@@ -173,6 +173,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
+      
 			Vehicle beforMod = null;
 			try {
 				beforMod = vehicleDataMapper.getVehicleByLicenseNo(element.getvehicleLicensePlate());
@@ -196,7 +197,8 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 
 			}
 			
-		}
+		
+}
 				
 
 		commit();
