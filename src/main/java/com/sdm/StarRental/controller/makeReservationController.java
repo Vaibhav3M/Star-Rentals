@@ -1,7 +1,6 @@
 package com.sdm.StarRental.controller;
 
 import com.sdm.StarRental.dataMapper.ClientDM;
-import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.Transaction;
@@ -12,7 +11,6 @@ import com.sdm.StarRental.unitOfWork.VehicleUnitOfWork;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,12 +40,6 @@ public class makeReservationController {
         clientDM = new ClientDM();
         transactionUnitOfWork = TransactionUnitOfWork.getInstance();
         vehicleUnitOfWork = VehicleUnitOfWork.getInstance();
-
-
-
-
-
-
 
     }
 
@@ -304,12 +296,17 @@ public class makeReservationController {
         transaction.setTransactionBy(httpSession.getAttribute("userNameLoggedIn").toString());
 
         transactionUnitOfWork.create(transaction);
-        //	logger.info("Here2");
         // update vehicle status
         vehicleSelected.setStatus("Reserved");
         vehicleUnitOfWork.update(vehicleSelected);
 
-//httpSession.getAttribute("userNameLoggedIn").toString()
+        selectedClient="";
+        selectedCar="";
+        if(searchedVehicles!=null) {
+            searchedVehicles.clear();}
+        if(searchedClients!=null) {
+            searchedClients.clear();
+        }
         return "clerkMainPage";
     }
 
