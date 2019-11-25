@@ -80,7 +80,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 	
 
 	@RequestMapping(value = "/createNewVehicle",method = RequestMethod.GET)
-	public String createNewVehicle() {	
+	public String createNewVehicle(@RequestParam Map<String, String> reqPar, ModelMap model, HttpSession httpSession) {
 		return "createNewVehicle";
 	}
 	
