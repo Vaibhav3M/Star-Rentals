@@ -169,7 +169,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")  ) {
+			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")|| element.getStatus().contains("Rented")  ) {
 				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 	
 			}
