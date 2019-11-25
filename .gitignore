@@ -1,0 +1,10 @@
+.settings
+/bin
+.classpath
+.metadata
+/target/
+.idea
+SOEN6461.iml
+.DS_store
+SOEN6461-Team3.iml
+.project
