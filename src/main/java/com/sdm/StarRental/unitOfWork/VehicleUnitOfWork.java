@@ -65,6 +65,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	
 	
 	public void scheduleCommit() {
+
 		
 		if(jobs.size()!=0) {
 			System.out.println("Pending Job done");
@@ -72,6 +73,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 				Vehicle vehicle = element.getE();
 				System.out.println(element.getE().toString());
 				if (element.getAction() == unitOfWorkAction.CREATE) {
+
 					commitCreateVehicle(vehicle);
 				} 
 				else if(element.getAction() == unitOfWorkAction.UPDATE) {
@@ -81,8 +83,10 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 				}
 			});
 			jobs = new HashMap<String, unitOfWork<Vehicle>>();
+
 		}
 		
+
 		
 		
 	}

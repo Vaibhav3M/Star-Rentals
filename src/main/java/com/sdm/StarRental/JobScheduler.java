@@ -18,7 +18,7 @@ public class JobScheduler {
 	
 	//fixedRate is in milliseconds
 	@Scheduled(fixedRate = 10000)
-	public void scheduleTaskWithFixedRate() {
+	public void scheduleTaskWithFixedRate() { 
 		vehicleUnitOfWork.scheduleCommit();;
 	}
 }
