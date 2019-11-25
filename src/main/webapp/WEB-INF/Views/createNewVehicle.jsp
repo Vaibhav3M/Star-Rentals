@@ -141,11 +141,7 @@ function isNumber(evt)
 										</div>
 									</div>
 									
-									  <div class="form-group">
-										<label for="exampleInputFile">Upload image</label>
-										<center><input type="file" name="file" id="image"></center>
-										
-									  </div>
+									 
 
 
 

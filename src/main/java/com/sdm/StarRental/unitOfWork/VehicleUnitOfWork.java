@@ -61,6 +61,36 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		
 	}
 
+	
+	
+	
+	public void scheduleCommit() {
+
+		
+		if(jobs.size()!=0) {
+			System.out.println("Pending Job done");
+			jobs.forEach((key, element) -> {
+				Vehicle vehicle = element.getE();
+				System.out.println(element.getE().toString());
+				if (element.getAction() == unitOfWorkAction.CREATE) {
+
+					commitCreateVehicle(vehicle);
+				} 
+				else if(element.getAction() == unitOfWorkAction.UPDATE) {
+					commitUpdateVehicle(vehicle);
+				} else if(element.getAction() == unitOfWorkAction.DELETE) {
+					commitDeleteVehicle(vehicle);
+				}
+			});
+			jobs = new HashMap<String, unitOfWork<Vehicle>>();
+
+		}
+		
+
+		
+		
+	}
+	
 	private void commitDeleteVehicle(Vehicle vehicle) {
 		try {
 			vehicleDataMapper.deleteVehicle(vehicle.getvehicleLicensePlate());
@@ -143,7 +173,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")  ) {
+			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")|| element.getStatus().contains("Rented")  ) {
 				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 	
 			}

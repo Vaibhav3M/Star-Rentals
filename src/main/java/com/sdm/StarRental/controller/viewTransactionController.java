@@ -355,6 +355,7 @@ public class viewTransactionController {
         }
 
 
+
         //sort
         //by status
         if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("status")) {
@@ -385,6 +386,7 @@ public class viewTransactionController {
         else if (reqPar.containsKey("sortBy") && reqPar.get("sortBy").equals("bookingTill")) {
             transactions = transactionDM.sortByRentedTill(transactions);
         }
+
 
         logger.info("Transaction length" + transactions.size());
         model.addAttribute("transaction_found", reqPar);
