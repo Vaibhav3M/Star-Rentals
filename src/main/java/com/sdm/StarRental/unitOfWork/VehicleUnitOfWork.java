@@ -183,6 +183,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 			}
 			
 			if(beforMod.getStatus().contains("Available")) {
+
 				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 
 			}
