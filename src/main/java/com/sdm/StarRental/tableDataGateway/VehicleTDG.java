@@ -80,7 +80,7 @@ public class VehicleTDG implements IVehicleTDG {
 
     @Override
     public boolean deleteVehicle(String licensePlate) throws Exception{
-
+    	establishConnection();
     	String sql="DELETE FROM c_catalog WHERE vehicleLicensePlate='"+licensePlate+"'";
 		Statement st;
 		try {

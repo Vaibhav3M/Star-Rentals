@@ -103,8 +103,29 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 
 	private void commitUpdateVehicle(Vehicle vehicle) {
 		try {
+			Vehicle  beforMod = vehicleDataMapper.getVehicleByLicenseNo(vehicle.getvehicleLicensePlate());
 			
-			vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			if(beforMod.getStatus().contains("Available")) {
+
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else if(beforMod.getStatus().contains("Rented") && vehicle.getStatus().contains("Available")) {
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else if(beforMod.getStatus().contains("Reserved") && vehicle.getStatus().contains("Available")) {
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else {
+				System.out.println("This vehicle will not be modified, it is dirty ie");
+
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,31 +194,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-      
-			Vehicle beforMod = null;
-			try {
-				beforMod = vehicleDataMapper.getVehicleByLicenseNo(element.getvehicleLicensePlate());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			if(beforMod.getStatus().contains("Available")) {
-
-				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
-
-			}
-			
-			else if(beforMod.getStatus().contains("Rented") && element.getStatus().contains("Available")) {
-				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
-
-			}
-			
-			else if(beforMod.getStatus().contains("Reserved") && element.getStatus().contains("Available")) {
-				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
-
-			}
-			
+			jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
 		
 }
 				

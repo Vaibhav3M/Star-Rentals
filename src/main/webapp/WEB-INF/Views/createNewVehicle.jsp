@@ -85,7 +85,7 @@ function isNumber(evt)
 								style="flex: 1; padding-left: 5px; padding-right: 5px;">
 
 								<form class="form-horizontal" action="createVehicleForm"
-									method="post" enctype="multipart/form-data">
+									method="post" enctype="multipart/form-data" onsubmit="return confirm('New vehicle added');">
 									<div class="form-group">
 										<a href="#"><img src="NewVehicle.jpg"
 											alt="Search for a vehicle in the catalog"></a>

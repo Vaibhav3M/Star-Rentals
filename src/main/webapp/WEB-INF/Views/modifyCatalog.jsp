@@ -153,7 +153,7 @@
     <h3>Modify Vehicle</h3>
 </center>
 <div class="row">
-    <form action="searchmodifyCatalog" method=post>
+    <form action="searchmodifyCatalog" method=post >
 
         <div class="col-lg-6">
             <h4>Search By</h4>
