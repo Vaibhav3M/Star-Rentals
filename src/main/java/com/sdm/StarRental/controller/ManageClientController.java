@@ -1,7 +1,11 @@
 package com.sdm.StarRental.controller;
 
 import com.sdm.StarRental.dataMapper.ClientDM;
+import com.sdm.StarRental.dataMapper.TransactionDM;
+import com.sdm.StarRental.dataMapper.VehicleDM;
 import com.sdm.StarRental.model.Client;
+import com.sdm.StarRental.model.Transaction;
+import com.sdm.StarRental.model.Vehicle;
 import com.sdm.StarRental.objectUtilities.Utilities;
 import com.sdm.StarRental.unitOfWork.ClientUnitOfWork;
 import org.slf4j.Logger;
@@ -23,11 +27,13 @@ public class ManageClientController {
 
     ClientDM clientDM;
     ClientUnitOfWork clientUnitOfWork;
-
+    VehicleDM vehicleDM;
+    TransactionDM transactionDM;
     public ManageClientController(){
         clientDM = new ClientDM();
-
+        vehicleDM = new VehicleDM();
         clientUnitOfWork  = ClientUnitOfWork.getInstance(clientDM);
+        
     }
 
     @RequestMapping(value = "/createClient",method = RequestMethod.GET)
@@ -133,11 +139,34 @@ public class ManageClientController {
 
 
         String clientLicenseNumber = reqParam.get("licenseNumber");
+        ArrayList<Transaction> relatedTransactions = new ArrayList<Transaction>();
+        ArrayList<String> relatedClient =  new ArrayList<String>();
+        ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
 
-        clientUnitOfWork.delete(clientLicenseNumber);
+       
 
         ArrayList<Client> clients = clientDM.getAllClientsService();
+        for (Vehicle vehicle : rentedVehicles) {
+            ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
+            if (!transactions.isEmpty()) {
+                Transaction currTransaction = transactions.get(transactions.size() - 1);
+                if (currTransaction != null && currTransaction.getStatus().equalsIgnoreCase("Rented")) {               
+                	relatedTransactions.add(currTransaction);
+                		relatedClient.add(currTransaction.getClientLicenseNumber());
+                }
+            }
 
+        }
+        if(relatedClient.contains(clientLicenseNumber)) {
+        	clientUnitOfWork.delete(clientLicenseNumber);	
+
+        }
+        else {
+        	System.out.println("The related client  "+relatedClient );
+
+        }
+        
+        
         if(!clients.isEmpty()){
             model.addAttribute("client_found","RESULT_FOUND");
             model.addAttribute("client_results",clients);
