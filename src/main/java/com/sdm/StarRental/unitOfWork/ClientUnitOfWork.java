@@ -64,7 +64,18 @@ public class ClientUnitOfWork implements IUnitOfWork<Client, String> {
             if(actionType == unitOfWorkAction.DELETE){
                 System.out.println("it is set for delete");
             }
+            
+            else if(actionType == unitOfWorkAction.CREATE){
+                System.out.println("Client is set for for a create and has now been modified");
+                data.put(element.getLicenseNumber(), mapToObject(element, unitOfWorkAction.CREATE));
 
+            }
+            
+            else if(actionType == unitOfWorkAction.UPDATE){
+                System.out.println("Client record is set for for a pending update, try later");
+              
+
+            }
             return;
         }
 
@@ -82,6 +93,11 @@ public class ClientUnitOfWork implements IUnitOfWork<Client, String> {
             client.setLicenseNumber(key);
             data.put(key, mapToObject(client, unitOfWorkAction.DELETE));
         }
+        else {
+			System.out.println("Client record can not be Deleted, pending comit");
+
+        }
+        
         commit();
     }
 

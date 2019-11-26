@@ -103,8 +103,29 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 
 	private void commitUpdateVehicle(Vehicle vehicle) {
 		try {
+			Vehicle  beforMod = vehicleDataMapper.getVehicleByLicenseNo(vehicle.getvehicleLicensePlate());
 			
-			vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			if(beforMod.getStatus().contains("Available")) {
+
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else if(beforMod.getStatus().contains("Rented") && vehicle.getStatus().contains("Available")) {
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else if(beforMod.getStatus().contains("Reserved") && vehicle.getStatus().contains("Available")) {
+				vehicleDataMapper.modifyVehicle(vehicle.getType(),vehicle.getMake(),vehicle.getModel(), vehicle.getYear(), vehicle.getColor(),vehicle.getvehicleLicensePlate(),vehicle.getStatus());
+
+			}
+			
+			else {
+				System.out.println("This vehicle will not be modified, it is dirty ie");
+
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,15 +194,9 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 		}
 		
 		else {
-			if(element.getStatus().contains("Available") || element.getStatus().contains("Reserved")|| element.getStatus().contains("Unreserved")|| element.getStatus().contains("Rented")  ) {
-				jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
-	
-			}
-			else {
-				System.out.println("You cannot modify a vehicle with a customer");
-			}
-
-		}
+			jobs.put(element.getvehicleLicensePlate(), mapToObject(element, unitOfWorkAction.UPDATE));		
+		
+}
 				
 
 		commit();
