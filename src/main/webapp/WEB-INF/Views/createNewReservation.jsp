@@ -251,7 +251,7 @@
             </h3>
 
             <form action="makeReservation" method="post"
-                  onsubmit="return confirm('Please confirm the reservation. You will be redirected to manage page after completion');">
+                  onsubmit="return confirm('Reservation submission confirmed. You will be redirected to manage page after completion');">
                 <b>From : </b> <input type="date" class="auto-style1" placeholder="From" name="fromDate" height=40px style="width: 28%" required >
                 <br><br>
                 <b>Till : </b><input type="date" min = " " class="auto-style1" placeholder="To" name="tillDate" height = 40px style="width: 28%" required>

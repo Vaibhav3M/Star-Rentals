@@ -85,7 +85,7 @@ private static Logger logger = LoggerFactory.getLogger(VehicleController.class);
 	}
 	
 	@RequestMapping(value = "/createVehicleForm",method = RequestMethod.POST)
-	public String createNewVehicleForm(@RequestParam Map<String, String> reqPar,@RequestParam  MultipartFile file, ModelMap modelMap, HttpSession httpSession, Vehicle req2) throws Exception {
+	public String createNewVehicleForm(@RequestParam Map<String, String> reqPar, ModelMap modelMap, HttpSession httpSession, Vehicle req2) throws Exception {
 	//	if (Utilities.validateSession(httpSession)) {
 		String type = reqPar.get("type"); 
 		String make = reqPar.get("make"); 

@@ -179,7 +179,7 @@
             </tr>
             </thead>
             <c:forEach items="${vehicle_results}" var="vehicles">
-              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Please confirm deletion of  ${vehicles.vehicleLicensePlate}?');">
+              <form action="deleteVehicleInfo" method=post onsubmit="return confirm('Vehicle deletion  of  ${vehicles.vehicleLicensePlate} done ');">
 
               <tr id = ${vehicles.vehicleLicensePlate}>
                 <td>${vehicles.vehicleLicensePlate}</td>
