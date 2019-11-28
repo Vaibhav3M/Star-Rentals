@@ -57,7 +57,7 @@ const openModal = a => {
 		$("#modal-vehicleMake").html(vehicle.make);
 		$("#modal-vehicleYear").html(vehicle.year);
 		$("#modal-vehicleColor").html(vehicle.color);
-		$("#modal-vehicleLicensePlate").html(vehicle.licensePlate);
+		$("#modal-vehicleLicensePlate").html(vehicle.vehicleLicensePlate);
 		$("#modal-vehicleStatus").html(vehicle.status);
 		$(".modal-body").show();
 	}
