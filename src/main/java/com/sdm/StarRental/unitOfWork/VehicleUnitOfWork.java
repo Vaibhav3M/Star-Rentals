@@ -126,6 +126,9 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 				System.out.println("This vehicle will not be modified, it is dirty ie");
 
 			}
+			jobs = new HashMap<String, unitOfWork<Vehicle>>();
+
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

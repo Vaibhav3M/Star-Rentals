@@ -127,6 +127,30 @@ public class ClientUnitOfWork implements IUnitOfWork<Client, String> {
 
     }
 
+    public void scheduleCommit() {
+    	if(data.size()!=0) {
+			System.out.println("Pending Client Job done");
+
+            System.out.println("Going in ");
+            data.forEach((key, element) -> {
+                Client client = element.getE();
+                if (element.getAction() == unitOfWorkAction.CREATE) {
+                    commitCreateClient(client);
+                } else if (element.getAction() == unitOfWorkAction.UPDATE) {
+                    commitUpdateClient(client);
+                } else if (element.getAction() == unitOfWorkAction.DELETE) {
+                    commitDeleteClient(client);
+                }
+            });
+            data = new HashMap<String, unitOfWork<Client>>();
+        
+			
+			
+    	}
+    }
+    
+    
+    
 
     private void commitCreateClient(Client client) {
         try {
