@@ -3,6 +3,7 @@ package com.sdm.StarRental.unitOfWork;
 
 import java.util.HashMap;
 
+import com.sdm.StarRental.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -42,7 +43,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 	
 	@Override
 	public void commit() {
-		if(jobs.size()==3) {
+		if(jobs.size()== Constants.UOW_Size_Threshold) {
 			jobs.forEach((key, element) -> {
 				Vehicle vehicle = element.getE();
 				System.out.println(element.getE().toString());

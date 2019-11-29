@@ -1,6 +1,7 @@
 package com.sdm.StarRental.unitOfWork;
 
 import com.sdm.StarRental.Enum.unitOfWorkAction;
+import com.sdm.StarRental.constants.Constants;
 import com.sdm.StarRental.dataMapper.TransactionDM;
 import com.sdm.StarRental.model.Transaction;
 import com.sdm.StarRental.model.unitOfWork;
@@ -76,7 +77,7 @@ public class TransactionUnitOfWork implements IUnitOfWork<Transaction,String> {
 	@Override
 	public void commit() {
 
-		if (data.size() == 3) {
+		if (data.size() == Constants.UOW_Size_Threshold) {
 			data.forEach((key, element) -> {
 				Transaction transaction = element.getE();
 				commitCreateTransaction(transaction);

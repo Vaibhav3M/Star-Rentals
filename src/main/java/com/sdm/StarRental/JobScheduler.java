@@ -1,5 +1,6 @@
 package com.sdm.StarRental;
 
+import com.sdm.StarRental.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class JobScheduler {
 	
 	
 	//fixedRate is in milliseconds
-	@Scheduled(fixedRate = 20000)
+	@Scheduled(fixedRate = Constants.UOW_Time_Threshold)
 	public void scheduleTaskWithFixedRate() { 
 		vehicleUnitOfWork.scheduleCommit();
 		clienUnitOfWork.scheduleCommit();

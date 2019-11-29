@@ -2,6 +2,7 @@ package com.sdm.StarRental.unitOfWork;
 
 
 import com.sdm.StarRental.Enum.unitOfWorkAction;
+import com.sdm.StarRental.constants.Constants;
 import com.sdm.StarRental.dataMapper.ClientDM;
 import com.sdm.StarRental.model.Client;
 import com.sdm.StarRental.model.unitOfWork;
@@ -110,7 +111,7 @@ public class ClientUnitOfWork implements IUnitOfWork<Client, String> {
     @Override
     public void commit() {
 
-        if (data.size() == 2) {
+        if (data.size() == Constants.UOW_Size_Threshold) {
             System.out.println("Going in ");
             data.forEach((key, element) -> {
                 Client client = element.getE();
