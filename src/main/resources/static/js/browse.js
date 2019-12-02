@@ -51,7 +51,6 @@ const openModal = a => {
 				}
 			}
 		}
-		$("#modal-vehicleImage").attr({ "src": vehicle.image }); // update with Q5.jpg with '+vehicle.image+' when you put image in the model of catalog.
 		$("#modal-vehicleType").html(vehicle.type);
 		$("#modal-vehicleModel").html(vehicle.model);
 		$("#modal-vehicleMake").html(vehicle.make);
