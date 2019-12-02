@@ -31,14 +31,6 @@ Create a Database - car_rental
 Run below SQL queries:
 
 
-
-
-
-
-
-
-
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -142,3 +134,33 @@ Login as Clerk:
 Username: Clerk
 Password: test
 More credentials can be fetched or added to the ‘c_users’ table in the DataBase.
+
+
+
+Support for concurrency and persistence
+
+We have implemented UoW for Vehicle, Client, and Transactions.
+Maintain the integrity of DB data and calls
+Prevent multiple connection setups
+
+
+The threshold in UoW is set to 3 i.e. for CUD(Create Update Delete) functions, DB will be updated only when 3 valid operations are made.
+
+Also, in the case of vehicle UoW, there is an implemented timer for UoW, i.e. the timer starts once a valid CUD operation is performed. Once the timer crosses the threshold(10 sec) UoW commits to DB.  In case CUD operation threshold exceeds 3 before timer threshold, the commit is made.
+
+Object registration in UoW sets a objects currently in UoW to be dirty.
+This prevents the wrongful update of data.
+
+
+We also set rightful checks to keep data persistency. 
+A vehicle that is rented or a client that has a vehicle rented cannot be deleted, a message with information is displayed in system logs.
+
+Patterns implemented to access data services layers
+Table Data Gateway
+Data Mapper
+
+We have 4 model elements mapped to database tables. We have a TDG for each table:
+VehicleTDG, ClientTDG, TransactionTDG, UserTDG. TDGs act as an intermediary between domain objects and the database.
+
+Similarly, we have a DM corresponding to each TDG, which moves data between objects and the database while keeping them independent of each other. 
+

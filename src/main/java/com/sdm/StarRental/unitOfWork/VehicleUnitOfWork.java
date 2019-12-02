@@ -130,6 +130,7 @@ public class VehicleUnitOfWork implements IUnitOfWork<Vehicle, String> {
 			jobs = new HashMap<String, unitOfWork<Vehicle>>();
 
 			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

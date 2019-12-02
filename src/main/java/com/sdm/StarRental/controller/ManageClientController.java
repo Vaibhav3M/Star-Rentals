@@ -34,6 +34,7 @@ public class ManageClientController {
         vehicleDM = new VehicleDM();
         clientUnitOfWork  = ClientUnitOfWork.getInstance(clientDM);
         transactionDM = new TransactionDM();
+
         
     }
 
@@ -154,6 +155,7 @@ public class ManageClientController {
                 if (currTransaction != null && currTransaction.getStatus().contains("Rented")) {               
                 	relatedTransactions.add(currTransaction);
                 		relatedClient.add(currTransaction.getClientLicenseNumber().trim());
+
                 }
             }
 
@@ -175,6 +177,7 @@ public class ManageClientController {
         	System.out.println("Cannot delete" );
 
         }
+
 
 
         
