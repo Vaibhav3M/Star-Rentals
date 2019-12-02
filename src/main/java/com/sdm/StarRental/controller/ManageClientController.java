@@ -33,6 +33,8 @@ public class ManageClientController {
         clientDM = new ClientDM();
         vehicleDM = new VehicleDM();
         clientUnitOfWork  = ClientUnitOfWork.getInstance(clientDM);
+        transactionDM = new TransactionDM();
+
         
     }
 
@@ -141,31 +143,43 @@ public class ManageClientController {
         String clientLicenseNumber = reqParam.get("licenseNumber");
         ArrayList<Transaction> relatedTransactions = new ArrayList<Transaction>();
         ArrayList<String> relatedClient =  new ArrayList<String>();
-        ArrayList<Vehicle> rentedVehicles = new ArrayList<>();
+        ArrayList<Vehicle> rentedVehicles = new ArrayList<>(vehicleDM.getVehicleFromOneCriteria("Rented", null, "status"));
 
-       
+    	System.out.println("vehicles rented  "+rentedVehicles );
 
         ArrayList<Client> clients = clientDM.getAllClientsService();
         for (Vehicle vehicle : rentedVehicles) {
-            ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
+        	  ArrayList<Transaction> transactions = transactionDM.getTransactionForVehicleService(vehicle.getvehicleLicensePlate());
             if (!transactions.isEmpty()) {
                 Transaction currTransaction = transactions.get(transactions.size() - 1);
-                if (currTransaction != null && currTransaction.getStatus().equalsIgnoreCase("Rented")) {               
+                if (currTransaction != null && currTransaction.getStatus().contains("Rented")) {               
                 	relatedTransactions.add(currTransaction);
-                		relatedClient.add(currTransaction.getClientLicenseNumber());
+                		relatedClient.add(currTransaction.getClientLicenseNumber().trim());
+
                 }
             }
 
         }
+        
+    	
+
         if(relatedClient.contains(clientLicenseNumber)) {
+        System.out.println("Client has a vehicle rented ");
+
+        }
+        else if(!relatedClient.contains(clientLicenseNumber)) {
         	clientUnitOfWork.delete(clientLicenseNumber);	
+        	System.out.println("deleted" );
+
 
         }
         else {
-        	System.out.println("The related client  "+relatedClient );
+        	System.out.println("Cannot delete" );
 
         }
-        
+
+
+
         
         if(!clients.isEmpty()){
             model.addAttribute("client_found","RESULT_FOUND");
