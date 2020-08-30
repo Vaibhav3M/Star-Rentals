@@ -1,29 +1,29 @@
 
-Getting Started
+# Getting Started
 
 If you want to load the project into an IDE, import the project as a maven project
 into eclipse or IntelliJ or if you want to build the project follow the following steps.
  
 
-Prerequisites
+# Prerequisites
 
-Maven
-JAVA 8
-MySQL setup
+- **Build Tool:** Maven 
+- **Language used:** [JDK 8](https://openjdk.java.net/projects/jdk/11/) 
+- **Framework:** [SprintBoot](https://spring.io/projects/spring-boot) 
+- **External Database:** MySQL 
 
-Installing
+# Installing
 
- mvn clean install - to build
-mvn spring-boot:run - to run
-Note: if you want to run the code after the build step, go into target directory and
-run command java -jar StarRentalSystem-0.0.1-SNAPSHOT.jar
-Install MAMP ( Or any MySQL database setup)
-Follow SQL DB setup below:
+1. mvn clean install - to build
+2. mvn spring-boot:run - to run
+3. Note: if you want to run the code after the build step, go into target directory and
+4. run command java -jar StarRentalSystem-0.0.1-SNAPSHOT.jar
+5. Install MAMP ( Or any MySQL database setup)
+6. Follow SQL DB setup below:
 
-
-Open MyPhpAdmin
-Create a Database - car_rental
-Run below SQL queries:
+    - Open MyPhpAdmin
+    - Create a Database - car_rental
+    - Run below SQL queries:
 
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -65,8 +65,6 @@ ALTER TABLE `c_transactions`
 
 ALTER TABLE `c_transactions`
   ADD PRIMARY KEY (`transactionID`);
-
-
 
 CREATE TABLE `c_users` (
   `userName` varchar(6) NOT NULL,
@@ -111,28 +109,22 @@ INSERT INTO `c_catalog` (`Type`, `Make`, `Model`, `Year`, `Color`, `vehicleLicen
 ALTER TABLE `c_catalog`
   ADD PRIMARY KEY (`vehicleLicensePlate`);
 
-Built With
-
-[JDK 8](https://openjdk.java.net/projects/jdk/11/) - language used
- [SprintBoot](https://spring.io/projects/spring-boot) - framework used for Java
-MySQL - external DataBase
 
 
+## On successful launch of Application:
 
-On successful launch of Application:
-
- Open -> http://localhost:8080/loginPage
-Login as Admin: 
+- Open -> http://localhost:8080/loginPage
+- Login as Admin: 
 Username: Admin
 Password: admin
-Login as Clerk: 
+- Login as Clerk: 
 Username: Clerk
 Password: test
 More credentials can be fetched or added to the ‘c_users’ table in the DataBase.
 
 
 
-Support for concurrency and persistence
+## Support for concurrency and persistence
 
 We have implemented UoW for Vehicle, Client, and Transactions.
 Maintain the integrity of DB data and calls
@@ -150,9 +142,9 @@ This prevents the wrongful update of data.
 We also set rightful checks to keep data persistency. 
 A vehicle that is rented or a client that has a vehicle rented cannot be deleted, a message with information is displayed in system logs.
 
-Patterns implemented to access data services layers
-Table Data Gateway
-Data Mapper
+## Patterns implemented to access data services layers
+- Table Data Gateway
+- Data Mapper
 
 We have 4 model elements mapped to database tables. We have a TDG for each table:
 VehicleTDG, ClientTDG, TransactionTDG, UserTDG. TDGs act as an intermediary between domain objects and the database.
